@@ -1,0 +1,46 @@
+.search_hot{float: left;width: 245px;margin-top: 20px;}
+.hot_one *{float: left;}
+.hot_one{height: 40px;margin-top: 20px;}
+.hot_one img{width: 35px;height: 35px;margin-right: 15px;cursor:pointer;}
+.hot_right{font-size: 14px;width: 190px;}
+.search_result{float: left;width: 705px;margin: 20px 0 0 50px;}
+.search_result.category{float: left;width: 705px;margin: 26px 0 0 50px;}
+.app .search_one{width: 235px;height: 100px;margin: 20px 0 10px;float: left;*margin:0px;overflow:hidden;}
+.app .search_one *{float: left;}
+.app .search_one img{width: 75px;height: 75px;margin-right: 10px;}
+.app .search_one span{clear: both;font-size: 14px;width:130px;}
+.one_right{width: 150px;}
+.search_result a{cursor:pointer;}
+.search_result a.ellipsis{width: 120px;height:20px;}
+/*.search_result span{color:#000;}*/
+.search_result span b{font-weight:normal;color:#7f7f7f;}
+.search_result .right b{color:#d9d9d9 !important;}
+.theme .search_one{width: 138px;height: 300px;margin: 20px 50px 10px 0;float: left;}
+.theme .search_one img{width: 138px;height: 230px;margin-bottom: 7px;}
+.theme .search_one span{float: left;clear: both;font-size: 14px;}
+.theme .price{margin-top: 3px;}
+
+.search_one.right{margin-right: 0;}
+
+.search_one img{cursor:pointer}
+
+.title_18 a{color: rgb(165,165,165);cursor: pointer;}
+
+.price{color: #32a5e7}
+.app .price{margin-top: 10px;clear: both;*clear:none;*margin:25px 0 0 10px;}
+.star_bg{margin: 4px 0;}
+
+.developer{margin-top: 20px;}
+.app.developer .search_one{width: 235px;height: 100px;margin: 20px 20px 10px 0;float: left;}
+.app.developer .search_one.right{margin-right: 0;}
+.dev_right{float: right;cursor: pointer;background: url('/resources/portal/search/images/developer_mail.png') no-repeat 80px 0;padding-right: 30px;height: 25px;}
+@media (max-width: 1000px) {
+    /*.dev_right img{width: 40px;height: 30px;margin-bottom: -2px;}*/
+    /*.dev_right{margin-right: 120px;padding-right: 80px;}*/
+    .dev_right{margin-top: 20px;height: 40px;vertical-align: middle;font-size: 14px;padding-right: 50px;}
+}
+.one_right .app_name{width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+#app,#resultData{float:left;overflow:hidden;width:705px;*margin-top:15px;}
+
+.search_tip{float: right;margin-top: 5px;}
+.search_tip span{max-width: 180px;vertical-align: middle;margin-bottom: 3px;width: auto;}

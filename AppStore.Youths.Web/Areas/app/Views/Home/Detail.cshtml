@@ -1,0 +1,235 @@
+﻿@using AppStore.Youths.Model;
+@{
+    Layout = null;
+}
+@{
+    App app = ViewBag.app;
+}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link href="/Content/css/common.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div id="head_wrapper">
+        <div class="menu_head">
+            <div class="menu">
+                <div class="left" style="width: 300px;">
+                    <a href="http://youths.cc/">Youths官网</a><div class="split"></div>
+                    <a href="/app/home/index">应用市场</a><div class="split"></div>
+                    <a href="/bbs/home/index">论坛</a>
+                </div>
+                <div class="right" style="width: 700px;text-align: right;">
+                    <input type="hidden" name="mz_flyme" id="mz_flyme" value="" />
+                    <input type="hidden" name="mz_developer" id="mz_developer" value="" />
+                    <input type="hidden" id="_assertion_nickname" value="" />
+                    @{
+                        if (ViewBag.user != null)
+                        {
+                            <span id="loginWrap">
+                                <a target="_blank" href="#" id="w_notify" title="" class="ellipsis"><i class="i_tooltips radius2" id="tooltips"></i>@ViewBag.user.UserName</a>
+                                <div class="split"></div>
+                                <a id="head-logout" title="退出" onclick="logout('/app/home/index')">退出</a>
+                            </span>
+                        }
+                        else
+                        {
+                            <span id="unloginWrap">
+                                <a href="/base/login" title="登录">登录</a>
+                                <div class="split"></div>
+                                <a href="/base/register" title="注册">注册</a>
+                            </span>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="head">
+            <div class="logo"></div>
+            <a data-href="/apps/public/index" data="app" class="current">应用</a>
+            <a data-href="/games/public/index" data="game">游戏</a>
+            <div class="search_bg">
+                <input type="text" id="flymeSearch" class="search" maxlength="100" value="" autocomplete="off"><div class="jsonSuggestResults" style="top: 45px; left: 746px; width: 210px; display: none;"></div>
+                <span class="default_val none">请输入应用/游戏/主题的名称</span>
+            </div>
+            <div class="search_btn" id="flymeSearchBtn"></div>
+        </div>
+        <div class="content">
+            <div class="content_nav"><a class="current" href="/app/home/index">应用</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<a class="current" href="category?cid=@app.AppClass.Id">@app.AppClass.AppClassName</a>&nbsp;&nbsp;&gt;&nbsp;&nbsp;<span class="ellipsis" title="@app.AppName">@app.AppName</span></div>
+        </div>
+    </div>
+    <div class="tip_msg none"></div>
+    <script src="/Content/js/common.js"></script>
+    <script src="/Content/js/jquery.jsonSuggestFlyme.js"></script>
+    <script src="/Content/js/public.js"></script>
+
+    <title>Youths 软件商店-@app.AppName</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="/Content/css/app.css" rel="stylesheet" type="text/css">
+
+
+    <div id="wrapper">
+        <input type="hidden" id="count" data-cname="@app.AppClass.AppClassName" data-cid="104" data-name="@app.AppName" data-appid="559008">
+        <div class="content_main" style="min-height: 285px;">
+        <div id="theme_content" class="clearfix color_line1">
+                <div class="left inside_left">
+                    <div class="app_download download_container">
+                        <img class="app_img" src="@app.AppImg">
+                        <div class="price_bg downloading" data-appid="559008" data-catid="1" data-detail="1">
+                            @if ((bool)app.AppIsFree)
+                            {
+                                <a href="#" class="price">免费</a>
+                            }
+                            else
+                            {
+                                <a href="#" class="price">付费</a>
+                            }
+                            
+                        </div>
+                        <ul>
+                            <li>
+                                <span class="app_title">类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</span>
+                                <div class="app_content"><a href="category?cid=@app.AppClass.Id" class="current" title="生活助理">@app.AppClass.AppClassName</a></div>
+                            </li>
+                            <li>
+                                <span class="app_title">开&nbsp;发&nbsp;者&nbsp;：</span>
+                                <div class="app_content ellipsis">
+                                    <a class="current" title="@app.AppName">@app.AppName</a>
+                                </div>
+
+                            </li>
+                            <li>
+                                <span class="app_title">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本：</span>
+                                <div class="app_content ellipsis noPointer">@app.AppVersion</div>
+                            </li>
+                            <li>
+                                <span class="app_title">下&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;载：</span>
+                                <div class="app_content"><span>@app.AppDownload</span></div>
+                            </li>
+                            <li>
+                                <span class="app_title">大&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;小：</span>
+                                <div class="app_content">
+                                    @app.AppSize
+                                </div>
+                            </li>
+                            <li>
+                                <span class="app_title">更新时间：</span>
+                                <div class="app_content">@app.UpdateTime.ToShortDateString()</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right inside_right">
+                    <div class="app_detail">
+                        <div class="detail_top">
+                            <h3>@app.AppName</h3>
+                            <div class="detail_content">
+
+                                <span class="detail_title_style clearfix">应用简介：</span>
+                                <div class="description_detail" style="height: 110px; overflow-y: hidden;">
+                                 @app.AppIntroduce
+                                </div><div class="moreDes">查看更多&gt;&gt;</div>
+                            </div>
+                            <div class="detail_content clearfix">
+                                <span class="detail_title_style">版本描述：</span>
+                                <div class="description_detail" style="height: 110px; overflow-y: hidden;">
+                                    @app.AppDescribe
+                                </div><div class="moreDes">查看更多&gt;&gt;</div>
+                            </div>
+                        </div>
+                        <div class="screenShots clearfix">
+                            <span class="detail_title_style">应用截图：</span>
+                            <div id="scrollImage" class="scrollImage">
+                                <div id="left_button" class="left_button" style="display: none;">
+                                    <a href="javascript:void(0);"><img class="app_img" src="http://app.res.meizu.com/resources/portal/app/images/left_button.gif"></a>
+                                </div>
+                                <div class="center-img">
+                                    <ul class="piclist mainlist" id="imagesList" style="width: 1085px;">
+                                        @foreach (AppScreenShot appScreenShot in app.AppScreenShots)
+                                        {
+                                            <li style="margin-top: 0px;"><a href="@appScreenShot.AppScreenShotUrl" class="detail_img"><img class="screenImg1" src="@appScreenShot.AppScreenShotUrl"></a></li>
+                                        }
+                                    </ul>
+                                    <ul class="piclist swaplist" style="width: 1085px;"></ul>
+                                </div>
+                                <div id="right_button" class="right-button">
+                                    <a href="javascript:void(0);"><img class="app_img" src="/Content/img/right_button.gif"></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comments clearfix">
+                            <span class="detail_title_style">用户评论：</span>
+                            <div id="eva">
+                            @foreach (AppComment appComment in app.AppComments)
+                            {
+                                <div class="user_comment">
+                                    <ul>
+                                        <li>@appComment.AppCommentDetail</li>
+                                        <li>
+                                            <div class="left user_left"><span class="user_name gray">@appComment.User.UserName</span><span class="comments_time gray">@appComment.UpdateTime.ToShortDateString()</span></div>
+                                            <div class="right user_right"><span class="version gray">版本 @appComment.App.AppSize</span><span class="star_bg star_40" data-num="40"></span></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            }
+                        <div class="bottom_page clearfix view_page">
+                            <div>
+                                <div id="pager" class="pager"><div class="pageDiv"><a class="selected bRadius0" href="javascript:void(0)">1</a><a class="liNoThisClass bRadius2" href="javascript:void(0)">2</a><a class="liNoThisClass bRadius2" href="javascript:void(0)">3</a><a class="liNoThisClass bRadius2" href="javascript:void(0)">4</a><a class="liNoThisClass bRadius2" href="javascript:void(0)">5</a><a class="bRadius0 pomit" href="javascript:void(0)">...</a><a class="bRadius2 liNoThisClass" href="javascript:void(0)" rno="46">46</a><a class="next bRadius2" href="javascript:void(0)">下一页</a></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                </div>
+        </div>
+        <div id="flymeFooter" class="footerWrap">
+            <div class="footerInner">
+                <div class="footer-layer1">
+                    <div class="footer-innerLink">
+                        <a href="http://www.meizu.com/about.html" target="_blank" title="关于Youths">关于Youths</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="http://hr.meizu.com" target="_blank" title="工作机会">工作机会</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="http://www.meizu.com/contact.html" target="_blank" title="联系我们">联系我们</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="http://www.meizu.com/legalStatement.html" target="_blank" title="法律声明">法律声明</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="javascript:void(0);" id="globalName" class="footer-language" title="简体中文">简体中文&nbsp;&nbsp;&nbsp;</a>
+                    </div>
+                    <div class="footer-service">
+                        <span class="service-label">客服热线</span>
+                        <span class="service-num">400-788-3333</span>
+                        <a id="service-online" class="service-online" href="javascript:void(0);" title="在线客服">在线客服</a>
+                    </div>
+                    <div class="footer-outerLink">
+                        <a class="footer-sinaMblog" href="http://weibo.com/meizuflyme" target="_blank"><i class="i_icon"></i></a>
+                        <a class="footer-tencentMblog" href="http://t.qq.com/mx_flyme" target="_blank"><i class="i_icon"></i></a>
+                        <a id="footer-weChat" class="footer-weChat" href="javascript:void(0);" target="_blank"><i class="i_icon"></i></a>
+                        <a class="footer-qzone" href="http://user.qzone.qq.com/2762957059" target="_blank" style="display:none;"><i class="i_icon"></i></a>
+                    </div>
+                    <div id="globalContainer" class="footer-language_menu">
+                        <a href="http://www.flyme.cn" title="简体中文" class="checked">简体中文</a>
+                        <a href="http://www.flyme.cn/hk/index.jsp" title="繁體中文" class="ClobalItem">繁體中文</a>
+                        <a href="http://www.flyme.cn/tw/index.jsp" title="台灣繁體" class="ClobalItem">台灣繁體</a>
+                        <a href="http://www.flyme.cn/en/index.jsp" title="English" class="ClobalItem">English</a>
+                        <!--<a href="http://ru.meizu.com" title="Русский" class="ClobalItem">Русский</a>
+                    <a href="http://il.meizu.com" title="עברית" class="ClobalItem" style="border-width:0px;">עברית</a>-->
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div id="flymeCopyright" class="copyrightWrap">
+                    <div class="copyrightInner">
+                        <span>©2014 Youths. All rights reserved.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wechatPic"></div>
+    </div>
+
+    <script src="/Content/js/developer.js"></script>
+    <script src="/Content/js/app-view.js"></script>
+    <script src="/Content/js/jquery.imgbox.pack.js"></script>
+    <div id="imgbox-loading"><div style="opacity: 0.4;"></div></div><div id="imgbox-overlay"></div>
+</body>
+</html>

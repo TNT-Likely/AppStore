@@ -1,0 +1,150 @@
+.content{
+	width: 100%;
+}
+#mainForm{
+	width: 343px;
+	margin: 100px auto 0px;
+	overflow: hidden;
+}
+#toLogin{
+	color: #2b2b2b;
+}
+.rememberField{
+	margin-bottom: 30px;
+	height: 20px;
+	line-height: 20px;
+}
+.rememberField label{
+	 margin-right:7px;
+	 cursor:pointer;
+}
+.checkboxPic{width: 20px;}
+.transferField{
+	text-align: right;
+}
+#transfer{
+	margin-left: 150px;
+}
+.checkUnchk{
+	background-position:-1px -73px;
+}
+#forgetpwd{
+	margin-left: 15px; 
+}
+input.error{
+	margin-bottom: 0px;
+}
+#kapkey{
+	font-size: 16px;
+	width: 220px;
+	border: none;
+	outline: none;
+	/*height: 50px;*/
+	line-height: 22px;
+	overflow: hidden;
+/*	*height: 49px;
+	*line-height: 50px;*/
+}
+#imgKey{
+	width: 88px;
+	height: 36px;
+	float: right;
+	top: 7px;
+	overflow: hidden;
+	position: absolute;
+	margin-left: 13px;
+}
+#password{
+	width: 100%;
+	display: inline-block;
+	/*height: 50px;*/
+	line-height: 22px;
+	font-size: 16px;
+	outline: none;
+	color: #474747;
+/*	*height: 49px;
+	*line-height: 50px;*/
+}
+#password,#kapkey,#account{
+	line-height: 22px;
+	padding: 14px 0;
+	height: 22px;
+	*height: 21px;	
+}
+/*reset*/
+span.error, span.otherError{
+	display: block;
+	margin-left: 0px;
+	margin-bottom: 20px;
+}
+#qrCode_login{
+	display:block;
+	float:right;
+	width:18px;
+	height:18px;
+	text-indent:-9999px;
+	*margin-top:-20px;
+	background:url("/resources/uc/member/images/qrBg.png") no-repeat 0 0;
+}
+#qrCode_login:hover{
+	background-position:-18px 0;
+}
+#qrCodePanel{
+	display:none;
+	width:342px;
+	height:230px;
+	background:#fff;
+	border:1px solid #fff;
+	position:absolute;
+	top:350px;
+	left:779px;
+	box-shadow: 0px 0px 19px 0px #666;
+	z-index:9;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/resources/uc/member/images/qrDiaBg.png');
+}
+#qrCodePanel .qrCodePanel_arrow{
+	display:block;
+	*display:none;
+	width:0;
+	height:0;
+	border:10px solid #fff;
+	border-left-width:7px;
+	border-right-width:7px;
+	border-top-color:transparent;
+	border-left-color:transparent;
+	border-right-color:transparent;
+	position:absolute;
+	top:-20px;
+	right:1px;
+}
+#qrCodePanel h3{
+	text-align:center;
+	font-size:16px;
+	color:#333;
+	font-weight:lighter;
+	margin:20px auto 0;
+}
+#qrCodePanel img{
+	display:block;
+	width:163px;
+	height:163px;
+	margin:auto;
+}
+#qrCodePanel .tips{
+	text-align:center;
+	font-size:14px;
+	color:#333;
+	height:18px;
+	line-height:18px;
+}
+#qrCodePanel .qrCodePanel_tips{
+	display:none;
+	width:260px;
+	height:18px;
+	margin:0 auto;
+	line-height:18px;
+	text-indent:20px;
+	font-size:14px;
+	color:#333;
+	background:url("/resources/uc/member/images/qrBg.png") no-repeat -36px 0;
+}

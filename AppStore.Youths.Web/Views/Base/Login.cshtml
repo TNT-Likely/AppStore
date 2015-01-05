@@ -1,0 +1,106 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta content="width=1080" name="viewport">
+    <title>登录Youths账户</title>
+    <link href="~/Content/css/base.css" type="text/css" rel="Stylesheet">
+    <link href="~/Content/css/nameregister.css" type="text/css" rel="Stylesheet">
+</head>
+<body style="min-height: 900px;">
+    <div id="content" class="content">
+
+        <div class="ucSimpleHeader" id="header">
+            <a href="#" class="meizuLogo"><i class="i_icon"></i></a>
+            <div id="trigger">
+                <a href="login" id="toLogin" class="linkAGray">登录</a>
+                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="register" id="toRegister" class="linkAGray">注册</a>
+            </div>
+        </div>
+        <div class="middle">
+            <form id="mainForm" action="login" method="post">
+                <div class="normalInput" style="margin-bottom: 20px;">
+                    <input type="text" value="" name="UserName" id="account" maxlength="50" autocomplete="off" placeholder="账号名">
+                </div>
+                <div class="normalInput" style="margin-bottom: 20px;">
+                    <input type="password" value="" name="UserPassword" id="password" maxlength="16" autocomplete="off" placeholder="密码">
+                </div>
+                <div class="rememberField" id="rememberField">
+                    <span class="mzchkbox"><span class="checkboxPic check_unchk"><i class="i_icon"></i></span><input name="remember" id="remember" type="checkbox" value="1" style="display: none;"></span>
+                    <label for="remember" tabindex="0">记住登录状态</label>
+                    <a id="/forgetpwd" href="/forgetpwd" class="linkABlue">忘记密码?</a>
+                </div>
+                <button id="login" class="fullBtnBlue">登录</button>
+            </form>
+        </div>
+    </div>
+    <div id="flymeFooter" class="footerWrap" style="top: 769px;">
+        <div class="footerInner">
+            <div class="footer-layer1">
+            </div>
+            <div class="clear"></div>
+            <div id="flymeCopyright" class="copyrightWrap">
+                <div class="copyrightInner">
+                    <span>©2014 Youths. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wechatPic"></div>
+    <script charset="utf-8" type="text/javascript" src="~/Content/js/jquery-1.7.1.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="~/Content/js/extend.js"></script>
+    <script type="text/javascript">
+        +(function ($) {
+            $("#mainForm").submit(function () {
+                $("#mainForm span.error").remove();
+                $("#mainForm .normalInput").removeClass("error");
+                var error = true;
+                var posturl = $(this).attr("action");
+                if ($("#account").val() == "") {
+                    formError($("#account"), "用户名不能为空!")
+                    error = false;
+                }
+                if ($("#password").val() == "") {
+                    formError($("#password"), "密码不能为空!")
+                    error = false;
+                }
+                if (!error) {
+                    return false;
+                }
+                else {
+                    str = $(this).serialize()
+                }
+                $.ajax({
+                    type: "POST",
+                    url: posturl,
+                    data: str,
+                    success: function (msg) {
+                        if (posturl == "login") {
+                            if (msg == "0") {
+                                $("#rememberField").before("<span class='error'>帐户名或密码不正确</span>");
+                            }
+                            else if (msg == "1") {
+                                jump(1500, "/app/home/index");
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        })(jQuery);
+    </script>
+    <script type="text/javascript" src="~/Content/js/jquery.form.js" charset="utf-8"></script>
+    @*<script type="text/javascript" src="~/Content/js/jquery.validate.js" charset="utf-8"></script>*@
+    <script type="text/javascript" src="~/Content/js/utils.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/Content/js/flyme.elements.js" charset="utf-8"></script>
+    @*<script type="text/javascript" src="~/Content/js/base.js" charset="utf-8"></script>
+        <script type="text/javascript" src="~/Content/js/jquery.autoEmail.js" charset="utf-8"></script>
+        <script type="text/javascript" src="~/Content/js/nameRegister.js" charset="utf-8"></script>*@
+</body>
+</html>

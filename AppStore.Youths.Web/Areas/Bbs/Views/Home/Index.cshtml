@@ -1,0 +1,740 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Youths官方交流平台 </title>
+    <meta name="keywords" content="Youths社区,Youths官方论坛" />
+    <meta name="description" content="Youths社区是魅族官方论坛,为广大用户提供Youths最新动向、玩机心得交流、手机游戏与应用下载服务,Youths社区欢迎您的到来! " />
+    <meta name="generator" content="MEIZU 2013" />
+    <meta name="author" content="MEIZU" />
+    <meta name="copyright" content="2003-2013 Comsenz Inc." />
+    <meta name="MSSmartTagsPreventParsing" content="True" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta http-equiv="MSThemeCompatible" content="Yes" />
+    <base />
+    <link rel="stylesheet" type="text/css" href="~/Areas/bbs/Content/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="~/Areas/bbs/Content/css/123.css" />
+    <script type="text/javascript" charset="utf-8" src="js/hotclick.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/1330080408.js"></script>
+    <script src="js/hm.js"></script>
+    <script type="text/javascript">
+        function getCookie(objName) {//获取指定名称的cookie的值
+            var arrStr = document.cookie.split("; ");
+            for (var i = 0; i < arrStr.length; i++) {
+                var temp = arrStr[i].split("=");
+                if (temp[0] == objName)
+                    return unescape(temp[1]);
+            }
+            return false;
+        }
+        var cookiepre = 'MZBBS_2132_';
+        var cookie_mobile = getCookie(cookiepre + 'mobile');
+        var static_index = window.location.href.indexOf('mobile=no') === -1 && (window.location.href == 'http://bbs.meizu.cn' || window.location.href == 'http://bbs.meizu.cn/' || window.location.href == 'http://bbs.meizu.cn/index.html' || (window.location.href.indexOf('index.html') === 0 && window.location.href.indexOf('mobile=yes')));
+        if (!navigator.userAgent.match(/pad|gt-p1000/i) && cookie_mobile !== 'no' && static_index && navigator.userAgent.match(/android|webos|ip(hone|od)|opera (mini|mobi|tablet)|iemobile|windows.+phone|mobile|fennec|kindle (Fire)|maemo|blackberry|playbook|bb10\; (touch|kbd)|Symbian(OS)|Ubuntu Touch/i)) {
+            window.location.href = 'index-2.html?mobile=yes';
+        }
+        var STYLEID = '1', STATICURL = 'http://bbs.meizu.cn/static/', IMGDIR = 'http://bbs.res.meizu.com/resources/php/bbs/static/image/common', VERHASH = 'MfF', charset = 'utf-8', discuz_uid = '0', cookiepre = 'MZBBS_2132_', cookiedomain = '', cookiepath = 'index.html', showusercard = '0', attackevasive = '0', disallowfloat = 'login|newthread|tradeorder|activity|debate|usergroups|task', creditnotice = '', defaultstyle = '', REPORTURL = 'aHR0cDovL2Jicy5tZWl6dS5jbi9pbmRleC5waHA/c3RhdGljX3RpbWVzdGFtcD0xNDE5ODIzMjAxJnN0YXRpY19zaWduPWU0YWIzNTAyMzYwMGMwYjY1NjgzYmMzNGQ1OGRiNTNmZmRmYWI3OTA=', SITEURL = 'index.html', JSPATH = 'http://bbs.res.meizu.com/resources/php/bbs/static/js/';
+
+
+        // 是否是手机浏览器
+        var BROWSER_IS_MOBILE = 0;		// 手机浏览器 1
+    </script>
+    <script src="js/common.js" type="text/javascript"</script>
+    <meta property="wb:webmaster" content="f1284c3017204ff7" />
+    <meta property="qc:admins" content="1300463313655125636" />
+    <meta name="application-name" content="魅族社区" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="msapplication-tooltip" content="魅族社区" />
+    <meta name="msapplication-task" content="name=;action-uri=http://bbs.meizu.cn/portal.php;icon-uri=http://bbs.res.meizu.com/resources/php/bbs/static/image/common/portal.ico" />
+    <meta name="msapplication-task" content="name=版块;action-uri=http://bbs.meizu.cn/forum.php;icon-uri=http://bbs.res.meizu.com/resources/php/bbs/static/image/common/bbs.ico" />
+    <meta name="msapplication-task" content="name=;action-uri=http://bbs.meizu.cn/group.php;icon-uri=http://bbs.res.meizu.com/resources/php/bbs/static/image/common/group.ico" />
+    <link rel="archives" title="魅族社区" href="archiver/index.html" />
+
+    <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+    <script src="js/forum.js" type="text/javascript"></script>
+    <script src="js/public.js" type="text/javascript"></script>
+    <script src="js/jquery.elements.js" type="text/javascript"></script>
+    <!--     IE 6 png 透明   -->
+    <!--[if lte IE 6]>
+    <script src="http://bbs.res.meizu.com/resources/php/bbs/static/js/belatedPNG.js" type="text/javascript"></script>
+    <script>
+      DD_belatedPNG.fix('.png_bg,.png_bg a:hover');
+    </script>
+    <![endif]-->
+    <!--百度统计-->
+    <script type="text/javascript">
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "../hm.baidu.com/hmbb60.js?e83cb9314f6d71918bec387706171c94";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body id="nv_forum" class="pg_index" onkeydown="if(event.keyCode==27) return false;">
+    <div id="append_parent"></div><div id="ajaxwaitid"></div>
+    <div id="hd">
+        <div id="w_header">
+            <div class="m_top">
+                <div id="logo"><a href="http://www.meizu.com/"></a></div>
+                <ul class="c_menu">
+                    <li><a href="http://store.meizu.com/" class="r_store"><span class="hideLeft"></span></a></li>
+                    <li><a href="http://www.meizu.com/products/index.html" class="r_prd "><span class="hideLeft"></span></a></li>
+                    <li><a href="http://retail.meizu.com/" class="r_buy"><span class="hideLeft"></span></a></li>
+                    <li><a href="http://service.meizu.com/" class="r_tech"><span class="hideLeft"></span></a></li>
+
+                    <li><a href="http://www.flyme.cn/" class="r_flyme"><span class="hideLeft"></span></a></li>
+
+                    <li><a href="index.html" class="r_bbs_selected"></a></li>
+                </ul>
+
+                <div id="mzCust" attribute="1" rel="1">
+                    <span id="mzLoginArea1">
+
+                        <a id="newsNum" class="empty_newsnum" onmouseover="showMenu(this.id);">0</a>
+
+                        <a id="mzCustName" title="账户管理" class="longdot" onmouseover="showMenu(this.id);"></a>
+                        <a id="mzUserHead" class="avatar"></a>
+                        <div id="mzCustName_menu" class="p_pop" style="width:118px;display:none;">
+                            <p><a class="actmanage_mzcust" href="https://member.meizu.com/uc/webjsp/member/detail">我的账户</a></p>
+                            <p><a href="homebe32.html?mod=follow">我的动态</a></p>
+                            <p><a href="forum7e4b.html?mod=guide&amp;view=my">我的帖子</a></p>
+                            <p><a href="home47c1.html?mod=space&amp;do=friend">我的好友</a></p>
+                            <p><a href="home7076.html?mod=space&amp;do=pm" id="pm_ntc">我的消息</a></p>
+                            <p><a href="home6c07.html?mod=spacecp">个人设置</a></p>
+                            <p><a class="logout_mzcust" id="mzLogout" href="https://member.meizu.com/logout.jsp?useruri=http%3A%2F%2Fbbs.meizu.cn%2F">退出账户</a></p>
+                        </div>
+                        <!--如果有新消息或提醒-->
+                        <div id="newsNum_menu" class="p_pop" style="width:400px;display:none;">
+                            <div id="firstLevelNews"></div>
+                            <div id="secLevelNews"></div>
+                        </div>
+                    </span>
+                </div>
+                <script type="text/javascript">
+                    function getCookie(objName) {//获取指定名称的cookie的值
+                        var arrStr = document.cookie.split("; ");
+                        for (var i = 0; i < arrStr.length; i++) {
+                            var temp = arrStr[i].split("=");
+                            if (temp[0] == objName)
+                                return unescape(temp[1]);
+                        }
+                        return false;
+                    }
+                    var cookiepre = 'MZBBS_2132_';
+                    var username_obj = eval('(' + getCookie(cookiepre + 'loginmember') + ')');
+                    if (typeof (username_obj.uid) == "undefined" || !username_obj.uid) {
+                        var nologin_block = '<div class="atag" id="mzLoginArea2"><a id="mzRegister" class="register_mz" href="https://member.meizu.com/register.jsp?service=bbs&amp;appuri=http://bbs.meizu.cn/logging.php&amp;useruri=http%3A%2F%2Fbbs.meizu.cn%2F">注册</a></div>'
+                                            + '<div  id="mzLoginArea3" style="width:5px;">/</div>'
+                                            + '<div class="atag" id="mzLoginArea4"><a id="mzLogin" class="login_mz" href="/login.php?">登录</a></div><div class="custHead"></div>';
+                        document.getElementById("mzCust").innerHTML = nologin_block;
+                        document.getElementById("mzCust").setAttribute("attribute", "0");
+                        document.getElementById("mzCust").innerHTML = nologin_block;
+
+                    } else {
+                        if (typeof (username_obj.username) != "undefined") {
+                            document.getElementById("mzCustName").innerHTML = username_obj.username + '<em class="arrow_dark"></em>';
+                        }
+                        if (typeof (username_obj.userhead) != "undefined") {
+                            document.getElementById("mzUserHead").innerHTML = '<img onerror="this.onerror=null;this.src=\'http://common.res.meizu.com/resources/php/bbs/static/image/noavatar_small.gif\'" src="'
+                                + username_obj.userhead
+                                + '"><span class="shadowbox_avatar"> </span>';
+                        } else {
+                            var userhead = '<img onerror="this.onerror=null;this.src=\'http://common.res.meizu.com/resources/php/bbs/static/image/noavatar_small.gif\'" src="../common.res.meizu.com/resources/php/bbs/static/image/noavatar_small.gif"><span class="shadowbox_avatar"> </span>';
+                            document.getElementById("mzUserHead").innerHTML = userhead;
+                        }
+                    }
+                </script>
+                <div class="cr"></div>
+            </div>
+        </div>
+
+        <div class="wp">
+            <div id="nv">
+                <ul>
+                    <li id="mn_Nb934"><a href="index.html" hidefocus="true">首页</a></li>
+
+                    <li class="separator"> </li>
+                    <li id="mn_forum"><a href="forum.html" hidefocus="true">版块</a></li>
+
+                    <li class="separator"> </li>
+                    <li id="mn_N2dde"><a href="group06a7.html?gid=112" hidefocus="true">魅友家</a></li>
+
+                    <!--						<li class="separator"> </li>
+                    <li id="morePlate" onClick="showMenu(this.id)"><a>更多</a><em class="arrow_dark"></em></li>-->
+                </ul>
+                <div id="morePlate_menu" class="p_pop moreplatebox" style="display:none;">
+                    <p><a href="forum-22-1.html">产品讨论</a></p>
+                    <p><a href="forum-62-1.html">资源分享</a></p>
+                    <p><a href="http://bbs.flyme.cn/portal.php">Flyme 专区</a></p>
+                    <p><a href="forum-144-1.html">魅蓝专区</a></p>
+                    <p><a href="forum-103-1.html">玩机达人</a></p>
+                    <p><a href="forum-110-1.html">科技前沿</a></p>
+                    <p><a href="forum-111-1.html">新人报到</a></p>
+                    <p><a href="forum-104-1.html">魅友家大本营</a></p>
+                    <p><a href="forum-10-1.html">魅友广场</a></p>
+                    <p><a href="forum-84-1.html">摄影天地</a></p>
+                    <p><a href="forum-20-1.html">二手交易</a></p>
+                    <p><a href="forum-13-1.html">社区办公室</a></p>
+                    <p><a href="forum-29-1.html">魅币兑换</a></p>
+                    <p><a href="forum-136-1.html">商家活动</a></p>
+                </div>
+            </div>
+            <div id="mu" class="cl" style="display:none;">
+            </div><div id="scbar" class="cl">
+                <form id="scbar_form" method="post" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="http://bbs.meizu.cn/search.php?searchsubmit=yes" target="_blank">
+                    <input type="hidden" name="mod" id="scbar_mod" value="search" />
+                    <input type="hidden" name="formhash" value="aeb234eb" />
+                    <input type="hidden" name="srchtype" value="title" />
+                    <input type="hidden" name="srhfid" value="0" />
+                    <input type="hidden" name="srhlocality" value="forum::index" />
+                    <div class="scbar_wrap">
+                        <input type="text" name="srchtxt" id="scbar_txt" value="搜索话题和用户" autocomplete="off" />
+                        <button type="submit" name="searchsubmit" id="scbar_btn" sc="1" value="true"></button>
+                    </div>
+
+                </form>
+            </div>
+            <div class="cr"> </div>
+            <ul id="scbar_type_menu" class="p_pop" style="display: none;"><li><a href="javascript:;" rel="forum" class="curtype">帖子</a></li><li><a href="javascript:;" rel="user">用户</a></li></ul>
+            <script type="text/javascript">
+                initSearchmenu('scbar', '');
+            </script>
+            <div class="cr"></div>
+        </div>
+    </div>
+
+    <div id="wp" class="wp">
+        <style id="diy_style" type="text/css"></style>
+        <link href="~/Areas/bbs/Content/css/common.css" rel="stylesheet" type="text/css" />
+        <script src="js/tuji_emote.js" type="text/javascript"></script>
+        <div class="wp">
+            <!--[diy=diy1]-->
+            <div class="index_content">
+                <div class="index_left">
+                    <div class="box1">
+                        <div class="banana_rotate">
+                            <div class="roll_img" id="roll_img_cc">
+                                <div id="portal_block_500" class="inrotate_img block move-span">
+                                    <div id="portal_block_500_content" class="dxb_bc">
+                                        <div class="roll_img_cc" style="width: 2090px; position:absolute; ">
+                                            <ul>
+                                                <li style="float:left;">
+                                                    <a href="thread-5430894-1-1.html" target="_blank">
+                                                        <div class="roll_img_kk" id="roll_img_kk_1" rurl="thread-5340237-1-1.html" width="686" height="278" alt="【年末暖冬】魅族天猫官方旗舰店品牌日" src="img/lunxian1.jpg" style="background:url('http://bbsimg.meizu.net/block/06/06e11adb992187b1c1eb0ca2a2e18915.jpg');width:686px;height:278px;"></div>
+                                                    </a>
+                                                </li>
+                                                <li style="float:left;">
+                                                    <a href="http://buying.meizu.com/yuyue.html" target="_blank">
+                                                        <div class="roll_img_kk" id="roll_img_kk_2" rurl="thread-5444967-1-1.html" width="686" height="278" alt="「青年良品」魅蓝note  12月30日正式上市" src="img/lunxian2.jpg" style="background:url('http://bbsimg.meizu.net/block/1d/1dfb72d498b9c9aea21a4f269a10a476.jpg');width:686px;height:278px;"></div>
+                                                    </a>
+                                                </li>
+                                                <li style="float:left;">
+                                                    <a href="thread-5064119-1-1.html" target="_blank">
+                                                        <div class="roll_img_kk" id="roll_img_kk_3" rurl="thread-5430894-1-1.html" width="686" height="278" alt="魅族全新品牌 魅蓝note发布售999元" src="img/lunxian3.jpg" style="background:url('http://bbsimg.meizu.net/block/22/22f8e2e367878281d2329e6283d6c38a.jpg');width:686px;height:278px;"></div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>                        <div class="leftbtn_picturn"></div>
+                                <div class="rightbtn_picturn"></div>
+                                <div class="cr"></div>
+                            </div>
+                            <div class="roll_opacity">
+
+                            </div>
+                            <div class="roll">
+                                <div class="roll_title"></div>
+                                <div class="roll_small_signimg_div">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="index_list mtop20">
+                        <div>
+                            <div class="iimage"><a class="is_image" href=thread-5442421-1-1.html target="_blank"><img src="img/a-2.jpg" width="311" height="213" title="千店万员 为您服务" /></a></div>          <div class="iright_k">
+                                <div class="ititle">          	<div class="index_forum">专卖店</div>                 <div class="cr"></div>          </div><div class="index_title" style="margin:3px 0 3px 0;"><a class="cg" target="_blank" href="thread-5442421-1-1.html" title="千店万员 为您服务">千店万员 为您服务</a></div><div style="font-size:12px;margin:12px 0 10px 0;">
+                                    <span class="readicon_uinfo_5" style="margin:0 4px 0 0;float:left;"></span>
+                                    <span class="spfont">7948</span>
+                                    <span class="replyicon_uinfo_5" style="margin:0 4px 0 20px;float:left;"></span>
+                                    <span class="spfont">287</span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <a href="space-uid-7301203.html">Dimiphan...</a></span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <span title="2014-12-29">3&nbsp;分钟前</span></span>
+                                    <span class="spfont alte" style="float:right;"><a class="alink" href="thread-5442421-1-1.html">阅读全文</a></span>
+                                    <div class="cr"></div>
+                                </div>          <div class="icontent">                 一年来，魅族的专卖店从600家增长至1000家，魅族专卖店建设突破到了一个新的台阶，未来魅族将会继续不断完善自有渠道建设，给用户带来更好的购物体验。         </div>          <div class="itail">
+                                    <div class="ishare">
+                                        <span class="bdsharebuttonbox isharebtn">
+                                            <a class="bds_tsina" href="../service.weibo.com/share/share53eb.html?appkey=439445218&amp;title=%e3%80%90%e5%8d%83%e5%ba%97%e4%b8%87%e5%91%98%20%e4%b8%ba%e6%82%a8%e6%9c%8d%e5%8a%a1%e3%80%91%e4%b8%80%e5%b9%b4%e6%9d%a5%ef%bc%8c%e9%ad%85%e6%97%8f%e7%9a%84%e4%b8%93%e5%8d%96%e5%ba%97%e4%bb%8e600%e5%ae%b6%e5%a2%9e%e9%95%bf%e8%87%b31000%e5%ae%b6%ef%bc%8c%e9%ad%85%e6%97%8f%e4%b8%93%e5%8d%96%e5%ba%97%e5%bb%ba%e8%ae%be%e7%aa%81%e7%a0%b4%e5%88%b0%e4%ba%86%e4%b8%80%e4%b8%aa%e6%96%b0%e7%9a%84%e5%8f%b0%e9%98%b6%ef%bc%8c%e6%9c%aa%e6%9d%a5%e9%ad%85%e6%97%8f%e5%b0%86%e4%bc%9a%e7%bb%a7%e7%bb%ad%e4%b8%8d%e6%96%ad%e5%ae%8c%e5%96%84%e8%87%aa%e6%9c%89%e6%b8%a0%e9%81%93%e5%bb%ba%e8%ae%be%ef%bc%8c%e7%bb%99%e7%94%a8%e6%88%b7%e5%b8%a6%e6%9d%a5%e6%9b%b4%e5%a5%bd%e7%9a%84%e8%b4%ad%e7%89%a9%e4%bd%93%e9%aa%8c%e3%80%82&amp;url=http://bbs.meizu.cn/thread-5442421-1-1.html&amp;pic=http://bbsimg.meizu.net/portal/201412/28/180454lp9h09f03ypb9b3h.jpg" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </span>
+                                    </div>                  <div class="cr"></div>
+                                </div>
+                            </div>
+                        </div>          <div class="cr"></div>
+                    </div><div class="index_list mtop20">
+                        <div>
+                            <div class="iimage"><a class="is_image" href=thread-5438089-1-1.html target="_blank"><img src="../bbsimg.meizu.net/portal/201412/26/112024mdhqx63fddhh6mf4.jpg" width="311" height="213" title="魅族MX系列+魅蓝note图赏" /></a></div>          <div class="iright_k">
+                                <div class="ititle">          	<div class="index_forum">魅图赏</div>                 <div class="cr"></div>          </div><div class="index_title" style="margin:3px 0 3px 0;"><a class="cg" target="_blank" href="thread-5438089-1-1.html" title="魅族MX系列+魅蓝note图赏">魅族MX系列+魅蓝note图赏</a></div><div style="font-size:12px;margin:12px 0 10px 0;">
+                                    <span class="readicon_uinfo_5" style="margin:0 4px 0 0;float:left;"></span>
+                                    <span class="spfont">82255</span>
+                                    <span class="replyicon_uinfo_5" style="margin:0 4px 0 20px;float:left;"></span>
+                                    <span class="spfont">579</span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <a href="space-uid-4412.html">showbill</a></span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <span title="2014-12-29">半小时前</span></span>
+                                    <span class="spfont alte" style="float:right;"><a class="alink" href="thread-5438089-1-1.html">阅读全文</a></span>
+                                    <div class="cr"></div>
+                                </div>          <div class="icontent">                 近日魅族正式发布了魅蓝note，小王同时找到了MX3、MX4、MX4 Pro、以及魅蓝note，来一个魅族四机同堂图赏，网友心中最美的魅族是哪一台呢？         </div>          <div class="itail">
+                                    <div class="ishare">
+                                        <span class="bdsharebuttonbox isharebtn">
+                                            <a class="bds_tsina" href="../service.weibo.com/share/sharea894.html?appkey=439445218&amp;title=%e3%80%90%e9%ad%85%e6%97%8fMX%e7%b3%bb%e5%88%97+%e9%ad%85%e8%93%9dnote%e5%9b%be%e8%b5%8f%e3%80%91%e8%bf%91%e6%97%a5%e9%ad%85%e6%97%8f%e6%ad%a3%e5%bc%8f%e5%8f%91%e5%b8%83%e4%ba%86%e9%ad%85%e8%93%9dnote%ef%bc%8c%e5%b0%8f%e7%8e%8b%e5%90%8c%e6%97%b6%e6%89%be%e5%88%b0%e4%ba%86MX3%e3%80%81MX4%e3%80%81MX4%20Pro%e3%80%81%e4%bb%a5%e5%8f%8a%e9%ad%85%e8%93%9dnote%ef%bc%8c%e6%9d%a5%e4%b8%80%e4%b8%aa%e9%ad%85%e6%97%8f%e5%9b%9b%e6%9c%ba%e5%90%8c%e5%a0%82%e5%9b%be%e8%b5%8f%ef%bc%8c%e7%bd%91%e5%8f%8b%e5%bf%83%e4%b8%ad%e6%9c%80%e7%be%8e%e7%9a%84%e9%ad%85%e6%97%8f%e6%98%af%e5%93%aa%e4%b8%80%e5%8f%b0%e5%91%a2%ef%bc%9f&amp;url=http://bbs.meizu.cn/thread-5438089-1-1.html&amp;pic=http://bbsimg.meizu.net/portal/201412/26/112024mdhqx63fddhh6mf4.jpg" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </span>
+                                    </div>                  <div class="cr"></div>
+                                </div>
+                            </div>
+                        </div>          <div class="cr"></div>
+                    </div><div class="index_list mtop20">
+                        <div>
+                            <div class="iimage"><a class="is_image" href=thread-5440281-1-1.html target="_blank"><img src="../bbsimg.meizu.net/portal/201412/27/154714ebolmcrrm0m0l4yl.jpg" width="311" height="213" title="魅族手机西南政法大学十大歌手总决赛" /></a></div>          <div class="iright_k">
+                                <div class="ititle">          	<div class="index_forum">魅青春</div>                 <div class="cr"></div>          </div><div class="index_title" style="margin:3px 0 3px 0;"><a class="cg" target="_blank" href="thread-5440281-1-1.html" title="魅族手机西南政法大学十大歌手总决赛">魅族手机西南政法大学十大歌手总决赛</a></div><div style="font-size:12px;margin:12px 0 10px 0;">
+                                    <span class="readicon_uinfo_5" style="margin:0 4px 0 0;float:left;"></span>
+                                    <span class="spfont">13141</span>
+                                    <span class="replyicon_uinfo_5" style="margin:0 4px 0 20px;float:left;"></span>
+                                    <span class="spfont">255</span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <a href="space-uid-8179865.html">sJyoUng</a></span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <span title="2014-12-29">18&nbsp;分钟前</span></span>
+                                    <span class="spfont alte" style="float:right;"><a class="alink" href="thread-5440281-1-1.html">阅读全文</a></span>
+                                    <div class="cr"></div>
+                                </div>          <div class="icontent">                 西南政法大学校园十大歌手大赛至今已成功举办十四届，本届由魅族手机赞助的总决赛代表西政歌唱的最高水平，让我们一起来欣赏精美绝伦的现场吧。         </div>          <div class="itail">
+                                    <div class="ishare">
+                                        <span class="bdsharebuttonbox isharebtn">
+                                            <a class="bds_tsina" href="../service.weibo.com/share/sharebf32.html?appkey=439445218&amp;title=%e3%80%90%e9%ad%85%e6%97%8f%e6%89%8b%e6%9c%ba%e8%a5%bf%e5%8d%97%e6%94%bf%e6%b3%95%e5%a4%a7%e5%ad%a6%e5%8d%81%e5%a4%a7%e6%ad%8c%e6%89%8b%e6%80%bb%e5%86%b3%e8%b5%9b%e3%80%91%e8%a5%bf%e5%8d%97%e6%94%bf%e6%b3%95%e5%a4%a7%e5%ad%a6%e6%a0%a1%e5%9b%ad%e5%8d%81%e5%a4%a7%e6%ad%8c%e6%89%8b%e5%a4%a7%e8%b5%9b%e8%87%b3%e4%bb%8a%e5%b7%b2%e6%88%90%e5%8a%9f%e4%b8%be%e5%8a%9e%e5%8d%81%e5%9b%9b%e5%b1%8a%ef%bc%8c%e6%9c%ac%e5%b1%8a%e7%94%b1%e9%ad%85%e6%97%8f%e6%89%8b%e6%9c%ba%e8%b5%9e%e5%8a%a9%e7%9a%84%e6%80%bb%e5%86%b3%e8%b5%9b%e4%bb%a3%e8%a1%a8%e8%a5%bf%e6%94%bf%e6%ad%8c%e5%94%b1%e7%9a%84%e6%9c%80%e9%ab%98%e6%b0%b4%e5%b9%b3%ef%bc%8c%e8%ae%a9%e6%88%91%e4%bb%ac%e4%b8%80%e8%b5%b7%e6%9d%a5%e6%ac%a3%e8%b5%8f%e7%b2%be%e7%be%8e%e7%bb%9d%e4%bc%a6%e7%9a%84%e7%8e%b0%e5%9c%ba%e5%90%a7%e3%80%82&amp;url=http://bbs.meizu.cn/thread-5440281-1-1.html&amp;pic=http://bbsimg.meizu.net/portal/201412/27/154714ebolmcrrm0m0l4yl.jpg" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </span>
+                                    </div>                  <div class="cr"></div>
+                                </div>
+                            </div>
+                        </div>          <div class="cr"></div>
+                    </div><div class="index_list mtop20">
+                        <div>
+                            <div class="iimage"><a class="is_image" href=thread-5436381-1-1.html target="_blank"><img src="../bbsimg.meizu.net/portal/201412/25/175150ilkaqdadoiuuik0f.jpg" width="311" height="213" title="千与千寻 寻找你身边的魅族专卖店" /></a></div>          <div class="iright_k">
+                                <div class="ititle">          	<div class="index_forum">魅活动</div>                 <div class="cr"></div>          </div><div class="index_title" style="margin:3px 0 3px 0;"><a class="cg" target="_blank" href="thread-5436381-1-1.html" title="千与千寻 寻找你身边的魅族专卖店">千与千寻 寻找你身边的魅族专卖店</a></div><div style="font-size:12px;margin:12px 0 10px 0;">
+                                    <span class="readicon_uinfo_5" style="margin:0 4px 0 0;float:left;"></span>
+                                    <span class="spfont">75553</span>
+                                    <span class="replyicon_uinfo_5" style="margin:0 4px 0 20px;float:left;"></span>
+                                    <span class="spfont">8738</span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <a href="space-uid-1304289.html">卓岳</a></span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <span title="2014-12-29">1&nbsp;小时前</span></span>
+                                    <span class="spfont alte" style="float:right;"><a class="alink" href="thread-5436381-1-1.html">阅读全文</a></span>
+                                    <div class="cr"></div>
+                                </div>          <div class="icontent">                 12月28日，魅族第1000家专卖店将落户天津，从1到1000不仅仅是量的积累，更是魅族发展多年来底蕴的沉淀，是魅族与广大用户沟通的桥梁。         </div>          <div class="itail">
+                                    <div class="ishare">
+                                        <span class="bdsharebuttonbox isharebtn">
+                                            <a class="bds_tsina" href="../service.weibo.com/share/shared3df.html?appkey=439445218&amp;title=%e3%80%90%e5%8d%83%e4%b8%8e%e5%8d%83%e5%af%bb%20%e5%af%bb%e6%89%be%e4%bd%a0%e8%ba%ab%e8%be%b9%e7%9a%84%e9%ad%85%e6%97%8f%e4%b8%93%e5%8d%96%e5%ba%97%e3%80%9112%e6%9c%8828%e6%97%a5%ef%bc%8c%e9%ad%85%e6%97%8f%e7%ac%ac1000%e5%ae%b6%e4%b8%93%e5%8d%96%e5%ba%97%e5%b0%86%e8%90%bd%e6%88%b7%e5%a4%a9%e6%b4%a5%ef%bc%8c%e4%bb%8e1%e5%88%b01000%e4%b8%8d%e4%bb%85%e4%bb%85%e6%98%af%e9%87%8f%e7%9a%84%e7%a7%af%e7%b4%af%ef%bc%8c%e6%9b%b4%e6%98%af%e9%ad%85%e6%97%8f%e5%8f%91%e5%b1%95%e5%a4%9a%e5%b9%b4%e6%9d%a5%e5%ba%95%e8%95%b4%e7%9a%84%e6%b2%89%e6%b7%80%ef%bc%8c%e6%98%af%e9%ad%85%e6%97%8f%e4%b8%8e%e5%b9%bf%e5%a4%a7%e7%94%a8%e6%88%b7%e6%b2%9f%e9%80%9a%e7%9a%84%e6%a1%a5%e6%a2%81%e3%80%82&amp;url=http://bbs.meizu.cn/thread-5436381-1-1.html&amp;pic=http://bbsimg.meizu.net/portal/201412/25/175150ilkaqdadoiuuik0f.jpg" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </span>
+                                    </div>                  <div class="cr"></div>
+                                </div>
+                            </div>
+                        </div>          <div class="cr"></div>
+                    </div><div class="index_list mtop20">
+                        <div>
+                            <div class="iimage"><a class="is_image" href=thread-5435574-1-1.html target="_blank"><img src="../bbsimg.meizu.net/portal/201412/25/164330mnlm5s85fz5cscfl.jpg" width="311" height="213" title="也没贵多少 但确实好不少" /></a></div>          <div class="iright_k">
+                                <div class="ititle">          	<div class="index_forum">魅评测</div>                 <div class="cr"></div>          </div><div class="index_title" style="margin:3px 0 3px 0;"><a class="cg" target="_blank" href="thread-5435574-1-1.html" title="也没贵多少 但确实好不少">也没贵多少 但确实好不少</a></div><div style="font-size:12px;margin:12px 0 10px 0;">
+                                    <span class="readicon_uinfo_5" style="margin:0 4px 0 0;float:left;"></span>
+                                    <span class="spfont">87233</span>
+                                    <span class="replyicon_uinfo_5" style="margin:0 4px 0 20px;float:left;"></span>
+                                    <span class="spfont">358</span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <a href="space-uid-715386.html">v6stvj4h</a></span>
+                                    <span class="spfont" style="margin:0 0 0 20px;">/ <span title="2014-12-29">半小时前</span></span>
+                                    <span class="spfont alte" style="float:right;"><a class="alink" href="thread-5435574-1-1.html">阅读全文</a></span>
+                                    <div class="cr"></div>
+                                </div>          <div class="icontent">                 魅蓝 note明确表达了向苹果出色的工业设计和品质致敬，对目前市面上那些千元机的不屑。而手机中国的经过评测得到的答案也是这样：也没贵多少，但确实好不少         </div>          <div class="itail">
+                                    <div class="ishare">
+                                        <span class="bdsharebuttonbox isharebtn">
+                                            <a class="bds_tsina" href="../service.weibo.com/share/shareb87d.html?appkey=439445218&amp;title=%e3%80%90%e4%b9%9f%e6%b2%a1%e8%b4%b5%e5%a4%9a%e5%b0%91%20%e4%bd%86%e7%a1%ae%e5%ae%9e%e5%a5%bd%e4%b8%8d%e5%b0%91%e3%80%91%e9%ad%85%e8%93%9d%20note%e6%98%8e%e7%a1%ae%e8%a1%a8%e8%be%be%e4%ba%86%e5%90%91%e8%8b%b9%e6%9e%9c%e5%87%ba%e8%89%b2%e7%9a%84%e5%b7%a5%e4%b8%9a%e8%ae%be%e8%ae%a1%e5%92%8c%e5%93%81%e8%b4%a8%e8%87%b4%e6%95%ac%ef%bc%8c%e5%af%b9%e7%9b%ae%e5%89%8d%e5%b8%82%e9%9d%a2%e4%b8%8a%e9%82%a3%e4%ba%9b%e5%8d%83%e5%85%83%e6%9c%ba%e7%9a%84%e4%b8%8d%e5%b1%91%e3%80%82%e8%80%8c%e6%89%8b%e6%9c%ba%e4%b8%ad%e5%9b%bd%e7%9a%84%e7%bb%8f%e8%bf%87%e8%af%84%e6%b5%8b%e5%be%97%e5%88%b0%e7%9a%84%e7%ad%94%e6%a1%88%e4%b9%9f%e6%98%af%e8%bf%99%e6%a0%b7%ef%bc%9a%e4%b9%9f%e6%b2%a1%e8%b4%b5%e5%a4%9a%e5%b0%91%ef%bc%8c%e4%bd%86%e7%a1%ae%e5%ae%9e%e5%a5%bd%e4%b8%8d%e5%b0%91&amp;url=http://bbs.meizu.cn/thread-5435574-1-1.html&amp;pic=http://bbsimg.meizu.net/portal/201412/25/164330mnlm5s85fz5cscfl.jpg" target="_blank">&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </span>
+                                    </div>                  <div class="cr"></div>
+                                </div>
+                            </div>
+                        </div>          <div class="cr"></div>
+                    </div>
+                    <div class="index_list mtop20 community_heat" style="padding:20px 20px 20px 20px;">
+                        <div class="t_title" style="border-bottom:1px solid #E6E6E6; padding-bottom:15px; ">
+                            <div style="float:left; font-size:16px; font-weight:bold; color:#333;">社区热帖</div>
+                            <div style="float:right;margin-top:3px; height:20px;"><span class="lsc">今日发帖 : <span class="clor">8881</span> </span><span class="flagstaff">|</span><span class="lsc">历史最高 : <span class="clor">221311</span> </span><span class="flagstaff">|</span><span class="lsc">会员 : <span class="clor">12142975</span> </span>                    </div>
+                            <div class="cr"></div>
+                        </div>
+
+                        <div class="mn plate_mn" style="float:none; box-shadow:0 0 0 0 #ECECEC; width:675px;">
+                            <div style="position: relative; border:0px none #000000;width:675px;" class="tl bm bmw" id="index_threadlist">
+                                <table cellspacing="0" cellpadding="0" summary="forum_22"><tbody id="stickthread_5436877">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/44/12/00/00/00/4412/w50h50" isdrift="true" uid="4412" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5436877-1-1.html" 6 onclick="atarget(this)" class="xst " title="来自魅族的双卡千元机：魅蓝Note开箱上手" target="_blank">来自魅族的双卡千元机：魅蓝Note开箱上手</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-4412.html" style="font-size:14px;" hidefocus="true">showbill</a></span></td></tr></tbody><tbody id="stickthread_5437059">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/13/04/28/90/00/1304289/w50h50" isdrift="true" uid="1304289" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5437059-1-1.html" 45 onclick="atarget(this)" class="xst " title="魅族第1000家专卖店落户天津" target="_blank">魅族第1000家专卖店落户天津</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-1304289.html" style="font-size:14px;" hidefocus="true">卓岳</a></span></td></tr></tbody><tbody id="stickthread_5433603">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/44/12/00/00/00/4412/w50h50" isdrift="true" uid="4412" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5433603-1-1.html" 46 onclick="atarget(this)" class="xst " title="999元打造更好用的千元机 魅蓝Note评测" target="_blank">999元打造更好用的千元机 魅蓝Note评测</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-4412.html" style="font-size:14px;" hidefocus="true">showbill</a></span></td></tr></tbody><tbody id="stickthread_5433783">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/44/12/00/00/00/4412/w50h50" isdrift="true" uid="4412" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5433783-1-1.html" 6 onclick="atarget(this)" class="xst " title="视频: 魅蓝 note 爱极客上手体验" target="_blank">视频: 魅蓝 note 爱极客上手体验</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-4412.html" style="font-size:14px;" hidefocus="true">showbill</a></span></td></tr></tbody><tbody id="stickthread_5433850">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/71/53/86/00/00/715386/w50h50" isdrift="true" uid="715386" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5433850-1-1.html" 46 onclick="atarget(this)" class="xst " title="售价999元魅蓝 note 拆解" target="_blank">售价999元魅蓝 note 拆解</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-715386.html" style="font-size:14px;" hidefocus="true">v6stvj4h</a></span></td></tr></tbody><tbody id="stickthread_5432545">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/38/96/79/30/00/3896793/w50h50" isdrift="true" uid="3896793" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5432545-1-1.html" 6 onclick="atarget(this)" class="xst " title="与iPhone 5c比工艺 魅蓝 note现场图赏" target="_blank">与iPhone 5c比工艺 魅蓝 note现场图赏</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-3896793.html" style="font-size:14px;" hidefocus="true">chenmew</a></span></td></tr></tbody><tbody id="stickthread_5432685">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/38/96/79/30/00/3896793/w50h50" isdrift="true" uid="3896793" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5432685-1-1.html" 6 onclick="atarget(this)" class="xst " title="千元智能机最强竞争者 魅蓝 note 真机赏" target="_blank">千元智能机最强竞争者 魅蓝 note 真机赏</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-3896793.html" style="font-size:14px;" hidefocus="true">chenmew</a></span></td></tr></tbody><tbody id="stickthread_5432291">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/44/12/00/00/00/4412/w50h50" isdrift="true" uid="4412" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5432291-1-1.html" 46 onclick="atarget(this)" class="xst " title="如何重新定义千元机 魅族魅蓝note首测" target="_blank">如何重新定义千元机 魅族魅蓝note首测</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-4412.html" style="font-size:14px;" hidefocus="true">showbill</a></span></td></tr></tbody><tbody id="stickthread_5432777">	<tr>		<td class="userhead" style="padding:8px 0 !important;"><a class="avatar"><img src="http://img.res.meizu.com/img/download/uc/38/96/79/30/00/3896793/w50h50" isdrift="true" uid="3896793" onerror="this.onerror=null;this.src='../common.res.meizu.com/resources/php/bbs/static/image/noavatar_big.gif'" /><span class="shadowbox_avatar"> </span></a></td>		<th class="common padding0 itemcont_threadlist" style="padding:8px 0 !important;">			<div class="maincont_list" style="width:100%;">			<a href="thread-5432777-1-1.html" 6 onclick="atarget(this)" class="xst " title="MT6752性能怪兽！魅蓝 note 首发性能全揭秘" target="_blank">MT6752性能怪兽！魅蓝 note 首发性能全揭秘</a><img src="../bbs.res.meizu.com/resources/php/bbs/static/image/common/folder_.html" style="display:none;visibility:hidden;" />		<span class="cr"> </span>	</div></th><td class="latestreply_list" style="padding:8px 0 !important;">	<span><a c="1" class="author_list" href="space-uid-3896793.html" style="font-size:14px;" hidefocus="true">chenmew</a></span></td></tr></tbody></table>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="index_list mtop20 community_heat" style="padding:20px 20px 20px 20px;">
+                                    <div class="t_title" style="border-bottom:1px solid #E6E6E6; padding-bottom:10px; " >
+                    <div style="float:left; font-size:16px; font-weight:bold; color:#333;">社区新帖</div>
+                                        <div style="float:right;">
+                    <span onclick="refresh_click()" class="refreshicon" style="margin-top:5px; float:left; cursor:pointer;"> </span><span onclick="refresh_click()" style=" margin-left:10px; float:left; color:#ffa800; cursor:pointer; font-size:16px;">刷新</span>
+                                        </div>
+                                        <div class="cr"></div>
+                                    </div>
+
+                                    <div class="mn plate_mn" style="float:none; box-shadow:0 0 0 0 #ECECEC; width:675px;" >
+                                        <div style="position: relative; border:0px none #000000;width:675px;" class="tl bm bmw" id="new_threadlist" >
+                                        </div>
+                                    </div>
+
+                                </div> -->
+                    <div style="padding:20px 20px 20px 20px;"></div>
+
+
+                </div>
+                <div class="index_right">
+
+                    <div class="index_right_2">
+                        <div class="signinwrap_expand">
+                            <div id="signin_expand" class="signin_expand signin_expand_2">
+                            </div>
+                            <script type="text/javascript">
+                                var nologin_sigin_block = '<div class="week_ban" >星期一</div>'
+                + '<div id="signin_status" class="btncont_signin btncont_signin_2" >签 到</div>'
+                + '<div class="cr"></div>'
+                + '</a>';
+                                var cookiepre = 'MZBBS_2132_';
+                                var username_obj = eval('(' + getCookie(cookiepre + 'loginmember') + ')');
+                                if (typeof (username_obj.uid) == "undefined" || !username_obj.uid) {
+                                    nologin_sigin_block = '<a attribute="https://member.meizu.com/login/login.html?service=bbs&amp;appuri=http://bbs.meizu.cn/logging.php&amp;useruri=http%3A%2F%2Fbbs.meizu.cn%2F" >' + nologin_sigin_block;
+                                    document.getElementById("signin_expand").innerHTML = nologin_sigin_block;
+
+                                } else {
+                                    nologin_sigin_block = '<a id="nosignin_link" attribute="/plugin.php?id=dsu_amupper&amp;ppersubmit=true&amp;formhash=' + username_obj.formhash + '&amp;infloat=yes" >' + nologin_sigin_block;
+                                    document.getElementById("signin_expand").innerHTML = nologin_sigin_block;
+                                }
+                            </script>
+                            <div class="tips_signin" style="display:none;"><span class="tipcont_signin"></span><em class="point_signtip"></em></div>
+                        </div>
+
+                        <div class="column_r10">
+                            <div id="portal_block_613" class="padding_margin0 block move-span">
+                                <div class="blocktitle title padding0"><span class="titletext2">热门版块</span></div><div id="portal_block_613_content" class="dxb_bc">
+                                    <div class="module cl xl forum_list">
+                                        <ul><li class="thread_1"><a class="cg" href="forum-22-1.html" title="产品讨论" target="_blank">产品讨论</a></li><li class="thread_2"><a class="cg" href="forum-144-1.html" title="魅蓝专区" target="_blank">魅蓝专区</a></li><li class="thread_3"><a class="cg" href="http://bbs.flyme.cn/portal.php" title="我爱 Flyme" target="_blank">我爱 Flyme</a></li><li class="thread_4"><a class="cg" href="forum-84-1.html" title="摄影天地" target="_blank">摄影天地</a></li><li class="thread_5"><a class="cg" href="forum-62-1.html" title="资源分享" target="_blank">资源分享</a></li><li class="thread_6"><a class="cg" href="forum-103-1.html" title="玩机达人" target="_blank">玩机达人</a></li><li class="thread_7"><a class="cg" href="forum-104-1.html" title="魅友家大本营" target="_blank">魅友家大本营</a></li><li class="thread_8"><a class="cg" href="forum-110-1.html" title="科技前沿" target="_blank">科技前沿</a></li><li class="thread_9"><a class="cg" href="forum-10-1.html" title="魅友广场" target="_blank">魅友广场</a></li><li class="thread_10"><a class="cg" href="forum-111-1.html" title="新人报到" target="_blank">新人报到</a></li></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column_r5">
+                            <div id="portal_block_606" class="inrotate_img block move-span">
+                                <div class="blocktitle title padding0"><span class="titletext2">最新活动</span></div>
+                                <div class="bread_line">
+                                    <div class="line"></div>
+                                    <div class="cr"></div>
+                                </div><div id="portal_block_606_content" class="dxb_bc">
+                                    <div class="module cl ml" style="padding-top:15px;">
+                                        <ul>
+                                            <li>
+                                                <div class="img_l">
+                                                    <img src="../bbsimg.meizu.net/block/50/5070028d8aff4c4e846b5394e934a225.jpg" width="121" height="92" title="Pro预订发货查询" />
+                                                </div>
+                                                <div class="mhometitle">
+                                                    <div class="title">Pro预订发货查询</div>
+                                                    <div class="summary">MX4 Pro预订 专卖店发货查询</div>
+                                                    <a href="http://event.meizu.com/pro_zmd.html" target="_blank"><div class="but">立即参加</div></a>
+                                                </div>
+                                                <div class="cr"></div>
+                                            </li>
+                                            <li>
+                                                <div class="img_l">
+                                                    <img src="../bbsimg.meizu.net/block/01/0184f824d11b0a05ed679a3dce973bca.jpg" width="121" height="92" title="双蛋充值送好礼" />
+                                                </div>
+                                                <div class="mhometitle">
+                                                    <div class="title">双蛋充值送好礼</div>
+                                                    <div class="summary">使用flyme账号充值游戏，MX4等好礼尽情送。</div>
+                                                    <a href="thread-5431601-1-1.html" target="_blank"><div class="but">立即参加</div></a>
+                                                </div>
+                                                <div class="cr"></div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="column_r7">
+                            <div class="tagbox" style="background-color:#FFFFFF;">
+                                <div class="tag_tags">
+                                    <div id="bbs_firmware_push_get" class="tg activity">体验固件</div>
+                                    <div id="bbs_system_course_get" class="tg ">正式固件</div>
+                                    <div class="cr"></div>
+                                </div>
+                                <div class="cr"></div>
+                                <div class="tag_main" style="height:183px;">
+                                    <div class="ctag" style=" overflow:hidden;">
+                                        <div id="portal_block_533" class="padding_margin0 block move-span">
+                                            <div id="bbs_firmware_push" style="display:none;">固件推送</div><div id="portal_block_533_content" class="dxb_bc">
+                                                <div class="module cl xl">
+                                                    <ul>
+                                                        <li style="margin:0px;">
+                                                            <dl class="cl xld">
+                                                                <dt style="font-size:14px;color:#222222;font-weight:bold;line-height:24px;padding:2px 0px;"> MX2/3 Flyme 4.1.3.2体验固件</dt>
+                                                                <dt style=" color:#222222; font-size:14px; line-height:24px;height:24px;padding:2px 0px;overflow:hidden;">发布日期：2014年12月23日</dt>
+                                                            </dl>
+                                                        </li>
+                                                        <li style="margin:0px;">
+                                                            <dl class="cl xld">
+                                                                <dd style="font-size:14px;color:#222222;line-height:24px;padding:0px;">变更详情：新增 Flyme语音助手</dd>
+                                                            </dl>
+                                                        </li>
+                                                        <li class="firmware_li  firmli_3"><a href="http://bbs.flyme.cn/thread-89118-1-1.html" title="更新日期" target="_blank"><em>更新日期</em><em class="arrow_2"> </em></a></li>
+                                                        <li class="firmware_li  firmli_4"><a href="http://bbs.flyme.cn/forum-100002-1.html" title="使用反馈" target="_blank"><em>使用反馈</em><em class="arrow_2"> </em></a></li>
+                                                        <li style="display:block;float:none;font-size:0;height:0;line-height:0;overflow:hidden;clear:both;visibility: hidden;margin:0px;"></li>
+                                                        <li style="padding-top:6px;"><a class="download_button" href="thread-5430427-1-1.html" title="下载固件" target="_blank"><div class="firmware_download">下载固件</div></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="ctag" style=" overflow:hidden; display:none;">
+                                        <div id="portal_block_535" class="padding_margin0 block move-span">
+                                            <div id="bbs_firmware_push" style="display:none;">正式固件</div><div id="portal_block_535_content" class="dxb_bc">
+                                                <div class="module cl xl">
+                                                    <ul>
+                                                        <li style="margin:0px;">
+                                                            <dl class="cl xld">
+                                                                <dt style="font-size:14px;color:#222222;font-weight:bold;line-height:24px;padding:2px 0px;">MX3/MX2 Flyme OS 3.7.3A</dt>
+                                                                <dt style=" color:#222222; font-size:14px; line-height:24px;height:24px;padding:2px 0px;overflow:hidden;">发布日期：2014年9月9日</dt>
+                                                            </dl>
+                                                        </li>
+                                                        <li style="margin:0px;">
+                                                            <dl class="cl xld">
+                                                                <dd style="font-size:14px;color:#222222;line-height:24px;padding:0px;">变更详情：新增 升级至Android 4.4.4</dd>
+                                                            </dl>
+                                                        </li>
+                                                        <li class="firmware_li  firmli_3"><a href="http://bbs.flyme.cn/forum-90-1.html" title="更新日期" target="_blank"><em>更新日期</em><em class="arrow_2"> </em></a></li>
+                                                        <li class="firmware_li  firmli_4"><a href="http://bbs.flyme.cn/forum-90-1.html" title="使用反馈" target="_blank"><em>使用反馈</em><em class="arrow_2"> </em></a></li>
+                                                        <li style="display:block;float:none;font-size:0;height:0;line-height:0;overflow:hidden;clear:both;visibility: hidden;margin:0px;"></li>
+                                                        <li style="padding-top:6px;"><a class="download_button" href="http://bbs.flyme.cn/thread-3612-1-1.html" title="下载固件" target="_blank"><div class="firmware_download">下载固件</div></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column_r8">
+                            <div id="portal_block_614" class="inrotate_img block move-span">
+                                <div id="portal_block_614_content" class="dxb_bc">
+                                    <div class="module cl ml" style="padding-top:15px;">
+                                        <ul>
+                                            <li style="width: 270px;">
+                                                <div class="blocktitle title padding0 item_img1"><span class="titletext2">新店速递</span></div>
+                                                <div class="bread_line">
+                                                    <div class="line"></div>
+                                                    <div class="cr"></div>
+                                                </div>
+                                                <a href="http://retail.meizu.com/" target="_blank"><img src="../bbsimg.meizu.net/block/f1/f10e5125a5cd6289aee1af5007e0e438.jpg" width="268" height="147" title="新店速递" /></a>
+
+                                            </li>
+                                            <li style="width: 270px;">
+                                                <div class="blocktitle title padding0 item_img2"><span class="titletext2">新人课堂</span></div>
+                                                <div class="bread_line">
+                                                    <div class="line"></div>
+                                                    <div class="cr"></div>
+                                                </div>
+                                                <a href="thread-4832056-1-1.html" target="_blank"><img src="../bbsimg.meizu.net/block/de/de57238fa5a4dc2a7b27975f5adbbc9f.jpg" width="268" height="147" title="新人课堂" /></a>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column_r9">
+                            <div id="portal_block_615" class="padding_margin0 block move-span">
+                                <div id="portal_block_615_content" class="dxb_bc">
+                                    <div class="module cl xl">
+                                        <ul><li class="thread1"><a class="cg" href="thread-4832056-1-1.html" title="系统教程" target="_blank">系统教程</a></li><li class="thread2"><a class="cg" href="thread-4563325-1-1.html" title="新人指引" target="_blank">新人指引</a></li><li class="thread3"><a class="cg" href="thread-4585954-1-1.html" title="社区版规" target="_blank">社区版规</a></li><li class="thread4"><a class="cg" href="forum-13-1.html" title="反馈建议" target="_blank">反馈建议</a></li><li class="thread5"><a class="cg" href="forum-47-1.html" title="版务申诉" target="_blank">版务申诉</a></li><li class="thread6"><a class="cg" href="http://www.meizu.com/services" title="服务支持" target="_blank">服务支持</a></li></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="column_r7" style="padding-top:20px;">
+                            <div class="tagbox2" style="background-color:#FFFFFF;">
+                                <div class="tag_tags">
+                                    <div id="bbs_firmware_push_get" class="tg activity">社区微博</div>
+                                    <div id="bbs_system_course_get" class="tg ">官方微信</div>
+                                    <div class="cr"></div>
+                                </div>
+                                <div class="cr"></div>
+                                <div class="tag_main">
+                                    <div class="ctag" style=" overflow: hidden; display: block;">
+                                        <iframe width="270" height="400" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=270&amp;height=400&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=5&amp;isTitle=0&amp;noborder=1&amp;isWeibo=1&amp;isFans=0&amp;uid=2992465674&amp;verifier=96b7574e&amp;colors=FFFFFF,ffffff,666666,0082cb,FFFFFF&amp;dpc=1"></iframe>
+                                    </div>
+                                    <div class="ctag" style=" overflow:hidden; display:none;">
+                                        <div id="portal_block_616" class="inrotate_img block move-span">
+                                            <div id="portal_block_616_content" class="dxb_bc">
+                                                <div class="module cl ml">
+                                                    <ul>
+                                                        <li class="two_code" style="width:100%;">
+                                                            <a href="#" target="_blank"><img src="../bbsimg.meizu.net/block/37/3733d6e49fb966ae6003b3944570aa1a.jpg" width="230" height="230" title="社区微信公众平台" /></a>
+                                                            <div class="text mhometitle1"><a class="cg" title="社区微信公众平台" href="#" target="_blank">社区微信公众平台</a></div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="cr"></div>
+            </div>
+            <!--[/diy]-->
+
+
+
+        </div>
+
+
+        <script language="javascript" type="text/javascript">
+            //    function showmgs(text,desc,url,pic){
+            //        window._bd_share_config = {
+            //		common : {
+            //			bdText : text,
+            //			bdDesc : desc,
+            //			bdUrl : url,
+            //			bdPic : pic
+            //		},
+            //		share : [{
+            //			"bdSize" : 16
+            //		}]
+            //	}
+            //        with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+            //    }
+
+
+            // 复制 id1 HTML的数据到 id2
+            function copy_html(id1, id2) {
+                try {
+                    var html = document.getElementById(id1).innerHTML;
+                    document.getElementById(id2).innerHTML = html;
+                } catch (e) { }
+            }
+            //copy_html( 'bbs_firmware_push','bbs_firmware_push_get');
+            //copy_html( 'bbs_system_course','bbs_system_course_get');
+            // 首页js 初使化
+            index_js.init();
+            //百度分享
+            //hoverSub(".ishare","displaybtn_ishare");
+
+            // 签到
+            signinFunc(".signin_expand", ".tips_signin");
+
+            // 头像浮动
+            adrift = new avatar_drift();
+            adrift.init();
+
+
+            // 删除底部线条
+            delete_bottom_line();
+
+        </script>
+        <div class="tborder_foot"></div>
+        <div id="Footer" class="cl">
+            <div id="footer1">
+                <script type="text/javascript">
+                    function goto_mobile_href() {
+                        var f = window.location.href;
+                        if (window.location.href.substr(0, 29) == 'group06a7.html') {
+                            window.location.href = 'index-2.html?mobile=yes';
+                        } else if (f.indexOf('mobile=no') !== -1) {
+                            window.location.href = f.replace(/mobile=no/, 'mobile=yes');
+                        } else if (f.indexOf('mobile=yes') > 0) {
+                            location.reload();
+                        } else if (f === 'http://bbs.meizu.cn' || f === 'index.html') {
+                            window.location.href = f + 'index.php?mobile=yes';
+                        } else if (f.substr(-1) == '/' || f.substr(-4) == 'html' || f.substr(-3) == 'php') {
+                            window.location.href = f + '?mobile=yes';
+                        } else {
+                            window.location.href = f + '&mobile=yes';
+                        }
+                    }
+                </script>
+                <a class="bottoma" target="_blank" href="http://www.meizu.com/about.html">关于魅族</a>
+                <img class="footline" src="../common.res.meizu.com/resources/common/images/default/space.gif">
+                <a class="bottoma" href="http://www.meizu.com/legalStatement.html" target="_blank">法律声明</a>
+                <img class="footline" src="../common.res.meizu.com/resources/common/images/default/space.gif">
+                <a class="bottoma" target="_blank" href="http://hr.meizu.com/">工作机会</a>
+                <img class="footline" src="../common.res.meizu.com/resources/common/images/default/space.gif">
+                <a class="bottoma" target="_blank" href="http://www.meizu.com/contact.html">联系我们</a>
+                <img class="footline" src="../common.res.meizu.com/resources/common/images/default/space.gif">
+                <span class="globalName">
+                    <a id="globalName" class="bottoma language" href="javascript:void(0);">
+                        <img src="../common.res.meizu.com/resources/common/images/default/earth/earth.html">简体中文&nbsp;&nbsp;
+                    </a>
+                    <div style="right: 31px; height: 200px; display: none;top:-202px;" id="globalContainer">
+                        <a href="http://www.meizu.com/" title="简体中文" class="checked">简体中文</a>
+                        <a href="http://www.meizu.com/hk/" title="繁體中文" class="ClobalItem">繁體中文</a>
+                        <a href="http://www.meizu.com/en/" title="English" class="ClobalItem">English</a>
+                        <a href="http://ru.meizu.com/" title="Русский" class="ClobalItem">Русский</a>
+                        <a href="http://il.meizu.com/" title="עברית" class="ClobalItem" style="border-width:0px;">עברית</a>
+                    </div>
+                </span>
+
+                <div id="footWeibo">
+                    <a class="sina" title="新浪微博" target="_blank" href="http://weibo.com/meizumobile"></a>
+                    <a class="tencent" title="腾讯微博" href="http://t.qq.com/meizu_tech" target="_blank"></a>
+                </div>
+            </div>
+            <div id="footer2" class="copyright">
+                <span>©2014 Meizu Telecom Equipment Co., Ltd. All rights reserved.</span>
+                <a href="../common.res.meizu.com/resources/www/images/icp2.jpg" target="_blank">经营许可证编号：粤B2-20130198</a>
+                <span id="footcap">
+                    <a target="_blank" rel="nofollow" href="http://210.76.65.188/">
+                        <img class="cap1" border="0" src="../common.res.meizu.com/resources/common/images/default/space.gif">
+                    </a>
+                    <a target="_blank" rel="nofollow" href="http://210.76.65.188/webrecord/innernet/Welcome.jsp?bano=4404013010531">
+                        <img class="cap2" border="0" src="../common.res.meizu.com/resources/common/images/default/space.gif">
+                    </a>
+                    &nbsp;<a href="http://discuz.qq.com/service/security" target="_blank" title="防水墙保卫网站远离侵害">
+                        <img src="http://bbs.meizu.cn/static/image/common/security.png">
+                    </a>&nbsp;&nbsp;
+                    <span id="tcss"></span>
+                    <script type="text/javascript" src="js/ping.js" charset="utf-8"></script>
+                    <script type="text/javascript" reload="1">pgvMain({ "discuzParams": { "r2": "27111811", "ui": 0, "rt": "portal", "pn": 1, "qq": "000" }, "extraParams": "" });</script>
+                </span>
+            </div>
+        </div>
+
+        <div id="g_upmine_menu" class="tip tip_3" style="display:none;">
+            <div class="tip_c">
+                积分 0, 距离下一级还需  积分
+            </div>
+            <div class="tip_horn"></div>
+        </div>
+        <script type="text/javascript">
+            scrolltop_obj = new goto_top();
+            scrolltop_obj.init();
+        </script>
+        <!--统计代码-->
+        <script src="../tongji.meizu.com/js/flow.js" type="text/javascript" charset="utf-8"></script>
+</body>
+<!-- Mirrored from bbs.meizu.cn/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 29 Dec 2014 03:36:51 GMT -->
+</html>

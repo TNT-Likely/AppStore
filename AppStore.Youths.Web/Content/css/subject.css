@@ -1,0 +1,26 @@
+﻿/*list*/
+.subject_recommend{width: 1000px;margin-top: 20px;}
+.subject_recommend img{width: 320px;height: 160px;border-radius: 5px;}
+.subject_one{width: 320px;height: 210px;float: left;margin: 20px 20px 0 0;}
+.subject_one span{font-size: 14px;display: block;float: left;clear: both;margin: 5px 0;cursor: pointer;}
+div.descript{clear: both;font-size: 12px;white-space:nowrap;overflow: hidden;text-overflow: ellipsis;}
+.subject_one.subject_right{margin-right: 0}
+
+/*info*/
+.subject_img{width: 1000px;height: 300px;margin-bottom: 50px;margin-top: 10px;}
+.subject_desc{float: left;width: 240px;height: 530px;margin-right: 50px;}
+.desc_content{font: 14px;margin-top: 15px;}
+.subject_content{float: left;width: 710px;}
+.subject_content .line_1{margin-bottom: 15px;}
+.info_one{float: left;width: 320px;height: 75px;margin: 0 70px 45px 0;}
+.info_one *{float: left}
+.info_one img{width: 75px;height: 75px;border-radius: 5px;margin-right: 15px;}
+.info_one .one_right{width: 230px;}
+.info_one span{font-size: 14px;}
+.info_one .info_desc{font-size: 12px;height: 30px;clear: both;width:228px;}
+.info_one.right{margin-right: 0;}
+.info_recommend{width: 1000px;height: 185px;margin-bottom: 70px;float: left;}
+.info_recommend img{float: left;width: 230px;height: 135px;margin: 15px 26px 0 0;border-radius: 5px;cursor: pointer;}
+.info_recommend .right{margin-right: 0;}
+.star_bg{margin: 7px 0;}
+a.price{float: right;margin-top: 2px;}

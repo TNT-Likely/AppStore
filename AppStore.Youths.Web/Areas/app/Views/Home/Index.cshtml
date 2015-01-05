@@ -1,0 +1,331 @@
+﻿@using AppStore.Youths.Model;
+@{
+    int num = 0,paiming=0;
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Youths 软件商店-应用</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <link href="/Content/css/app.css" rel="stylesheet" type="text/css">
+    <link href="/Content/css/common.css" rel="stylesheet" type="text/css">
+    <script src="/Content/js/extend.js"></script>
+</head>
+<body>
+
+    <div id="head_wrapper">
+        <div class="menu_head">
+            <div class="menu">
+                <div class="left" style="width: 300px;">
+                    <a href="http://youths.cc/">Youths官网</a><div class="split"></div>
+                    <a href="/app/home/index">应用市场</a><div class="split"></div>
+                    <a href="/bbs/home/index">论坛</a>
+                </div>
+                <div class="right" style="width: 700px;text-align: right;">
+                    <input type="hidden" name="mz_flyme" id="mz_flyme" value="" />
+                    <input type="hidden" name="mz_developer" id="mz_developer" value="" />
+                    <input type="hidden" id="_assertion_nickname" value="" />
+                    @{
+                        if (ViewBag.user != null)
+                        {
+                            <span id="loginWrap">
+                                <a target="_blank" href="#" id="w_notify" title="" class="ellipsis"><i class="i_tooltips radius2" id="tooltips"></i>@ViewBag.user.UserName</a>
+                                <div class="split"></div>
+                                <a id="head-logout" title="退出" onclick="logout('/app/home/index')">退出</a>
+                            </span>
+                        }
+                        else
+                        {
+                            <span id="unloginWrap">
+                                <a href="/base/login" title="登录">登录</a>
+                                <div class="split"></div>
+                                <a href="/base/register" title="注册">注册</a>
+                            </span>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="head">
+            <div class="logo"></div>
+            <a data-href="/apps/public/index" data="app.html">应用</a>
+            <a data-href="/games/public/index" data="game.html">游戏</a>
+            <div class="search_bg">
+                <input type="text" id="flymeSearch" class="search" maxlength="100" value="" autocomplete="off" style="color: rgb(190, 190, 190);"><div class="jsonSuggestResults" style="top: 45px; left: 746px; width: 210px; display: none;"></div>
+                <span class="default_val none" style="display: block;">请输入应用/游戏/主题的名称</span>
+            </div>
+            <div class="search_btn" id="flymeSearchBtn"></div>
+        </div>
+        <div class="content">
+            <div class="content_nav">
+            </div>
+        </div>
+    </div>
+    <div class="tip_msg none"></div>
+    <script src="/Content/js/common.js"></script>
+    <script src="/Content/js/jsonSuggestFlyme.js"></script>
+    <script src="/Content/js/public.js"></script>
+    <div id="wrapper">
+        <div class="content_main">
+            <div class="banner_container">
+                <ul id="bannerImgList">
+                    <li><img src="/Content/img/lunxian1.png" data-param="" data-type="special" data-content="452"></li>
+                    <li><img src="/Content/img/lunxian2.png" data-param="" data-type="special" data-content="468"></li>
+                    <li><img src="/Content/img/lunxian3.png" data-param="" data-type="special" data-content="475"></li>
+                </ul>
+                <ul id="bannerIdxList">
+                    <li><span class="outter banner_idx"></span></li>
+                    <li><span class="outter banner_idx"></span></li>
+                    <li><span class="outter banner_idx"></span></li>
+                </ul>
+            </div>
+            <div class="left inside_left">
+                <div class="app_category category list">
+                    <span class="title_18">应用分类</span>
+                    <div class="line_1 bgc_242"></div>
+                    <ul id="categoryList">
+                        @foreach (AppClass appClass in ViewBag.category)
+                        {
+                            <li data-param="@appClass.Id"><img src="@appClass.AppClassImg" /><a href="category?cid=@appClass.Id"><span title="@appClass.AppClassName" class="ellipsis">@appClass.AppClassName</span></a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="app_category rank">
+                    <span class="title_18">免费下载排行</span>
+                    <div class="line_1 bgc_242"></div>
+                    <ul id="freeList">
+                        @{
+                            paiming=0;
+                            foreach(App app in ViewBag.downloadPF)
+                            {
+                                <li data-param="detail?did=@app.Id" class="download_float">
+                                <div class="left download_left">
+                                    <span class="origin selected">@(paiming +=1)</span>
+                                    <img src="@app.AppImg" />
+                                </div>
+                                <div class="left download_right">
+                                    <a><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <span class="star_bg" data-num="27"></span>
+                                </div>
+                            </li>
+                        }
+                        }
+                    </ul>
+                </div>
+                <div class="app_category rank">
+                    <span class="title_18">付费下载排行</span>
+                    <div class="line_1 bgc_242"></div>
+                    <ul id="freeList">
+                        @{
+                            paiming = 0;
+                            foreach (App app in ViewBag.downloadPP)
+                            {
+                                <li data-param="detail?did=@app.Id" class="download_float">
+                                    <div class="left download_left">
+                                        <span class="origin selected">@(paiming += 1)</span>
+                                        <img src="@app.AppImg" />
+                                    </div>
+                                    <div class="left download_right">
+                                        <a><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                        <span class="star_bg" data-num="27"></span>
+                                    </div>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
+                <div class="app_category developer">
+                    <span class="title_18">开发者中心</span>
+                    <div class="line_1 bgc_242"></div>
+                    <ul>
+                        <li>免费获得官方开发支持</li>
+                        <li>体验简单方便的发布渠道</li>
+                        <li class="enter dev">加入开发者中心</li>
+                        <li class="enter mz_mail">admin@youths.cc</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right inside_right">
+                <div class="app_recommend recommend download_container">
+                    <span class="title_18">编辑推荐</span>
+                    <div class="line_1 bgc_242"></div>
+                    @{
+                        num=0;
+                        foreach (App app in ViewBag.IsRecommand)
+                        {
+                            num += 1;
+                            if (num % 5 == 0)
+                            {
+                                <div class="app_one downloading app_right" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="app_one downloading" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+                <div class="app_recommend subject">
+                    <span class="title_18">精选专题</span><a href="tcategory" class="more subject">更多</a>
+                    <div class="line_1 bgc_242"></div>
+                    @{
+                        foreach (AppTheme appTheme in ViewBag.AppTheme)
+                        {
+                            <a href="tDetail?atid=@appTheme.Id"><img src="@appTheme.AppThemeImg" data-param="213" /></a>
+                        }
+                    }
+                </div>
+                <div class="app_recommend download_container">
+                    <span class="title_18">热门新品</span><a class="more new" href="category">更多</a>
+                    <div class="line_1 bgc_242"></div>
+                    @{
+                        num = 0;
+                        foreach (App app in ViewBag.newapp)
+                        {
+                            num += 1;
+                            if (num % 5 == 0)
+                            {
+                                <div class="app_one downloading app_right" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="app_one downloading" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                       }
+                    }
+                 </div>
+                <div class="app_recommend download_container">
+                    <span class="title_18" id="hotTitle">热门免费</span><a class="more free" href="category">更多</a>
+                    <div class="line_1 bgc_242"></div>
+                    @{
+                        num = 0;
+                        foreach (App app in ViewBag.freeapp)
+                        {
+                            num += 1;
+                            if (num % 5 == 0)
+                            {
+                                <div class="app_one downloading app_right" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="app_one downloading" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+                <div class="app_recommend paid download_container">
+                    <span class="title_18">热门付费</span><a class="more paid" href="category">更多</a>
+                    <div class="line_1 bgc_242"></div>
+                    @{
+                        num = 0;
+                        foreach (App app in ViewBag.payapp)
+                        {
+                            num += 1;
+                            if (num % 5 == 0)
+                            {
+                                <div class="app_one downloading app_right" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="app_one downloading" data-param="com.taobao.taobao" data-appid="120010" data-catid="1">
+                                    <img src="@app.AppImg"><a href="detail?did=@app.Id"><span class="ellipsis" title="@app.AppName">@app.AppName</span></a>
+                                    <div class="star_bg" data-num="37"></div>
+                                    <a class="price none">0</a>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div id="flymeFooter" class="footerWrap">
+            <div class="footerInner">
+                <div class="footer-layer1">
+                    <div class="footer-innerLink">
+                        <a href="http://www.meizu.com/about.html" target="_blank" title="关于Youths">关于Youths</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="http://hr.meizu.com" target="_blank" title="工作机会">工作机会</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="http://www.meizu.com/contact.html" target="_blank" title="联系我们">联系我们</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="http://www.meizu.com/legalStatement.html" target="_blank" title="法律声明">法律声明</a>
+                        <img class="foot-line" src="https://https-res.meizu.com/resources/common/images/default/space.gif">
+                        <a href="javascript:void(0);" id="globalName" class="footer-language" title="简体中文">简体中文&nbsp;&nbsp;&nbsp;</a>
+                    </div>
+                    <div class="footer-service">
+                        <span class="service-label">客服热线</span>
+                        <span class="service-num">400-788-3333</span>
+                        <a id="service-online" class="service-online" href="javascript:void(0);" title="在线客服">在线客服</a>
+                    </div>
+                    <div class="footer-outerLink">
+                        <a class="footer-sinaMblog" href="http://weibo.com/meizuflyme" target="_blank"><i class="i_icon"></i></a>
+                        <a class="footer-tencentMblog" href="http://t.qq.com/mx_flyme" target="_blank"><i class="i_icon"></i></a>
+                        <a id="footer-weChat" class="footer-weChat" href="javascript:void(0);" target="_blank"><i class="i_icon"></i></a>
+                        <a class="footer-qzone" href="http://user.qzone.qq.com/2762957059" target="_blank" style="display:none;"><i class="i_icon"></i></a>
+                    </div>
+                    <div id="globalContainer" class="footer-language_menu">
+                        <a href="http://www.flyme.cn" title="简体中文" class="checked">简体中文</a>
+                        <a href="http://www.flyme.cn/hk/index.jsp" title="繁體中文" class="ClobalItem">繁體中文</a>
+                        <a href="http://www.flyme.cn/tw/index.jsp" title="台灣繁體" class="ClobalItem">台灣繁體</a>
+                        <a href="http://www.flyme.cn/en/index.jsp" title="English" class="ClobalItem">English</a>
+                        <!--<a href="http://ru.meizu.com" title="Русский" class="ClobalItem">Русский</a>
+                    <a href="http://il.meizu.com" title="עברית" class="ClobalItem" style="border-width:0px;">עברית</a>-->
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <div id="flymeCopyright" class="copyrightWrap">
+                    <div class="copyrightInner">
+                        <span>©2014 Youths. All rights reserved.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="wechatPic"></div>
+        <div class="alert_bg none"></div>
+        <div class="alert_box none" id="alert_box">
+            <a class="alert_close" id="closeDownloadBtn"></a>
+            <div class="alert_content" id="alert_content">
+            </div>
+
+            <div style="text-align:center;color:red;height: 20px;margin-bottom: 5px;">
+                <span id="returnMessage">&nbsp;</span>
+            </div>
+            <div class="liveBtn" id="alertBtn">
+                <input type="hidden" id="downloadUrl" value="" />
+                <span id="downloadButton">下载</span>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/Content/js/app_center.js"></script>
+</html>

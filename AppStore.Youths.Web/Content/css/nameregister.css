@@ -1,0 +1,164 @@
+﻿.content{
+	width: 100%;
+}
+#toRegister{
+	color: #474747;
+	cursor: pointer;
+}
+#mainForm{
+	margin-top: 100px;
+	width: 100%;
+	margin: 100px auto 0px;
+	overflow: hidden;
+}
+.middle{
+ 	width: 343px;
+ 	margin: 0px auto;
+}
+.number{
+	font-size: 20px;
+	margin-left: -5px;
+	margin-bottom: 30px;
+	width: 350px;
+	text-align: center;
+}
+.register-line{
+	color: #d9d9d9;
+	display: inline-block;
+	border: 1px solid #dadada;
+	border-left: 1px;
+	height: 16px; 
+	margin-right: 50px;
+	margin-left: 50px;
+}
+.rememberField{
+	margin-bottom: 30px;
+	height: 20px;
+	line-height: 20px;
+}
+.normalInput .username{
+	width: 220px;
+	border: none;
+	outline: none;
+	font-size: 16px;
+	height: 50px;
+	line-height: 22px;
+	*height: 49px;
+	*line-height: 50px;
+}
+#kapkey{
+	font-size: 16px;
+	width: 220px;
+	border: none;
+	outline: none;
+	height: 50px;
+	line-height: 22px;
+	overflow: hidden;
+	position: relative;
+	*height: 49px;
+	*line-height: 50px;
+}
+#imgKey{
+	position: absolute;
+	width: 88px;
+	height: 36px;
+	top: 7px;
+	right:5px;
+	float: right;
+	overflow: hidden;
+	margin-left: 13px;
+}
+.lineWrap{
+	zoom: 1;
+}
+#pwdBtn{
+	margin-top: 13px;
+	margin-bottom: 10px;
+}
+#password, #password1{
+	width: 200px;
+	display: inline-block;
+	height: 50px;
+	line-height: 22px;
+	font-size: 16px;
+	outline: none;
+	color: #474747;
+	float: left;
+	*height: 49px;
+	*line-height: 50px;
+}
+#mainForm input{
+	line-height: 22px;
+	padding: 14px 0;
+	height: 22px;
+	*height: 21px;	
+}
+.pwdBtn,.pwdBtnShow{
+	outline: none;
+	position: relative;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	overflow: hidden;
+	float: right;
+	margin-right: 5px;
+}
+.pwdBtnShow i, .pwdBtn i{
+	background: url("/resources/uc/base/images/elements.png") no-repeat;
+	_background-image: none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/resources/uc/base/images/elements.png');
+}
+.pwdBtn i {
+	background-position: -60px -92px;
+	_margin-left: -60px;
+	_margin-top: -92px;
+}
+.pwdBtnShow i {
+	background-position: -30px -93px;
+	_margin-left: -30px;
+	_margin-top: -93px;
+}
+/*reset*/
+span.error, span.otherError{
+	display: block;
+	margin-left: 0px;
+	margin-bottom: 20px;
+}
+#password1::-ms-reveal {
+	display: none;
+}
+#password::-ms-clear {
+	display: none;
+}
+.grayTip{
+	height: 50px;
+	line-height: 50px;
+	vertical-align: top;
+	display:inline-block;
+}
+
+.form-line{
+	color: #d9d9d9;
+	height: 40px;
+	display: inline-block;
+	border-left: 1px solid #dadada;
+	position: absolute;
+	right: 100px;
+	top: 5px;
+}
+#getKey{
+	width: 84px;
+	text-align: center;
+	border: none;
+	outline: none;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	position: absolute;
+	right: 10px;
+	top: 0px;
+}
+.alertDialogContent .normalInput{
+	margin-top:10px;
+}

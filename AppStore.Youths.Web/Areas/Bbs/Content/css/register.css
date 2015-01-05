@@ -1,0 +1,146 @@
+.content{
+	width: 100%;
+}
+#toRegister{
+	color: #474747;
+	cursor: pointer;
+}
+input[type="checkbox"]{
+	margin: 0px 0px 30px 5px;
+	float: left;
+	cursor: pointer;
+	width: 18px;
+	height: 18px;
+	border: solid 1px #dadada;
+}
+.checkChk{
+	background-position: -1px -53px;
+	cursor: pointer;
+	margin-bottom: 5px;
+}
+.checkUnchk{
+	background-position: -1px -73px;
+}
+#nextAutoLogin{
+	margin-left: -115px; 
+}
+.number{
+	font-size: 20px;
+	margin-left: -5px;
+	margin-bottom: 30px;
+	width: 350px;
+	text-align: center;
+}
+#mainForm{
+	margin-top: 100px;
+	width: 343px;
+	margin: 100px auto 0px;
+	overflow: hidden;
+}
+.rememberField{
+	margin-bottom: 30px;
+	height: 20px;
+	line-height: 20px;
+}
+#getKey{
+	width: 84px;
+	text-align: center;
+	border: none;
+	outline: none;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	position: absolute;
+	right: 10px;
+	top: 0px;
+}
+.form-line{
+	color: #d9d9d9;
+	height: 40px;
+	display: inline-block;
+	border-left: 1px solid #dadada;
+	position: absolute;
+	right: 100px;
+	top: 5px;
+}
+.register-line{
+	color: #d9d9d9;
+	display: inline-block;
+	border: 1px solid #dadada;
+	border-left: 1px;
+	height: 16px;
+	line-height: 20px;
+	margin-right: 50px;
+	margin-left: 50px;
+}
+#kapkey{
+	width: 200px;
+	border: none;
+	outline: none;
+	height: 50px;
+	font-size: 16px;
+	line-height: 22px;
+	*height: 49px;
+	*line-height: 50px;
+}
+.lineWrap{
+	position: relative;
+	zoom: 1;
+}
+#password, #password1{
+	float: left;
+	width: 200px;
+}
+#pwdBtn{
+	margin-top: 13px;
+	margin-bottom: 10px;
+}
+.pwdBtn,.pwdBtnShow{
+	outline: none;
+	position: relative;
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+	overflow: hidden;
+	float: right;
+	margin-right: 5px;
+}
+.pwdBtnShow i, .pwdBtn i{
+	background: url("/resources/uc/base/images/elements.png") no-repeat;
+	_background-image: none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/resources/uc/base/images/elements.png');
+}
+.pwdBtn i {
+	background-position: -60px -93px;
+	_margin-left: -60px;
+	_margin-top: -93px;
+}
+.pwdBtnShow i {
+	background-position: -30px -92.65px;
+	_margin-left: -30px;
+	_margin-top: -93px;
+}
+#mainForm input{
+	line-height: 22px;
+	padding: 14px 0;
+	height: 22px;
+	*height: 21px;	
+}
+/*reset*/
+span.error, span.otherError{
+	display: block;
+	margin-left: 0px;
+	margin-bottom: 20px;
+}
+#password1::-ms-reveal {
+	display: none;
+}
+#password::-ms-clear {
+	display: none;
+}
+
+/*验证码弹框*/
+.alertDialogContent .normalInput {position: relative; display: inline-block; padding: 0 10px; width: 320px; height: 50px; line-height: 22px; font-size: 16px; text-align:left; margin:10px 0 20px -7px; border: 1px solid #dadada; outline: none; color: #474747; zoom: 1; overflow: hidden;}
+.alertDialogContent .normalInput .kapkey{font-size: 16px; width: 220px; border: none; outline: none; line-height: 22px; overflow: hidden;}
+.alertDialogContent .normalInput #imgKey{width: 88px; height: 36px; float: right; top: 7px; overflow: hidden; position: absolute; margin-left: 13px;}

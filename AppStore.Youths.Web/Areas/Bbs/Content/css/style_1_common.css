@@ -1,0 +1,3082 @@
+/* ----------------------------------
+
+Main CSS file for Discuz! X
+(C) Comsenz Inc.
+http://www.comsenz.com
+Created & Modified by Lushnis, Pony, Dfox & DragonLee.
+
+----------------------------------
+
+结构目录：
+	1. 重定义浏览器默认样式
+	2. 全局常用 CSS 样式
+	3. 表单及表单元素
+	4. 页面布局以及通用的区块样式
+	5. 列表样式vwmy
+	6. 其他特定功能块
+		1. 个人中心面板
+		2. 简易编辑器
+		3. 弹出菜单、弹出层及弹出窗口
+		4. 联系人列表、短消息窗口
+		5. 登录和注册
+		6. 其他
+	7. 拖拽及页面 DIY
+
+	*  其他页面专用样式参见 module.css
+
+----------------------------------
+
+常用变量说明：
+
+	通用边框颜色：		#CDCDCD		#CDCDCD
+	通用背景填充色：		#F2F2F2			#F2F2F2
+	特殊边框颜色：		#C2D5E3		#D1D9DF
+	特殊背景填充色：		#E5EDF2			#E9F2F9
+
+----------------------------------
+
+CSS 样式模块的格式示例：
+
+	Name:			模块名称
+	Level:			级别（Global, Channel, Function）
+	Dependent:		依赖关系，该模块必须依赖于何种模块
+	Sample:			用法示例，或指出改模块所作用的直接页面
+	Explain:		附加说明
+	Author:			创建者 日期(两位数年月日时)
+	Last Modify:	最终修改者 日期(两位数年月日时)
+
+----------------------------------
+
+CSS 写作注意事项：
+	1. 属性写在一行内，属性之间、属性名和值之间以及属性与“{}”之间须有空格，例如：.class { width: 400px; height: 300px; }
+	2. 属性的书写顺序：
+		2.1. 按照元素模型由外及内，由整体到细节书写，大致分为五组：
+			位置：position,left,right,float
+			盒模型属性：display,margin,padding,width,height
+			边框与背景：border,background
+			段落与文本：line-height,text-indent,font,color,text-decoration,...
+			其他属性：overflow,cursor,visibility,...
+		2.2. 针对特殊浏览器的属性，应写在标准属性之前，例如：-webkit-box-shadow:; -moz-box-shadow:; box-shaow:;
+	3. 谨慎添加新的选择符规则，尤其不可滥用 id，尽可能继承和复用已有样式
+	4. 选择符、属性、值均用小写（格式的颜色值除外），缩写的选择符名称须说明缩写前的全称，例如 .cl -> Clearfix
+	5. 避免使用各种 CSS Hack，如需对 IE 进行特殊定义，请参阅下节“关于 CSS Hack 的说明”
+	6. 勿使用冗余低效的 CSS 写法，例如：
+		ul li a span { ... }
+	7. 慎用 !important
+	8. 建议使用在 class/id 名称中的词语
+		6.1. 表示状态：a->active
+		6.2. 表示结构：h->header,c->content,f->footer
+		6.3. 表示区域：mn->main,sd->side,nv-navigation,mu->menu
+		6.4. 表示样式：l-list,tab,p_pop
+	9. 开发过程中的未定事项，须用 [!] 标出，以便于后续讨论整理
+
+----------------------------------
+
+关于 CSS Hack 的说明：
+
+	所有 IE浏览器适用：	.ie_all .foo { ... }
+	IE6 专用：			.ie6 .foo { ... }
+	IE7 专用：			.ie7 .foo { ... }
+	IE8 专用：			.ie8 .foo { ... }
+
+---------------------------------- */
+
+/*
+	Name:			mod_reset
+	Level:			Global
+	Explain:		重定义浏览器默认样式
+	Last Modify:	Pony
+*/
+	* { word-wrap: break-word; word-break:break-all;}
+	//body { background: #FFF url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/background.png") repeat-x 0 0;}
+        body { background: #FFF url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/background.png") repeat-x 0 0;}
+	body, input, button, select, textarea { font-size: 14px ; font-family:"微软雅黑","Microsoft Yahei","宋体",Tahoma,'Simsun',Arial,Helvetica,sans-serif; color: #515151; outline:none;}
+		textarea { resize: none; }
+	body, ul, ol, li, dl, dd, p, h1, h2, h3, h4, h5, h6, form, fieldset, .pr, .pc { margin: 0; padding: 0; outline:none;}
+		caption, th { text-align: left; font-weight: 400; }
+	ul li, .xl li { list-style: none; }
+	h1, h2, h3, h4, h5, h6 { font-size: 1em; font-weight:normal;}
+	em, cite, i { font-style: normal; }
+	strong,b{font-weight:normal;}
+	a { color:#222222; text-decoration: none; outline:none;}
+	a:link {color: #222222;outline:none;}
+	a:visited {color: #222222;outline:none;}
+	a:hover {color: #515151;outline:none;}
+	a:active {color: #222222;outline:none;}
+	
+	
+		a img { border: none; }
+	label { cursor: pointer; }
+	blockquote{margin:0px;text-indent:40px;}
+	.float_l{ float:left;}
+/*
+	Name:			mod_float
+	Level:			Global
+	Sample:			class="z/y"
+	Explain:		.z/.y 浮动 left/right
+	Last Modify:	lushnis
+*/
+	.z { float: left; } .y { float: right; }
+
+/* 公共 */
+	.smilie_hide{ display:none;}
+	.ie6_repair_minbox{width:300px; height:1px; overflow:hidden;}
+	.yellow{ color:#FF9900;}
+	.mleft20{ margin-left:20px !important;}
+	.mtop10{ margin-top:10px;}
+	.mtop15{ margin-top:15px;}
+	.mtop20{ margin-top:20px;}
+	.fll{ float:left;}
+	.pright15{ padding-right:15px;}
+	.padding0{padding:0px !important;}
+	.padding25{ padding:25px !important;}
+	.w80{ width:80px !important;}
+	
+	
+	.bbda_cl{ color:#32a5e7 !important; border-bottom: 0 none !important; border-bottom-style:none !important;}
+	
+/*
+	Name:			mod_clearfix
+	Level:			Global
+	Sample:			class="cl"
+	Explain:		Clearfix,避免因子元素浮动而导致的父元素高度缺失能问题
+	Last Modify:	lushnis
+*/
+	.cl:after { content: "."; display: block; height: 0; clear: both; visibility: hidden;} .cl { zoom: 1; }
+.c2:after { content: "."; height: 0; clear: both; visibility: hidden; }
+/*
+	元素获取焦点时隐藏外边框
+*/
+	.hidefocus { outline: none; }
+	.fwinmask{ box-shadow:0px 0px 5px #E6E6E6;}
+	.fwinmask .identifying_code{padding-top:10px;}
+	
+/* 表情 */
+	.smilies_mx, .smilies_mz{ width:24px;}
+	
+	
+/*
+	Name:			mod_hr
+	Level:			Global
+	Sample:			<hr />
+	Explain:		重定义 <hr /> 元素的样式，去除默认边距
+	Last Modify:	lushnis
+*/
+	hr { display: block; clear: both; *margin-top: -8px !important; *margin-bottom: -8px !important; }
+		.mn hr, .sd hr { margin: 0 10px; }
+		.area hr { margin-left: 0 !important; margin-right: 0 !important; }
+/*
+	Name:			mod_hr_solid
+	Level:			Global
+	Dependent:		mod_hr
+	Sample:			<hr class="l" />
+	Explain:		定义 1px 高度实线样式的 <hr /> 元素，具有两个个扩展样式，.l2 和 .l3，分别实现 2px 和 3px 的实线分割线
+	Last Modify:	lushnis
+*/
+	hr.l { height: 1px; border: none; background: #CDCDCD; color: #CDCDCD; }
+		hr.l2 { height: 2px; }
+		hr.l3 { height: 3px; }
+/*
+	Name:			mod_hr_dashed
+	Level:			Global
+	Dependent:		mod_hr
+	Sample:			<hr class="da" />
+	Explain:		定义 1px 高度虚线样式的 <hr /> 元素
+	Last Modify:	lushnis
+*/
+	hr.da { height: 0; border: none; border-top: 1px dashed #CDCDCD; background: transparent; color: transparent; }
+
+	/* [!]使用注意 */
+	hr.bk { margin-bottom: 10px !important; *margin-bottom: 2px !important; height: 0; border: none; border-top: 1px solid #FFF; background: transparent; color: transparent; }
+		.n .sd hr.bk { border-top-color: #F9F9F9; }
+	/* 清除Margin */
+	hr.m0 { margin-left: 0; margin-right: 0; }
+
+/*
+	Name:			mod_page_header
+	Level:			Global
+	Sample:			<h1 class="ph">Text</h1>
+	Explain:		页面中标题级别的文字 [!]此处须整合为一个单独 class
+	Last Modify:	lushnis
+*/
+	/* .wx --> weight text 粗体字，通常用于大标题 */
+	.wx, .ph {  font-weight: 100; }
+	/* Page header */ .ph { font-size: 20px; }
+	/* Main title */ .mt { padding: 10px 0; font-size: 16px; }
+
+/* 行内分割竖线 */ .pipe { margin: 0 5px; color: #CCC; }
+
+/* 文本属性：字号、颜色、粗细 */
+/*
+	Name:			mod_text_size
+	Level:			Global
+	Sample:			class="xs*"
+	Explain:		文字字号，分为四个级别
+	Last Modify:	lushnis
+*/
+	.xs0 { font-size: 0.83em; -webkit-text-size-adjust: none; }
+	.xs1 { font-size: 12px !important; }
+	.xs2 { font-size: 14px !important; }
+	.xs3 { font-size: 16px !important; }
+/*
+	Name:			mod_text_gray_level
+	Level:			Global
+	Dependent:		-
+	Sample:			class="xs[*]"
+	Explain:		文字字号，分为四个级别
+	Last Modify:	lushnis
+*/
+	.xg1, .xg1 a { color: #999999 !important; }
+	a.xg1:hover, .xg1 a:hover{color:#222222 !important;}
+	.xg2 { color: #666666; }
+	a.xg2:hover{color:#222222;}
+/*
+	Name:			mod_text_importance_level
+	Level:			Global
+	Sample:			class="xs[*]"
+	Explain:		文字提亮级别，分为两级，默认模板中，1为橙色，2为蓝色
+	Last Modify:	lushnis
+*/
+	.onerror { color: #F26C4F; }
+/*
+	Name:			mod_text_weight_level
+	Level:			Global
+	Sample:			class="xs[*]"
+	Explain:		文字字号，分为四个级别
+	Last Modify:	lushnis
+*/
+	.xw0 { font-weight: 400; }
+	.xw1 { font-weight: 700; }
+/*
+	Name:			mod_border
+	Level:			Global
+	Dependent:		-
+	Sample:			class="bbda/bbs"
+	Explain:		边框样式，该模块仅作用于元素的下边框，分为虚线和实线两种，宽度均为 1px
+	Last Modify:	lushnis
+*/
+	.bbda { border-bottom: 1px dashed #CDCDCD; }
+/*
+	Name:			mod_border_reset
+	Level:			Global
+	Sample:			class="bw0/bw0_all"
+	Explain:		去除边框
+	Last Modify:	lushnis
+*/
+	.bw0 { border: none !important; }
+	.bw0_all, .bw0_all th, .bw0_all td { border: none !important; }
+/*
+	Name:			mod_background_reset
+	Level:			Global
+	Sample:			class="bg0_c/bg0_i/bg0_all"
+	Explain:		去除背景，bg0_c、bg0_i 和 bg0_all 分别为去除背景颜色、去除背景图片和去除所有背景元素
+	Last Modify:	Pony
+*/
+	.bg0_c { background-color: transparent !important; }
+	.bg0_i { background-image: none !important; }
+	.bg0_all { background: none !important; }
+
+/*
+	Name:			mod_notice_line
+	Level:			Global
+	Sample:			<div class="ntc_l">
+	Explain:		黄色背景的提示条，一般用在单行醒目提示，不可用于多行块级区域
+	Last Modify:	lushnis
+*/
+	.ntc_l { padding: 5px 10px; background: #FEFEE9; }
+		.ntc_l .d { width: 20px; height: 20px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/op.png) no-repeat 0 0; line-height: 9999px; overflow: hidden; }
+			.ntc_l .d:hover { background-position: 0 -20px; }
+
+/* 圆角 [!]此处考虑弃用 */
+	.brs, .oshr { -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+	.brm { -moz-border-radius: 10px; -webkit-border-radius: 10px;  border-radius: 10px; }
+	.brw { -moz-border-radius: 20px; -webkit-border-radius: 20px; border-radius: 20px;  }
+/*
+	Name:			mod_margin
+	Level:			Global
+	Sample:			class="mtn/mtm/mtw/..."
+	Explain:		外边距样式，作用于元素的上下外边距，上下各具有 n, m, w 三个级别
+	Last Modify:	lushnis
+*/
+	
+/*
+	Name:			mod_padding
+	Level:			Global
+	Sample:			class="ptn/ptm/ptw/..."
+	Explain:		内边距样式，作用于元素的上下内边距，上下各具有 n, m, w 三个级别
+	Last Modify:	lushnis
+*/
+	
+/*
+	Name:			mod_avatar
+	Level:			Global
+	Sample:			<div class="avt"><img src="avatar source" alt="username" /></div>
+	Explain:		标准尺寸头像样式，默认为 48px*48px，带边框
+	Last Modify:	lushnis
+*/
+	.avt img { width: 48px; height: 48px; background: #FFF; border: 1px solid #F2F2F2;}
+/*
+	Name:			mod_avatar_middle, mod_avatar_small
+	Level:			Global
+	Sample:			<div class="avtm/avts"><img src="avatar source" alt="username" /></div>
+	Explain:		中等尺寸和小尺寸头像样式，中等尺寸为宽度 120px，高度按比例；小尺寸为 24px*24px
+	Last Modify:	lushnis
+*/
+	.avtm img { width: 120px; height: auto; }
+	.avts img { width: 24px; height: 24px; vertical-align: middle; }
+/*
+	Name:			mod_emp
+	Level:			Global
+	Sample:			<p class="emp">暂无数据</p>
+	Explain:		页面中无数据输出时，用此样式显示相关提示，如无特殊必要，建议使用 <p> 而不是 <div>
+	Last Modify:	lushnis
+*/
+	.emp { padding: 20px 10px; }
+		.emp a { color: #369; text-decoration: underline !important; }
+/*
+	Name:			mod_align
+	Level:			Global
+	Sample:			class="vm/hm"
+	Explain:		纵向及横向对齐方式
+	Last Modify:	lushnis
+*/
+	.vm { vertical-align: middle; }
+		.vm * { vertical-align: middle; }
+	.hm { text-align: center; }
+/*
+	Name:			mod_alt
+	Level:			Global
+	Sample:			class="{echo swapclass('alt');}"
+	Explain:		隔行换色时深色背景
+	Last Modify:	lushnis
+*/
+	.alt, .alt th, .alt td { background-color: #F7F7F7; }
+	
+/*
+	Name:			mod_notice
+	Level:			Global
+	Sample:			class="notice"
+	Explain:		类似统计中需注意的文字样式 [!]此处须考虑名称简写为 ntc
+	Last Modify:	lushnis
+*/
+	.notice { clear: both; margin: 5px 0; padding: 3px 5px 3px 20px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/notice.gif) no-repeat 2px 6px; }
+/*
+	Name:			mod_ajax_wait_info
+	Level:			Global
+	Sample:			id="ajaxwaitid"
+	Explain:		相应页面中 AJAX 请求时的状态显示
+	Last Modify:	lushnis
+*/
+	#ajaxwaitid { display: none; position: absolute; right: 0; top: 0; z-index: 1; padding: 0 5px; background: #D00; color: #FFF; }
+/*
+	Name:			mod_showmenu
+	Level:			Global
+	Sample:			class="showmenu"
+	Explain:		下拉菜单
+	Last Modify:	lushnis
+*/
+	.showmenu { cursor: pointer; white-space: nowrap; color:#32a5e7 !important;padding:0px 12px;background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/head20121226.png") no-repeat -206px -56px;position:relative;}
+		#um .showmenu { margin-right: -5px; }
+.showmenu_elect{ color:#32a5e7 !important;}
+
+/*
+	Name:			mod_cursor
+	Level:			Global
+	Sample:			class="cur1"
+	Explain:		鼠标样式，可以根据需要按序添加
+	Last Modify:	Pony
+*/
+	.cur1 { cursor: pointer; }
+
+/* 如果验证码有错乱，可添加此样式.sec（全局，修改时要小心，会涉及分享、快速回复和 feed日志相册中的评论等地方） by Pony */
+.ie6 .sec .p_pop { white-space: expression(this.offsetWidth >= 220 ? 'normal' : 'nowrap'); width: expression(this.offsetWidth >= 220 ? 200 : 'auto'); }
+
+
+/* ------------------------------------------------------------------------ 表单及表单元素 */
+		/*
+		.pn				button
+			.pnc		button with light color
+			.pnp		post button
+		.px				input[text]
+		.pt				textarea
+		.pf				input[file]
+		.pc				input[checkbox]
+		.pr				input[radio]
+		.ps				select
+		.oshr			share button
+		.ofav			fav button with oshr
+		.oivt			invite button with oshr
+		*/
+
+/* 必填项 */ .rq { color: red; }
+
+/*
+	Name:			mod_input[text]_textarea_select
+	Level:			Global
+	Sample:			class="px/pt/ps"
+	Explain:		单行输入框（px）、多行文本框（pt）和选择框(ps/select)
+	Last Modify:	Pony
+*/
+	.px, .pt, .ps, select { border: 1px solid; border-color: #848484 #E0E0E0 #E0E0E0 #848484; background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/px.png) repeat-x 0 0; color: ; }
+		.px, .pt { padding: 2px 4px; line-height: 17px; }
+		.pt2{border: 1px solid; padding-bottom: 2px; line-height: 17px; background-color:#f9f9f9; border:#f9f9f9 1px solid; background-image:none; }
+		.px { height: 17px; background-color:#F9F9F9; border:1px solid #E0E0E0; background-image:none !important; }
+		textarea{ border:1px solid #E0E0E0; background-image:none;}
+		.normal_btn2{display: inline-block;font-size: 14px;height: 27px;line-height: 27px;padding: 0 !important;text-align: center;width: 75px;}
+		
+		
+			.pxs { width: 30px !important; }
+			.fdiy .tfm .px, .fdiy .tfm .pt { width: auto; }
+			.p_fre { width: auto !important; }
+			.er { border-color: #F66 #FFBDB9 #FFBDB9 #F66; background-color: #FDF4F4; background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/px_e.png); }
+		.pt { overflow-y: auto; }
+			div.pt { height: 162px; line-height: 162px; }
+		.ps, select { padding: 2px 2px 2px 1px; }
+		/* 自动调整高度的 textarea by Pony */
+		.pts { vertical-align: top; overflow: hidden; }
+		.cmt .pts { width: 60%; }
+
+/*
+	Name:			mod_button
+	Level:			Global
+	Sample:			<button class="pn">Submit</button>
+	Explain:		按钮样式
+	Last Modify:	Pony
+*/
+	button::-moz-focus-inner { border: 0; padding: 0; }
+	.pn { vertical-align: middle; overflow: hidden; padding: 0;}
+		.pn:active { background-position: 0 -23px; }
+		.ie6 .pn { overflow-x: visible; width: 0; }
+
+		.pn em, .pn span, .pn strong { padding: 0 10px; line-height: 21px; }
+		.ie7 .pn em, .ie7 .pn span, .ie7 .pn strong { padding: 0 5px;}
+
+	a.pn { height: 21px; line-height: 21px; color: #444 !important; }
+		a.pn:hover { text-decoration: none; }
+		.ie6 a.pn { width: auto; }
+		.ie6 a.pn em, .ie6 a.pn span, .ie6 a.pn strong { display: block; }
+		.ie7 a.pn em, .ie7 a.pn span, .ie7 a.pn strong { line-height: 21px; }
+
+	.pnc, a.pnc { border-color: #235994; background-color: #06C; background-position: 0 -48px; color: #FFF !important; }
+		.pnc:active { background-position: 0 -71px; }
+
+
+/*
+	Name:			mod_input[radio]_input[checkbox]_label
+	Level:			Global
+	Sample:			class="pr/pc/lb"
+	Explain:		单选按钮(pr)、多选框(pc)和<label>(lb)
+	Last Modify:	Pony
+*/
+	.pr, .pc { vertical-align: middle; margin: 0 5px 1px 0; padding: 0; }
+		.ie6 .pr, .ie6 .pc, .ie7 .pr, .ie7 .pc { margin-right: 2px; }
+	.lb { margin-right: 20px; }
+
+
+/*
+	Name:			mod_narrow_input
+	Level:			Global
+	Sample:			<div class="pns"></div>
+	Explain:		小尺寸的输入框和按钮样式。该样式在模板中保留，目前样式为空。
+	Last Modify:	Pony
+*/
+	.pns .px {}
+	.pns .pn {}
+
+/*
+	Name:			mod_float_typeid
+	Level:			Global
+	Sample:			<div class="ftid">
+						<select>
+							<option>Option</option>
+						</select>
+					</div>
+	Explain:		模拟下拉菜单样式
+	Last Modify:	Pony
+*/
+.ftid { float: left; margin-right: 6px; }
+	.ftid select { float: left; height: 23px; }
+	.ftid a { display: block; overflow: hidden; padding: 0 17px 0 4px; height: 21px; line-height: 21px; text-decoration: none !important; font-size: 12px; font-weight: 400; color: #444 !important; border: 1px solid; border-color: #848484 #E0E0E0 #E0E0E0 #848484; background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/newarow.gif) no-repeat 100% 0; }
+		.ftid a:hover, .ftid a:focus { background-position: 100% -23px; }
+	/* ctrl 'select' width */
+	.ftid select { width: 94px; }
+	.sslt a { width: 54px; }
+	.sslt select { width: 60px; }
+
+.sltm { padding: 5px 11px 5px 10px; border: 1px solid #DDD; background-color: #FFF; text-align: left; }
+	.sltm li { padding: 2px 0; color: #666; cursor: pointer; }
+		.sltm li:hover { color: #369; }
+		.sltm li.current { color: #F26C4F; }
+
+/* 分享按钮 */ .oshr { float: right; margin-left: 5px; padding: 0 5px 0 22px; border: 1px solid; border-color: #CCC #A9A9A9 #A9A9A9 #CCC; background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/oshr.png) no-repeat 5px 50%; }
+				.oshr:hover { text-decoration: none; }
+/* 收藏按钮 with oshr */ .ofav { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/fav.gif); }
+/* 邀请按钮 with oshr */ .oivt { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/activitysmall.gif); }
+
+
+/*
+	Name:			mod_form
+	Level:			Global
+	Sample:			<form>
+						<table cellspacing="0" cellpadding="0" class="tfm">
+							<tr>
+								<th>Label</th>
+								<td><input type="text" name="" id="" class="" /></td>
+							</tr>
+						</table>
+					</form>
+	Explain:		表单样式
+	Last Modify:	Pony
+*/
+	.tfm { width: 100%; }
+		.tfm caption, .tfm th, .tfm td { vertical-align: top; padding: 7px 0; }
+			.tfm caption h2 { font-size: 16px; }
+			.vt th, .vt td { vertical-align: top; }
+		.tfm th { padding-top: 9px; padding-right: 5px; width: 130px; }
+			.tfm th .rq { float: right; font-size: 14px; }
+			.tfm .pt, .tfm .px { margin-right: 3px; width: 330px; }
+		.tfm .c, .tfm .tedt, .m_c .tfm .tedt { width: 338px; }
+		.tfm .d { clear: both; margin: 5px 0; color: #999; }
+			.tfm .d em { margin-left: 5px; color: red; }
+			.tfm .d strong { margin-left: 5px; }
+			.tfm .d a { color: #369; }
+		.tfm .p { text-align: right; }
+		.tfm .pcl label { display: block; padding: 0 2px 5px; }
+			.tfm .pcl .pc { margin-right: 5px; padding: 0; }
+		.tfm .l th, .tfm .l td { padding-top: 0; padding-bottom: 0; }
+	.bn .tfm caption, .bn .tfm th, .bn .tfm td { padding-top: 5px; padding-bottom: 5px; }
+
+/*
+	Name:			mod_postboxtitle
+	Level:			Function
+	Explain:		发帖页面、弹窗等的标题栏
+	Last Modify:	Pony
+*/
+.pbt { margin-bottom: 10px; }
+	.ie6 .pbt .ftid a, .ie7 .pbt .ftid a { margin-top: 1px; }
+	#custominfo.mtn { margin-bottom: -5px; }
+
+/* 提示信息 alert_win － altw*/
+.altw { width: 350px; }
+	.altw .fltc { margin-bottom: 0; padding: 8px; }
+		.alert_right, .alert_error, .alert_info {min-height: 40px; height: auto !important; height: 40px; line-height: 160%; font-size: 14px; color:#000000; }
+		.alert_error {  }
+			.alert_error a { font-weight: 700; color: #369; }
+		.alert_info { }
+		.alert_btnleft { margin-top: 8px; }
+		.alert_btn { margin-top: 20px; text-align: center; }
+		.alert_act { margin-top: 20px; padding-left: 58px; }
+
+/* 发帖导航 by lushnis */
+.pbnv { float: left; white-space: nowrap; overflow: hidden; width: 400px; padding: 7px 0; }
+.pbl { overflow: hidden; margin: 9px 0; width: 621px; border-width: 1px 0 1px 1px; border-style: solid; border-color: #CCC; background: #FFF; }
+	.pbl li { float: left; overflow-x: hidden; overflow-y: auto; padding: 5px; width: 196px; height: 300px; border-right: 1px solid #CCC; }
+	.pbl p { height: 25px; line-height: 25px; }
+		.pbl a { display: block; white-space: nowrap; overflow: hidden; padding: 0 4px; text-decoration: none; color: #369; border: solid #FFF; border-width: 1px 0; }
+			.pbl a:hover { text-decoration: none; background-color: #F3F3F3; }
+		.pbl .highlightlink { color: #08C; }
+	.pbls a,.pbls a:link,.pbls a:visited, .pbls a:hover { background-color: #EEE; color: #666; font-weight: 700; }
+		.pbsb { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/arrow.gif) right -33px no-repeat; }
+
+/* ------------------------------------------------------------------------ 页面布局 */
+		/*
+		#hd				Header
+			#nv			Navigation
+			#mu			Customer menu
+		.wp				Wrap
+		#ct				Container
+			.mn			Main area
+			.sd			Side area
+		#ft				Footer
+		----------------
+		.bm				Block in main area
+		.bn				Block in nerrow area
+		.bw				Block in full width
+
+		#pp				Personal Panel
+		.pm				Personal Message (Window)
+		.pmfl			PM friend list (Window)
+		*/
+
+/* 通用容器，定义页面宽度 */ 
+.wp{margin: 0 auto; width: 1040px;padding:0px 20px;} 
+#wp .wp,.wp .wp{width: auto;padding:0px;}
+
+/* 页头 */
+	#toptb { line-height: 24px; }
+		#toptb a { float: left; padding: 0 4px; height: 24px; }
+		#toptb a.showmenu { padding-right: 15px; }
+		#toptb a.hover { background-color: #FFF; }
+		#toptb .pipe { float: left; display: none; }
+	#hd { border-bottom: 0 solid #C2D5E3;  }
+			#diy-tg { float: right; width: 55px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/panel-toggle.png) no-repeat 100% 1px; text-indent: -9999px; overflow: hidden; }
+				#diy-tg_menu { position: absolute; margin: -2px 0 0 -1px; padding: 6px 0; width: 72px; height: 48px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/panel-toggle-drop.png) no-repeat 0 0; text-align: center; }
+				#diy-tg_menu a { float: none !important; }
+			#toptb #diy-tg_menu { margin: -6px 0 0 -10px; }
+
+			.hdc { height: 80px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/headbg.jpg) repeat-x 0 0;}
+				.ie6 .hdc { height: 80px; }
+			#hd h2 { padding: 0 20px 8px 0; float: left; }
+				#space #hd h2 { margin-top: 0; }
+			#hd .fastlg { padding-top: 10px; }
+
+			#scbar {float:right; height: 36px;line-height: 36px; padding:17px 0px; overflow: hidden; }
+				.scbar_icon_td { width: 50px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/search.png) no-repeat 0 -74px; }
+				.scbar_wrap {_float:right; height:34px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png) no-repeat 0 0 ;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+					#scbar_txt { width: 170px; height:34px; padding:0px 0px 0px 10px; outline: none; font-size: 14px;border:none; background:none transparent; float:left;}
+					.ie_all #scbar_txt{line-height:35px;}
+					.scbar_narrow #scbar_txt { width: 260px; }
+				.scbar_btn_td { width: 40px; text-align: center; }
+					#scbar_btn { width:40px; height:34px; margin: 0; padding: 0; border: none; background:none transparent; cursor:pointer; float:left;}
+					#scbar_type { display: block; padding-left: 5px; text-align: left; text-decoration: none; }
+						#scbar_type_menu { margin-top: -8px; }
+				#scbar_hot { padding-left: 8px; height: 45px; overflow: hidden; }
+					#scbar_hot strong, #scbar_hot a { float: left; margin-right: 8px; white-space: nowrap; }
+
+			#nv { overflow: hidden; padding:17px 0px; height: 36px; float:left;}
+				#nv li { float: left; height: 36px; line-height: 36px; font-size: 14px; }
+					.ie_all #nv li { line-height: 36px; }
+					.ie6 #nv li { line-height: 33px; }
+					#nv li a {display:inline-block;padding:0px 6px;margin:0px 19px;}
+					#nv li.a a{border-bottom:2px solid #27b3f0;}
+						/*#nv li a { color: #FFF; }*/
+						#nv li span { display: none; }
+					#nv li.a { margin-left: -1px;}
+						/*#nv li.a a { color: #FFF; }
+						#nv li a:hover { background: url(../../static/image/common/nv_a.png) no-repeat 50% -66px; }
+						#nv li.hover a:hover, #nv li.hover a { background: url(../../static/image/common/nv_a.png) no-repeat 50% -99px; }*/
+					#morePlate{position:relative;cursor:pointer;}
+					#morePlate .arrow_dark{right:15px;bottom:8px;}
+			#mu { position: relative; z-index: 1; }
+				.ie6 #mu, .ie7 #mu { line-height: 0; font-size: 0; }
+				#mu ul { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/mu_bg.png) no-repeat 0 100%; line-height: 22px; z-index: 2; font-size: 12px; }
+					#mu li { float: left; height: 32px }
+						#mu a { float: left; display: inline; margin: 5px 6px; padding: 0 10px; white-space: nowrap; }
+							#mu a:hover { margin: 4px 5px; border: 1px solid #C2D5E3; background: #E5EDF2; color: #369; text-decoration: none; }
+				.floatmu { position: absolute; left: 0; top: 0; }
+			#um { padding-top: 10px; padding-right: 60px; _padding-right: 54px; line-height: 2.3; zoom: 1; }
+				#um, #um a { color: #444; }
+				#um p { text-align: right; }
+				#um .avt { display: inline; margin-right: -60px; }
+				.vwmy { padding-left: 16px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/user_online.gif) no-repeat 0 2px; }
+					.vwmy.qq { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/connect_qq.gif) no-repeat scroll 0 0; padding-left: 20px; }
+				/* .topnav .new, .sch .new 分别为为个人中心和搜索页面头部新消息样式 */
+				#um .new, .topnav .new, .sch .new, #toptb .new { padding-left: 20px; background-repeat: no-repeat; background-position: 0 50%; color: #369; font-weight: 700; }
+					#myprompt.new { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/notice.gif); background-position: 3px 50%; }
+					#task_ntc { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/feed/task.gif); }
+				#um .pipe { margin: 0 5px 0 0; }
+
+				#extcreditmenu { margin-right: 2px !important; padding-top: 3px; padding-bottom: 3px; padding-left: 10px; }
+					#extcreditmenu.a { position: relative; z-index: 302; margin-right: 1px !important; border: 1px solid; border-color: #DDD; border-bottom: none; background-color: #FFF; }
+					#extcreditmenu_menu { margin-top: -1px; width: auto; }
+						#extcreditmenu_menu li { float: none; display: block; padding-left: 10px !important; padding-right: 3em !important; }
+
+				#qmenu { float: right; display: inline; margin: 3px 4px 0; padding: 0 12px 0 0; width: 83px; height: 26px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/qmenu.png) no-repeat 0 0; line-height: 26px; text-align: center; color: #369; font-weight: 700; text-shadow: 0 1px 0 #FFF; overflow: hidden; }
+					#qmenu:hover { text-decoration: none; }
+					#qmenu.a { position: relative; z-index: 302; background-position: 0 -30px; }
+					.ie8 #qmenu { line-height: 30px; }
+				#qmenu_menu { margin-top: -1px; padding: 20px 5px 10px; width: 180px; border-color: #9A9A9A; }
+					#qmenu_menu ul li { float: left; }
+					#qmenu_menu ul a { margin-bottom: 10px; padding: 47px 0 0; width: 60px; border: none; border-radius: 4px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/noicon.gif) no-repeat 50% 5px; text-align: center; }
+						#qmenu_menu ul a:hover { background-color: #E5EDF2; color: #369; text-shadow: none; }
+
+/* 页面主区域 */
+	#ct { min-height: 300px; }
+		.mn { background-color:#FFFFFF;}
+		.ct1 { border: 1px solid #CCC; border-top: none; }
+		.ct2 .mn { float: left; width: 730px; margin-bottom: 1em; }
+		.ct2 .sd { float: right; width: 220px; overflow: hidden; _overflow-y: visible; }
+
+		.appl { float: left; overflow: hidden; margin-bottom: 10px; padding: 6px 10px; width: 117px; }
+
+		.ct2_a, .ct3_a { }
+			.ct2_a_r { border: none; background-image: none; }
+			 .ct2_a h1.mt { display: none; }
+			 .ct2_a .tb { margin-top: 3px; }
+			.ct2_a .mn { float: right; width: 800px;  display: inline; padding-top: 30px;}
+			.cont_wp{ border: 1px solid #E6E6E6; width: 758px !important;padding:0px 20px;}
+			.cont_wp .mn{ width:auto;}
+			.ct2_a .float_l{float:left;}
+				#nv_userapp .ct2_a .mn, .ct2_a_r .mn { margin-right: 0; width: 810px; }
+
+		.ct3_a .mn { float: left; margin-left: 20px; width: 565px; }
+		.ct3_a .sd { float: right; width: 220px; }
+			#nv_home .ct3_a .sd .bm { margin-right: 10px; border: none; }
+				#nv_home .ct3_a .sd .bm_c { padding: 10px 0; }
+
+		.mw { width: 100%; float: none; }
+		.mnw { clear: both; border-top: 1px solid #CCC; }
+		.mnh { width: 643px; background: #F2F2F2; margin-bottom: 0; }
+
+/* 页尾 */
+	#ft { padding: 10px 0 50px; margin-top:20px; border-top: 1px solid #CDCDCD; line-height: 1.8; color: #666; }
+		#flk { text-align: right; }
+			#flk img { vertical-align: middle; }
+			#scrolltop { visibility: hidden; position: fixed; bottom: 100px; display: none; margin: 0; width: 1px; height: 1px;overflow: hidden; cursor: pointer; }
+			#scrolltop2 { visibility: hidden; position: fixed; bottom: 80px; display: block; margin: 0; width: 48px; height: 48px; background-color:#ffffff; background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/scrolltop2.jpg") no-repeat 0 -48px; line-height: 999px; overflow: hidden; cursor: pointer; border:1px solid #e6e6e6; visibility:visible;box-shadow: 0px 0px 5px #e6e6e6; }
+			.scrolltop2_mousemove{background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/scrolltop2.jpg") no-repeat 0 0 !important;}
+			.ie6 #scrolltop { position: absolute; bottom: auto; }
+			
+			
+		.ie6 #scrolltop { position: absolute; bottom: auto; }
+		#nv_home #ft, .pg_announcement #ft, .pg_modcp #ft, .pg_portalcp #ft, .pg_ranklist #ft, #nv_userapp #ft { border-top: none; }
+
+/* 通用的区域块 */
+	/*
+	.bm 是最常用的区块元素，默认带有 1px 的边框和 10px 的下边距。一般情况下，.bm 内应包括两个子容器：.bm_h 和 .bm_c，前者代表区块头部，带有灰色背景和下边框；后者是容器主体，默认带有 10px 的内边距。
+	.bm 另有三种子样式
+		.bmw	Weight		头部为彩色背景
+		.bml	Lite		头部无背景填充
+		.bmn	Notice		整体带有彩色背景，常用于提示信息
+	*/
+
+		.bm_h .o { float: right; width: 30px; }
+			.bm_h .o img { float: right; margin-top: 7px; cursor: pointer; }
+		.bm_h .i { padding-left: 10px; }
+		.bm_h .pn { margin-top: 4px; }
+		.bm_h { padding: 0 10px; height: 31px; border-top: 1px solid #FFF; border-bottom: 1px solid #C2D5E3; background: #F2F2F2; line-height: 31px; white-space: nowrap; overflow: hidden; }
+		.bmw { border: 1px solid #E6E6E6; }
+			.bmw .bm_h { border-top-color: #FFF; border-right: 1px solid #FFF; border-bottom-color: #C2D5E3; border-left: 1px solid #FFF; background: #E5EDF2; }
+				.bmw .bm_h a { color: #369; }
+		.bml .bm_h { padding-top: 5px; border: none; background: transparent; }
+		.bml .bm_c { padding-top: 0; }
+		.bmn { padding: 7px 10px; border-color: #C2D5E3; background: #E5EDF2; }
+
+		.fl { border: 1px solid #CDCDCD; border-top: none; background: #FFF; }
+			.fl .bm { margin-bottom: 0; border: none; }
+				.fl .bm_h { border-width: 1px 0; border-color: #C2D5E3; background: #E5EDF2 url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/titlebg.png") repeat-x 0 0; }
+		.fl .bm_c, #online .bm_c, .lk .bm_c { padding-top: 0; padding-bottom: 0; }
+	.bm2 .bm2_b { float: left; width: 49%; border: 1px solid #CDCDCD; }
+		.bm2 .bm2_b_y { float: right; }
+	.bw0 { background: transparent; }
+
+	/* 宽布局下的通用块 */.bw { padding: 0 15px; }
+
+/*
+	Name:			mod_path
+	Level:			Global
+	Sample:			<div id="pt"><div class="z">Path here</div></div>
+	Explain:		面包屑导航
+	Last Modify:	lushnis
+*/
+	#pt { margin: 2px 0; height: 29px; border:none; background: transparent; line-height: 29px; }
+		#pt .z { padding-right: 10px; font-size:14px;}
+		#pt .z a, #pt .z em, #pt .z span { float: left; height: 29px; color:#999999;padding:0px;}
+		#pt .z a:hover{color:#222222;}
+		#pt .z em { width: 20px;overflow: hidden; text-align:center; }
+		.nvhm { width: 16px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/search.png) no-repeat -8px -119px; line-height: 200px; overflow: hidden; }
+			/* XP 或 Windows 7，IE 最高版本为 8 或 9，这几种组合情况对字体的渲染存在差异，所以需要对背景进行微调，以适应更多情况 by Pony 11050511 */
+			.ie_all #pt .z em { background-position: 3px 9px; }
+			.ie_all .nvhm { background-position: -8px -120px; }
+/*
+	Name:			mod_userheader
+	Level:			Global
+	Sample:			div id="uhd"
+	Explain:		论坛皮肤下用户页面头部
+	Last Modify:	lushnis
+*/
+#uhd { padding-top: 10px;border: 1px solid #CCC; border-bottom: none; background: #E5EDF2; }
+	#uhd .tb a { border-width: 1px 0; border-top-color: #E5EDF2; border-bottom-color: #CCC; }
+	#uhd .tb .a a { border: 1px solid #CCC; border-bottom-color: #FFF; }
+	.ie6 #uhd .tb .a { position: relative; }
+	#uhd .mn { float: right; margin-right: 15px; margin-bottom: -30px; line-height: 28px; }
+		#uhd .mn a { padding: 2px 0 2px 20px; background: no-repeat 0 50%; color: #666; }
+			#uhd .mn a:hover { color: #369; }
+			#uhd .mn .addflw a { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/flw_ico.png); }
+			#uhd .mn .addf a { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/feed/friend.gif); }
+			#uhd .mn .pm2 a { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pmto.gif); }
+	#uhd .h { padding-left: 75px; }
+		#uhd .avt { display: inline; float: left; margin-left: -65px; }
+		#uhd .mt { padding-bottom: 0; }
+	#uhd .flw_hd { float: right; width: 260px; margin-right: 10px; margin-bottom: -30px; }
+		#uhd .tns th, #uhd .tns td { padding-left: 20px; text-align: left; }
+		#uhd .flw_hd .o { padding-left: 20px; }
+/* 统计数据 */
+.tns { padding: 10px 0; }
+	.tns table { width: 100%; }
+		.tns th, .tns td { text-align: center; font-size: 12px; }
+		.sd .tns th, .sd .tns td { width: 110px !important; }
+		.tns th { border-right: 1px solid #CCC; }
+		.tns th p, .tns td p { font-size: 14px; margin: 0; }
+	.pls .tns { padding: 0 10px 10px; }
+		.pls .tns th p, .pls .tns td p { font-size: 12px; margin: 0; }
+
+/* 带图标页面头部 ih. --> icon header */
+	.ih .icn { float: left; width: 60px; }
+	.ih dl { margin-left: 60px; }
+		.ih dt { font-size: 14px; font-weight: 700; }
+		.ih dd { padding-bottom: 1em; }
+			.ih dd strong { margin: 0 2em 0 4px; color: #C00; }
+
+/*
+	Name:			mod_tab
+	Level:			Global
+	Dependent:		mod_clearfix
+	Sample:			<ul class="tb cl">
+						<li class="a"><a href="#">Active Tab Item</a></li>
+						<li><a href="#">Tab Item</a></li>
+					</ul>
+	Explain:		标签样式
+	Last Modify:	lushnis
+*/
+.tb { margin-top: 10px; padding-left: 20px; line-height: 30px; border-bottom: 1px solid #e6e6e6; height:50px;}
+	.tb li { float: left; margin: 0 3px -1px 0; height:50px; line-height:48px; width:106px;text-align:center;}
+		.ie6 .tb .a, .ie6 .tb .current { position: relative; }
+	.tb a { display: block; padding: 0px;color:#515151;}
+		.tb .a a, .tb .current a { border: 1px solid #e6e6e6; border-bottom-color: #FFF; background: #FFF; color:#32a5e7;line-height:50px;}
+		.tb a:hover { text-decoration: none; }
+	.tb .y { float: right; margin-right: 0; }
+		.tb .y a { border: none; background: transparent; }
+	.tb .o { margin: 1px 4px 0 2px; border: 1px solid #235994; }
+	.tb .o, .tb .o a { height: 23px; line-height: 23px; background: #06C url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pn.png) repeat-x 0 -48px; }
+		.tb .o a { padding: 0 15px; border: none; font-weight: 700; color: #FFF; }
+		.ie6 .tb .o a { float: left; }
+	.tb_h { margin: 0; padding: 0; background-color: #E5EDF2; }
+		.tb_h li { margin-right: 0; }
+		.tb_h a { border-top: none; border-left: none; }
+		.tb_h .o { margin-top: 2px; }
+	.tb_s { margin-top: 0; line-height: 26px; }
+
+	/* 类似menu的Tab */
+.tbmu { padding: 8px 10px 8px 0; border-bottom: 1px dashed #CDCDCD; }
+	.tbmu a { color: #369; }
+	.tbmu .a { color: #333; font-weight: 700; }
+	.tbmu .a:hover{color:#515151;}
+	/* tab的强调信息提示 */
+.tbms { padding: 10px 10px 10px 26px; border: 1px dashed #FF9A9A; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/notice.gif) no-repeat 10px 50%; }
+.tbms_r { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/data_valid.gif); }
+	/* 极简 Tab */
+.tbx { margin: 10px 0; }
+	.tbx span { margin-right: 10px; cursor: pointer; }
+	.tbx .a { padding: 3px 5px; border: solid #999; border-width: 0 1px 1px 0; background: #F2F2F2 url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/thead.png) repeat-x 0 -20px; }
+	.tbx strong { color: #F26C4F; }
+	
+.settinglist ul.tb li a{ font-size:14px;}
+
+/* 类似相册侧边切换页面用的 */
+.obn { border-bottom: 1px solid #CDCDCD; }
+	.obn select { width: 100%; margin-bottom: 5px; }
+
+/* 广告 */
+	/* 页头广告 */ .a_h { padding-top: 5px; }
+	/* 二级导航广告 */ .a_mu { border: solid #CDCDCD; border-width: 0 1px 1px; background: #F2F2F2; }
+	/* 页尾广告 */ .a_f { margin: 5px auto; }
+	/* 日志内容广告 */ .a_b { float: right; margin: 0 0 5px 5px; }
+	/* 格子广告 */ .a_t { margin-bottom: 10px; }
+		.a_t table { width: 100%; }
+		.a_t td { padding: 4px 15px; border: 1px solid #CDCDCD; }
+	/* 帖内广告 */ .a_pr { float: right; overflow: hidden; }
+		.a_pt, .a_pb { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/ad.gif) no-repeat 0 50%; margin-bottom: 6px; padding-left: 20px; zoom: 1; }
+	/* 漂浮广告 */ .a_fl, .a_fr { float: right; position: fixed; top: 350px; z-index: 100; }
+		.a_fl { left: 0; }
+		.a_fr { right: 0; text-align: right; }
+		* html .a_fl, * html .a_fr { position: absolute; top: expression(offsetParent.scrollTop+350); }
+	/* 对联广告 */ .a_cb { top: 20px }
+		* html .a_cb { top: expression(offsetParent.scrollTop+20); }
+	/* 文章漂浮广告 */ .a_af { float:left; margin-right: 10px; margin-bottom: 10px; }
+	/* 右下角广告 */ .a_cn { position: fixed; right: 10px; bottom: 10px; z-index: 300; }
+		* html .a_cn { position: absolute; top: expression(offsetParent.scrollTop+document.documentElement.clientHeight-this.offsetHeight); }
+		.a_cn .close { text-align: right; }
+
+	.a_h, .a_mu, .a_c, .a_p, .a_f, .a_t { text-align: center; }
+
+/* ------------------------------------------------------------------------ 列表样式 */
+		/*
+		.xl				Text list
+			.xl1		1 line list ( wrap text will be hidden );
+			.xl2		2 col list
+			.xld		list with description ( the HTML tag must be <dl> )
+		.ml				Media/Image list
+			.mls		Media size: 48*48px
+		.fl				Forum list
+		.tl				Thread list
+		.al				Application list
+		*/
+
+/* 文本列表 */
+.xl li { margin: 2px 0; }
+	.xl em { float: right; padding-left: 5px; }
+		.xl em, .xl em a { color: #999; }
+	.xl label, .xl label a { color: #C00; }
+	.xl1 li { height: 1.5em; overflow: hidden; }
+		.xl1_elp { float: left; width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+	.xl2 li { float: left; margin: 2px 0; padding: 0; width: 48.6%; height: 1.5em; overflow: hidden; }
+	.xl ol, ol.xl { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/sortnum.png) no-repeat 0 3px; line-height: 21px; }
+		.xl ol li, ol.xl li { background: none; padding-left: 20px; }
+		.xl ol li, ol.xl li { height: 21px; }
+	.xld dt { padding: 6px 0px; font-weight: normal; }
+	.xld dd { margin-bottom: 8px; }
+		/* text with thumbnail image ( must with the additional class .cl ) */
+		.xld .m { float: left; margin: 8px 8px 10px 0; }
+		.xld .atc { float: right; margin-left: 20px; }
+			.ie8 .xld .atc { max-width: 86px; }
+			.xld .atc img { padding: 2px; max-width: 80px; max-height: 80px; border: 1px solid #CCC; background: #FFF; }
+				.ie6 .xld .atc img { width: expression(this.width > 80 && this.width>=this.height ? 80 : true); height: expression(this.height > 80 && this.width<=this.height ? 80 : true); }
+		.xld a.d, .xl a.d, .attc a.d, .c a.d, .sinf a.d { float: right; width: 20px; height: 20px; overflow: hidden; line-height: 100px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/op.png) no-repeat 0 -2px; }
+			.attc a.d { float: left; }
+		.xld a.d:hover, .xl a.d:hover, .attc a.d:hover, .c a.d:hover, .sinf a.d:hover { background-position: 0 -22px; }
+		.xld a.b { background-position: 0 -40px; }
+			.xld a.b:hover { background-position: 0 -60px; }
+	.xlda dl { padding-left: 65px; }
+		.xlda .m { display: inline; margin: 8px 0 8px -65px; }
+		.xlda .avt img { display: block; }
+		.xlda dd img { max-width: 550px; }
+			* html .xlda dd img { width: expression(this.width > 550 ? 550 : true); }
+		.xlda dd a { color: #369; }
+		.xlda dd .hot { color: #F26C4F; }
+
+/* 图片列表 */
+.ml {}
+	.ml li { float: left; padding: 0 5px 5px; text-align: center; overflow: hidden; }
+		.ml img { display: block; margin: 0 auto; }
+		.ml p, .ml span { display: block; width: 100%; height: 20px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+		.ml span, .ml span a { color: #999; }
+	.mls li { padding: 0 0 5px; width: 66px; }
+		.mls .avt { display: block; margin: 0 auto; width: 54px; }
+		.mls img { width: 48px; height: 48px; }
+		.mls p { margin-top: 5px; }
+	.mlm li { padding: 0 0 5px; width: 150px; }
+		.mlm img { width: 120px; height: 120px; }
+	.mla li { width: 140px; height: 224px; }
+	.mla1 li { height: 150px; }
+		.mla .c { margin: 0 auto; width: 136px; height: 150px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/gb.gif) no-repeat 0 0; text-align: left; }
+			.mla .a { background-position: 0 100%; }
+			.mla .c a { display: block; padding: 14px 4px 3px 8px; width: 120px; height: 120px; overflow: hidden; }
+		.mla img { max-width: 120px; max-height: 120px; _width: expression(this.width > 120 && this.width>=this.height ? 120 : true); _height: expression(this.height > 120 && this.width<=this.height ? 120 : true); }
+	.mlp li { width: 140px; height: 140px; }
+	.mlp .d { padding: 0 0 5px; width: 150px; height: 180px; }
+		.mlp img { padding: 2px; max-width: 120px; max-height: 120px; border: 1px solid #CCC; background: #FFF; }
+		* html .mlp img { width: expression(this.width > 120 && this.width>=this.height ? 120 : true); height: expression(this.height > 120 && this.width<=this.height ? 120 : true); }
+
+/* 用户头像列表时，各种状态图标。.gm -> 管理员; .gs -> 明星会员 ; .gol -> 在线会员; */
+.gm, .gs, .gol { position: absolute; overflow: hidden; margin: -3px 0 0 -3px; width: 60px; height: 18px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/gst.gif) no-repeat 0 0; display: block;/* ie6 */ }
+.gs { background-position: 0 -18px; }
+.gol { background-position: 0 -36px; }
+
+/* 应用列表*/
+	.appl ul { margin: 3px 0; }
+	.appl li { display: block; height: 28px; line-height: 28px; white-space: nowrap; word-wrap: normal; word-break:normal;font-size: 14px; text-overflow: ellipsis; overflow: hidden; }
+	.appl li a { text-decoration: none !important; }
+	.appl img { margin: 5px 5px -3px 0; }
+	.appl span { float: right; font-size: 12px; }
+		.appl span a { color: #999; }
+			.appl span a:hover { color: #369; }
+	/* 应用侧边 by Pony */
+	.myo li { height: auto; line-height: 1.5; }
+	.myo img { margin-bottom: -1px; }
+	.myo a { color: #369; }
+	/* 侧边管理列表 */
+	.tbn { margin: -6px -10px 0; }
+		.tbn ul { margin: 0; }
+			.tbn li { margin: 0 10px; height: 33px; border-bottom: 1px dashed #CCC; }
+			.tbn li.a { margin: -1px 0 0; padding: 0 10px 0 9px; border-top: 1px solid #CDCDCD; border-bottom-style: solid; background: #FFF; }
+		.tbn ul a { display: block; height: 33px; line-height: 33px; }
+		.tbn .mt { padding: 10px; }
+
+/* 道具 magic */
+.mg_img { padding: 10px; width: 76px; height: 76px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/magic_imgbg.gif) no-repeat 0 0; }
+
+/*
+	Name:			mod_link
+	Level:			Global
+	Dependent:
+	Sample:			<ul class="tb cl">
+						<li class="a"><a href="#">Active Tab Item</a></li>
+						<li><a href="#">Tab Item</a></li>
+					</ul>
+	Explain:		友情链接
+	Last Modify:	lushnis
+*/
+	.lk img { float: left; margin-right: 5px; margin-bottom: 5px; width: 88px; height: 31px; }
+	.lk p { color: #666; }
+	.lk .m li { clear: left; padding: 0 0 10px 98px; }
+		.lk .m img { display: inline; margin-top: 4px; margin-top/*\**/: 1px\9; margin-left: -98px; }
+	.lk .x li { float: left; margin-right: 5px; width: 88px; height: 1.5em; overflow: hidden; }
+	.lk_logo .lk_content { float: left; }
+
+/* ------------------------------------------------------------------------ 其他特定功能块 */
+/* 简易编辑器 Tiny Editor */
+	.tedt { width: 98%;}
+	.tedt2 { width: 100%; border: 1px solid; border-color: #e6e6e6; }
+		.tedt .bar { padding: 0px; height: 40px; line-height: 40px;}
+			.fpd{overflow:hidden;float:left;}
+			.fpd a { float: left; margin: 2px 20px 0 0; height: 20px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new.png) no-repeat;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new.gif); line-height: 20px; overflow: hidden; }
+			.fpd a.fbld { background-position: -273px 0px;width:13px; }
+			.fpd a.fclr {background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new2.png) no-repeat -390px 0px; _background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new2.gif);width:20px; }
+			.fpd a.flnk { background-position: -234px 0px;width:18px; }
+			.fpd a.fqt { background-position: -158px 0px;width:14px; }
+			.fpd a.fcd { background-position: -191px 0px;width:23px; }
+			.fpd a.fat { background-position: -39px 0px;width:19px; }
+			.fpd .fswf{display:inline-block;width:21px;float:left;margin:0px 20px 0px 0px;}
+			
+			.fpd a.fmg,.fpd a.fsml {width:24px;height:24px;padding:7px;margin:0px 20px 0px 0px;background:none #f5f5f5;border:1px solid #e6e6e6;border-radius:2px;}
+			.fpd a.fmg em,.fpd a.fsml em{display:inline-block;width:24px;height:24px;background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new.png) no-repeat;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new.gif);}
+			.fpd a.fmg em{ background-position: -45px -30px;}
+			.fpd a.fsml em{ background-position: 0px -30px;}
+			#flw_post_extra .fpd a.fmg,#flw_post_extra .fpd a.fsml{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new.png") no-repeat 0px 0px;border:none;padding:0px;height:20px;width:auto;}
+			#flw_post_extra .fpd a.fsml em{background:none;}
+			
+		.tedt .area { margin-top:20px; padding: 4px; background: #f9f9f9; zoom: 1; border:1px solid #e6e6e6;}
+		.tedt .area textarea{height:162px;}
+		.tedt .defaulttext_area{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/default_editor.gif") no-repeat 15px 13px #F9F9F9;}
+		.tedt .pt { width: 100%; margin-right: 0; padding: 0 !important; border: none; background: #f9f9f9 none; }
+		.tedt #fastpostiframe{background:transparent;}
+			.tedt .pt:focus { outline: none; -moz-box-shadow: none; }
+	.m_c .tedt { width: 600px; }
+.fwin .tedt .area{ margin-top:10px;}
+.fwin .tedt .area textarea{width:100% !important;}
+.fwin .tedt .y a, .fwin .tedt .y a:link,.fwin .tedt .y a:visited, .fwin .tedt .y a:hover{ color:#515151;}
+
+
+/* 表情 */
+.sllt { padding: 10px !important; }
+	.sllt td { padding: 10px; border: none; cursor: pointer; }
+	.sllt_p { *float: left; text-align: right; }
+		.sllt_p a { margin-right: 5px; color: #069; text-decoration: underline; }
+	.sl_pv { margin-top: 5px; padding: 8px; background: #FAFAFA; border: 1px solid #CCC; }
+	.ie6 .slg, .ie7 .slg { width: expression(this.parentNode.offsetWidth); }
+
+/*
+	Name:			mod_style_selector
+	Level:			Fuction
+	Dependent:		mod_popupmenu
+	Explain:		风格切换菜单
+	Last Modify:	lushnis
+*/
+	#toptb a#sslct, #toptb a.switchblind { width: 10px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/style_switch.png) no-repeat 50% 50%; text-indent: -9999px; overflow: hidden; }
+	#sslct_menu { padding: 6px 10px 10px; }
+		 .sslct_btn { float: left; margin: 4px 4px 0 0; width: 12px; height: 12px; border: 1px solid #CDCDCD; cursor: pointer; }
+			.sslct_btn i { float: left; display: inline; margin: 1px; width: 10px; height: 10px; background: #2E80D1; overflow: hidden; font-style: normal; }
+	#toptb a.switchblind{ width: 10px; background-image: none ; }
+/* 弹出菜单、弹出层及弹出窗口 */
+	.p_pop, .p_pof, .sllt { padding: 4px; border: 1px solid; min-width: 60px; border-color: #E6E6E6; background: #FFFFFF; box-shadow: 0px 0px 5px rgba(0,0,0,0.1); }
+		.ie6 .p_pop { width: 100px; }
+		.p_pof .p_pop { padding: 0; border: none; box-shadow: none; }
+		.p_pof { width: 500px; }
+		.p_opt { padding: 10px; }
+		.p_pop{padding:0px 16px;border:1px solid #e0e3e8;border-radius:1px;background:#FFFFFF;box-shadow: 0px 0px 5px #DDDDDD;}
+		.p_pop a { display: block; padding: 0px 10px; border-bottom: 1px solid #e0e3e8; white-space: nowrap; line-height:39px;height:39px;margin-bottom:-1px;color:#000000;float:none;}
+			.p_pop li:last-child a { border: none; }
+			.ie6 .p_pop a { position: relative; }
+			.p_pop a.a, #sctype_menu .sca { background-color: #E5EDF2; color: #369; text-decoration: none; }
+			.p_pop a:hover{color:#32a5e7;}
+		/* .blk -> block 内容较为复杂的弹出层使用 .blk 的 class，内部的 a 标签重新定义 */
+		.blk a, .inlinelist a { display: inline; padding: 0; border: none; }
+			.blk a:hover { background: none; color: #333; text-shadow: none; text-decoration: underline; }
+		.inlinelist { padding: 5px; }
+			.inlinelist a { float: left; width: 5em; height: 2em; overflow: hidden; text-align: center; line-height: 2em; }
+	.h_pop { min-width: 120px; border-top: none; }
+	.admin_operation{margin-top:13px;}
+	.admin_operation a { line-height:25px;height:25px; width:40px; display:block; float:left;margin:0px;color:#515151;}
+	
+/* .txt 和 .textarea 属于旧的命名规范，待整理 by lushnis */.p_opt .txt, .p_opt .txtarea { margin: 5px 0; }
+
+	.p_pop .flbc, .p_pof .flbc{margin-right: 8px;margin-top: 4px;}
+
+/* 弹出层 以下 class 都可以分开写，单独定义，以便个性化 */
+	/* 四条边、四个角的公用样式 */
+	.t_l, .t_c, .t_r, .m_l, .m_r, .b_l, .b_c, .b_r { overflow: hidden; background: #000; opacity: 0.2; filter: alpha(opacity=20); }
+	/* 四个角 */
+	.t_l, .t_r, .b_l, .b_r { width: 8px; height: 8px; }
+	/* 上下两条边 */
+	.t_c, .b_c { height: 8px; }
+	/* 左右两条边 */
+	.m_l, .m_r { width: 8px; }
+
+	.t_l { -moz-border-radius: 8px 0 0 0; -webkit-border-radius: 8px 0 0 0; border-radius: 8px 0 0 0; }
+	.t_r { -moz-border-radius: 0 8px 0 0; -webkit-border-radius: 0 8px 0 0; border-radius: 0 8px 0 0; }
+	.b_l { -moz-border-radius: 0 0 0 8px; -webkit-border-radius: 0 0 0 8px; border-radius: 0 0 0 8px; }
+	.b_r { -moz-border-radius: 0 0 8px 0; -webkit-border-radius: 0 0 8px 0; border-radius: 0 0 8px 0; }
+	.m_c { background: #FFF; }
+
+/* 弹出层内容区 by Pony */
+	.m_c .tb { margin: 0 0 10px; padding: 0 10px; }
+	.m_c .c { padding: 0 0px 10px; }
+	.m_c .o { padding: 10px 0px 0px; height: 38px; text-align: right; }
+	
+		/* 分享时会用到 */
+	.m_c .el { width: 420px; }
+		.m_c .el li { padding: 0; border: none; }
+
+/* .flb 弹出层header */
+	.flb { padding: 10px 10px 8px; height: 20px; line-height: 20px; }
+		.flb em { float: left; font-size: 14px; font-weight: 700; color: #369; }
+			.flb em a { text-decoration: none; }
+		.flb .needverify { float: left; margin-left: 8px; padding-left: 13px; width: 45px; height: 21px; line-height: 21px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/re_unsolved.gif) no-repeat 0 0; font-size: 12px; color: #999; font-weight: 400; }
+		.flb .onerror, .flb .onright { padding-left: 20px; height: auto; line-height: 140%; white-space: nowrap; font-size: 12px; font-weight: 400; }
+			.flb .onerror { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/check_error.gif) no-repeat 0 50%; }
+			.flb .onright { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/check_right.gif) no-repeat 0 50%; color: #666; }
+
+		.flb span { float: right; color: #999; }
+			.flb span a, .flb strong { float: left; text-decoration: none; margin-left: 8px; font-weight: 400; color: #333; }
+				.flb span a:hover { color: #999; }
+			.flbc { float: left; width: 28px; height: 28px; overflow: hidden; text-indent: -9999px; background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -87px -401px transparent; _background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif"); cursor: pointer; }
+			.flbc:hover { background-position: -120px -401px; }
+
+
+			.floatwrap { overflow: auto; overflow-x: hidden; margin-bottom: 10px; height: 280px; }
+
+		.f_c { }
+			.f_c li { list-style: none; }
+			.f_c hr.l { margin: 0; }
+			.f_c a,.f_c a:link,.f_c a:visited,.f_c a:hover,.f_c a:active { color: #32a5e7; }
+			.f_c .list { margin: 0 auto 10px; width: 570px; border-top: 3px solid #CDCDCD; }
+				.f_c .list th, .f_c .list td { padding: 5px 2px; height: auto; border-bottom: 1px dashed #CDCDCD; }
+				.f_c .list .btns th, .f_c .list .btns td { border-bottom: none; }
+				.f_c .th th, .f_c .th td { padding: 10px 0; }
+				.f_c .list th { background: none; }
+				#fwin_viewthreadmod .f_c .list th, #fwin_viewthreadmod  .f_c .list td{ border-bottom:1px solid #CDCDCD; height:35px;}
+				#fwin_viewratings .f_c .list th, #fwin_viewratings .f_c .list td{ font-size:12px;}
+
+.fwin .flb { padding:40px 0px 30px; position:relative; }
+.fwin .flb em { float: left; font-size: 18px; font-weight: 700; color: #000; }
+.fwin .m_c{ padding:0px 40px 40px;}
+#mdly .fwin .m_c{ padding:5px 10px;}
+
+.fwin .flb span a, .fwin .flb strong {color: #333333;float: left;font-weight: 400;margin-left: 8px;position: absolute;right: -40px;text-decoration: none;top: 0px;}
+.fwin #fwin_content_reply #moreconf #postsubmit{ color:#FFFFFF;}
+.fwin #fwin_content_reply .quote{color:#999999;}
+.cutline_fwin{border-top:1px solid #E6E6E6;height:0px;overflow:hidden;padding:0px 0px 20px 0px;margin:0px -30px;}
+.minwidth_fwin{display:block;height:1px;width:300px;overflow:hidden;padding:0px;margin:0px;}
+
+/* 弹窗未开启时 nofloat */
+.nfl { height: auto !important; height: 320px; min-height: 320px; }
+	.nfl .f_c { margin: 60px auto; padding: 20px; width: 580px; border: 3px solid #F2F2F2; background: #FFF; }
+	.nfl .loginform { height: auto; }
+	.nfl .clause { width: auto; height: auto; }
+
+/* dropdownbtn 下拉菜单 */
+.hasd {}
+	.hasd input { float: left; width: 121px; }
+		.hasd input.crl { padding: 0; width: 20px; height: 20px; background: none; border-style: solid; border-color: #848484 #E0E0E0 #E0E0E0 #848484; border-width: 1px 0 1px 1px; }
+	.hasd .spmediuminput { width: 115px; }
+	.dpbtn { float: left; overflow: hidden; text-indent: -9999px; width: 21px; height: 21px; border-width: 1px 1px 1px 0; border-style: solid; border-color: #848484 #E0E0E0 #E0E0E0 #848484; background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/newarow.gif) no-repeat 100% 0; }
+		.dpbtn:hover { background-position: 100% -23px; }
+	.hasd label { float: left; }
+		.tpclg h4 a.dpbtn { float: right; border-width: 1px; }
+		.tpclg h4 { font-weight: 400; }
+		.tpclg .pt { margin: 5px 0; width: 212px; overflow: hidden; }
+		/* 下面两行为评分时用到的 */
+		.mark .dt, .mark .tpclg h4 { width: 270px; }
+		.mark .tpclg .pt { width: 260px; }
+	#postbox dd.hasd input { width: 99px; margin-right: 0; }
+
+/*弹窗 编辑器 颜色框 colorbox*/
+.colorbox{ width: 130px !important; }
+.colorbox input { float: left; margin: 2px; padding: 0; width: 12px; height: 12px; border: 0; cursor: pointer; }
+
+/* 短消息对话框 .pm -> personal_message (window) by Pony */
+	.pm { overflow: hidden; width: 400px; }
+		.pm .flb { margin-bottom: 0; padding: 1px 5px 4px; background: #CCC url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm.png) repeat-x 0 -101px; }
+			* html .pm .flb { padding: 4px 5px 1px; }
+			.pm .flb em { padding-left: 15px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm.png) no-repeat 0 -65px; text-shadow: 1px 1px 1px #FFF; color: #333; font-size: 12px; }
+			
+		.pm_tac { padding: 5px 10px; background: #F2F2F2; }
+		.pm .c { padding: 0; background: #F2F2F2; }
+		.pmb { position: relative; padding: 20px 20px 0; width: 360px; height: 280px; overflow: auto; overflow-x: hidden; }
+			.pmb li { position: relative; margin-bottom: 10px; }
+				.pmt { overflow: hidden; position: absolute; bottom: 0; left: -6px; text-indent: -999px; width: 7px; height: 7px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm.png) no-repeat -13px -40px; zoom: 1; }
+				.pmd { float: left; padding: 5px 8px; background: #F0F0F0 url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm-bg1.png) repeat-x; border: 1px solid; border-color: #E7E7E7 #BBB #999 #E7E7E7; word-wrap: break-word; word-break:break-all; -moz-box-shadow: 0px 0px 5px #DDD; -webkit-box-shadow: 0px 0px 5px #DDD; box-shadow: 0px 0px 5px #DDD; -moz-border-radius: 10px 10px 10px 0; -webkit-border-radius: 10px 10px 10px 0; border-radius: 10px 10px 10px 0; }
+					.pmd, .pmd img { max-width: 292px; }
+					* html .pmd { width: expression(this.offsetWidth > 292 ? 292+'px':'auto'); }
+						* html .pmd img { width: expression(this.width > 292 ? 292 : true); }
+					/* 短消息下的引用和代码样式 */
+					.pmd .quote { overflow: hidden; margin: 0; padding-left: 16px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/qa.gif) no-repeat 0 0; color: #666; }
+						.pmd .quote blockquote { display: inline; margin: 0; padding-right: 16px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/qz.gif) no-repeat 100% 100%; text-indent:0px;}
+					.pmd .blockcode { overflow: hidden; margin: 0; padding: 0; background: transparent; color: #666; }
+						.pmd .blockcode code { font-size: 12px; line-height: 1.8em; }
+				.pmm .pmt { right: -6px; left: auto; background-position: 0 -47px; }
+				.pmm .pmd { float: right; background: #FEF5E7 url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm-bg2.png) repeat-x; border-color: #FFC68C #F9D4A7 #F3BB65 #DDC4A9; -moz-box-shadow: -0px 0px 5px #DDD; -webkit-box-shadow: -0px 0px 5px #DDD; box-shadow: -0px 0px 5px #DDD; -moz-border-radius: 10px 10px 0 10px; -webkit-border-radius: 10px 10px 0 10px; border-radius: 10px 10px 0 10px; }
+			.pmb h4 { text-align: center; }
+		.pmfm { padding: 0 15px 15px; }
+			.pmfm .tedt { width: 365px; }
+			.pmfm .pt { height: 65px; }
+			.pmfm .pn { float: right; }
+			.pma a { margin-right: 5px; }
+
+/* 短消息联系人列表 by Pony */
+	.pmo { position: absolute; top: 8px; right: 10px; overflow: hidden; padding-left: 10px; width: 130px; height: 31px; line-height: 24px; line-height /*\**/: 26px\9; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pn.png) repeat-x 0 -320px; text-shadow: 1px 1px 1px #FFF; }
+		.pmo em { display: block; padding: 3px 5px 4px 0; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pn.png) no-repeat 100% -360px; }
+		.pmo a { overflow: hidden; white-space: nowrap; display: block; padding-right: 10px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm.png) no-repeat 100% -222px; outline: none; }
+		.pmo .b { background-position: 100% -278px; }
+
+	/* .pmfl -> pm_friend_list (Window) */
+	.pmfl { position: absolute; top: 35px; right: 10px; z-index: 200; width: 138px; border: solid #CCC; border-width: 0 1px 1px; background: #FFF; }
+		.pmfl .s, .pmfl .o { padding: 5px; border-bottom: 1px solid #CCC; background: #F2F2F2; }
+		.pmfl .o { border-bottom-color: #FFF; }
+			.pmfl .s .px { padding-left: 20px; width: 101px; background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm.png) no-repeat 0 -160px; }
+			.pmfl .o .ps { width: 100%; }
+		.pmfl ul { overflow: auto; overflow-x: hidden; width: 138px; height: 306px; }
+			.pmfl li { padding: 5px; height: 24px; }
+			.pmfl .avt { float: left; width: 29px; height: 29px; }
+				.pmfl .avt img { padding: 0; width: 24px; height: 24px; border: none; }
+				/* 跳动的头像样式 by Pony */
+				.pmfl .newpm img { margin: 1px 0 0 1px; }
+			.pmfl p { overflow: hidden; white-space: nowrap; width: 78px; }
+				/* 当前交谈的用户 */
+				.pmfl p .a { color: red; }
+				/* 在线的用户 */
+				.pmfl p .ol { color: #333; }
+				.pmfl strong { color: #000; }
+				
+/* 消息对话框 */			
+#fwin_showMsgBox .fwin .m_c{ padding:0 !important;}
+#fwin_showMsgBox .fwin .login_showMsgBox{padding:0px 40px 40px !important;}
+.pm_chat{ position:relative; width:418px;}
+.pm_chat .pm_avatar{ position:absolute;border:1px solid #E6E6E6; background-color:#FFFFFF; left:18px; top:22px; padding:2px; }
+.pm_chat .pm_avatar img{ width:50px; height:50px;}
+.pm_chat .flb{ height:48px; background-image:none !important; background-color:#2f373a;}
+.pm_chat .flb span a, .pm_chat .flb strong{ right:5px; top:5px;}
+.pm_chat .pm_space{ float:right; width:125px; color:#515151;}
+.pm_chat .pm_notes{ float:right; width:120px; color:#515151;}
+.pm_chat .pm_space .pm_space_icon{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm_icon.jpg") no-repeat 0px 0px; width:20px; height:20px; float:left;margin-right:5px;}
+.pm_chat .pm_notes .pm_notes_icon{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm_icon.jpg") no-repeat -20px 0px;  width:20px; height:20px;float:left;margin-right:5px;}
+.pm_chat .pm_space:hover{ color:#000;}
+.pm_chat .pm_notes:hover{ color:#000;}
+.pm_chat .pm_space:hover .pm_space_icon{ background-position:0px -20px;}
+.pm_chat .pm_notes:hover .pm_notes_icon{ background-position:-20px -20px;}
+.pm_chat .pm_tac{ background-color:#FFFFFF; padding:30px 0px 20px; margin:0 15px; border-bottom:none; border-top:1px solid #E6E6E6;border-bottom:1px solid #E6E6E6;position:relative;}
+.pm_chat .shadebox_chat{position:absolute;z-index:999;height:35px;width:387px;bottom:-36px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/shade_chat.png") repeat-x;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/shade_chat.gif");}
+
+.pm_chat li{ margin-bottom:20px;}
+.pm .c{ background-color:#FFFFFF;}
+.pm_chat .pmd { border-radius:0px !important;box-shadow:none !important; border:1px solid #DDE5EB; background-image:none; background-color:#f3f8fc; padding:15px;}
+.pmt{ background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -32px -373px transparent; _background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif"); position:absolute; top:8px; height:10px; left:-7px; width:8px;}
+.pmm .pmd{background-image:none; background-color:#f9f9f9;border:1px solid #E6E6E6;}
+.pmm .pmt{ background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll 0 -374px transparent;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif"); position:absolute; top:8px; height:11px; right:-9px; width:10px;}
+.pm_chat .pmfm{padding:0px 26px 20px;}
+.pm_chat .tedt{border:0px none; border-style:none; padding-top:0px; border-radius:0 !important;}
+.pm_chat .pmb{width:366px;height:250px;padding:20px 26px 0px;}
+.pm_chat .tedt .area{ margin-top:0px;}
+.pm_chat .tedt .area textarea{ height:65px !important;}
+
+
+
+
+
+/* 登录和注册 */
+
+.rfm { margin: 0 auto; width: 760px; border-bottom: 1px dotted #CDCDCD; }
+		.rfm a { color: #369; }
+		.rfm .rq {}
+		.rfm th, .rfm td { padding: 10px 2px; vertical-align: top; line-height: 24px; }
+			.rfm .tipwide { padding-top: 0; }
+		.rfm th { padding-right: 10px; width: 10em; text-align: right; }
+		.rfm .px { width: 220px; }
+			.rfm .px:focus { border-color: #369; background: #FFF; }
+		.rfm .p_tip { position: absolute; z-index: 2; display: none; padding-left: 10px; width: 390px; background: #FFF; color: #666; font-style: normal; }
+		.rfm .p_chk { position: absolute; z-index: 1; padding-left: 10px; width: 390px; color: red; font-weight: 700; }
+		.rfm #emailmore { position: absolute; }
+		.p_right { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/check_right.gif) no-repeat 10px 12px; width: 30px; }
+		#returnmessage4 { display: none; padding: 10px 0; border-bottom: 1px solid #CDCDCD; background: #FFE; text-align: center; font-weight: 700; }
+		#returnmessage4.onerror { display: block; }
+		.rfm .l { margin: 0; }
+	.blr .c { padding: 0 10px 10px; }
+	.login_slct a { margin-right: -8px; padding-right: 16px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/arrwd.gif) no-repeat 100% 50%; }
+	.fwin .rfm, .nfl .f_c .rfm { width: 500px; }
+	.fwin .rfm th, .fwin .rfm td, .nfl .f_c .rfm th, .nfl .f_c .rfm td { padding: 6px 2px; }
+	.fwin .loginb button { margin-left: 11.3em; }
+	.nfl .f_c .loginb button { margin-left: 12em; }
+	.fwin{background-color: #FFFFFF;border: 1px solid #E6E6E6;box-shadow: 0 0 10px #E6E6E6; min-width:350px;}
+	.fwin2{ min-width:inherit;}
+	
+/*
+	Name:			mod_passlevel
+	Level:			Function
+	Explain:		密码强度检测
+	Last Modify:	lushnis
+*/
+	.passlevel { padding-left: 70px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/passlevel.png) no-repeat 0 5px; }
+	.passlevel1 { background-position: 0 -35px; }
+	.passlevel2 { background-position: 0 -75px; }
+	.passlevel3 { background-position: 0 -115px; }
+
+.blr { width: 580px; margin: 20px auto 30px; }
+	.m_c .blr { margin: 0 auto; }
+.lgfm { font: 12px/1.5; float: left; margin-bottom: 10px; *margin-bottom: -10px; padding: 20px 0; width: 280px; border-right: 1px solid #CCC; }
+	.rgs { margin-bottom: 10px; }
+	.lgfm label, .lgfm p, .reginfo { clear: both; overflow: hidden; display: block; margin-bottom: 10px; line-height: 22px; }
+		/* 自定义的注册信息 */
+		.reginfo label { display: inline; }
+		.reg_c { float: left; width: 200px; }
+	.lgfm .txt, .lgfm .px { padding: 2px 4px; height: 16px; border: 1px solid; border-color: #848484 #E0E0E0 #E0E0E0 #848484; background-image: none; }
+		.lgfm .txt, .lgfm .px, .lgfm .pt { width: 170px; }
+	.lgfm .ftid a, .lgfm .ftid a:hover { height: 20px; background-position: 100% -1px; border-color: #848484 #E0E0E0 #E0E0E0 #848484; }
+	.fsb { clear: both; margin-top: 8px; padding: 10px; }
+		.fsb .z { padding-top: 5px; }
+	.m_c .fsb { background: #F2F2F2; border-top: 1px solid #CCC; }
+		.fsb .pns { margin-right: 8px; }
+		.lgfm em, .fsb em { float: left; width: 60px; }
+			.fsb .pnr { *margin-top: 4px; }
+.nlf .txt{ width: 230px; }
+.brls { overflow: auto; margin-bottom: 10px; width: 470px; height: 240px; }
+.sipt { float: none; margin: 0 0 10px; width: 234px; height: 20px; background-color: #FFF; border: 1px solid; border-color: #848484 #E0E0E0 #E0E0E0 #848484; clear: left; }
+	.sipt a { float: left; width: 54px; border: none; }
+		.sipt a:hover, .sipt a:focus { border: none; }
+	.sipt .txt { float: left; width: 154px; border: none; outline: none; background: #FFF; }
+.sltp { float: none; margin: 10px 0; clear: both; }
+	.sltp a, .sltp a:hover, .sltp a:focus { height: 20px; line-height: 20px; border-color: #EEE; background-color: transparent; background-position: 100% -1px; color: #069 !important; }
+		.sltp a:hover, .sltp a:focus { background-position: 100% -24px; }
+.lpsw label { float: left; padding-left: 4px; width: 61px; line-height: 150%; }
+.clck, .sipt .clck { background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/clck.gif) no-repeat 98% 50%; }
+
+.lgf { float: left; overflow: visible; margin: 47px 25px 10px 40px; }
+	.lgf h4 { margin-bottom: 10px; font-weight: 400; font-size: 14px; }
+	.lgf a { color: #369; }
+	.minf { margin-top: 23px; }
+
+/*
+	Name:			mod_messagelogin
+	Level:			Global
+	Explain:		showmessage 处的登录框
+	Last Modify:	lushnis
+*/
+#messagelogin { margin-top: 5px; border-top: 1px solid #CDCDCD; }
+	#messagelogin .flb { padding-left: 0; }
+	#messagelogin .blr { margin: 0; }
+	#messagelogin .lgfm  { padding-top: 0; }
+	#messagelogin .minf { margin-top: 0; }
+	#messagelogin .fsb { padding: 0; }
+
+/*
+	Name:			mod_fast_login
+	Level:			Global
+	Explain:		页面头部的快速登录
+	Last Modify:	Pony 11061011
+*/
+.fastlg { line-height: 24px; }
+	.fastlg td { padding: 2px 0 2px 4px; }
+	.fastlg_fm { margin-right: 5px; padding-right: 5px; border-right: 1px solid #CDCDCD; }
+	#ls_fastloginfield_ctrl { line-height: 20px; border: none; background-color: transparent; background-position: 100% -1px; }
+		#ls_fastloginfield_ctrl:hover { background-position: 100% -24px; }
+	.psw_w { padding-left: 5px; }
+
+	.fastlg_l { padding-right: 4px !important; border-right: 1px solid #E5EDF2; }
+
+/* 打招呼 by Pony */
+	.poke { margin: 10px 0px; }
+		.poke li { float: left; margin: 0 1% 5px 0; width: 32%; height: 22px; }
+		.poke img { vertical-align: middle; }
+
+/* 普通数据列表 datatable by michael */
+.dt { border-top: 1px solid #CDCDCD; width: 100%; }
+	.dt th { background: #F2F2F2; }
+	.dt td, .dt th { padding: 7px 4px; border-bottom: 1px solid #CDCDCD; }
+	.dt .c { width: 50px; }
+
+	/* 用来展示数据的表格 */
+.tdat { width: 100%; overflow: hidden; zoom: 1;}
+		.tdat th, .tdat td { overflow: hidden; padding:0px 0px 0px 20px; height: 40px;white-space: nowrap; background-color:#F7F7F7;}
+		.tdat .alt, .tdat .alt th, .tdat .alt td { background-color: #F0F0F0; }
+		.head_dug th{background-color:#ebebeb;height:46px;color:#000000;}
+
+/* ==  um 公告 帮助 message 通用列表  lum -- um list == */
+.um { margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px dashed #CDCDCD; clear: left; }
+	.umh { margin-bottom: 10px; overflow: hidden; }
+		.umh h2, .umh h3 { clear: left; font-size:  14px; float: left; background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/arrow.gif) no-repeat right 6px;  padding-right: 14px; cursor: pointer; }
+			.schfaq h3 { background: none; cursor: default; }
+			.umh h3 a { color: #666; }
+			.umh h3 span { font-size: 12px; font-weight: 400; color: #666; }
+			.umh h2 em, .umh h3 em { margin-left: 8px; font-size: 12px; color: #999; font-weight: 400; }
+			.umh_act { float: right; }
+			.umh .umh_cb { display: none; }
+			.umh .umh_ext { display: block; }
+	.umn { background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/dash.gif) repeat-x 0 10px; clear: left; }
+		.umn h3 { background: #FFF url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/arrow.gif) no-repeat right -35px; font-size: 14px; }
+			.umn .umh_cb { display: block; background-color: #FFF; color: #666; cursor: pointer; }
+			.umn .umh_ext { display :none; }
+.lum {}
+	.lum h2 { font-size: 14px; }
+	.lum ul { padding: 1em 0 1em 2em; margin-bottom: 1em; border-bottom: 1px dashed #CDCDCD; }
+		.lum ul li { padding: 0.2em 0; }
+
+/* pgs --> pages & postbutton 分页、发帖按钮, pgb -->返回首页, nxt -->下一页 */
+.pgs {}
+	.pgs #newspecial, .pgs #newspecialtmp, .pgs #post_reply, .pgs #post_replytmp { float: right;}
+	.pg { float: left; }
+	.pg, .pgb { line-height: 26px; }
+		.pg a, .pg strong, .pgb a, .pg label {float:left;font-size:18px; display: inline-block;height:34px;line-height:34px; margin-left: 10px;padding:0px 12px; color: #333333; overflow: hidden; text-decoration: none;background-color:#F3F3F3;border:1px solid #F0F0F0;border-radius:18px 18px 18px 18px;}
+			.pg a.prev{margin-left:0px;}
+			.pg a.nxt {margin-right:10px;}
+			.pg strong {color:#FFFFFF;background-color:#32a5e7;border:1px solid #32a5e7; }
+			.pg a.disprev,.pg a.disnxt{color:#999999;}
+			.pg a.prev em{font-size:14px;}
+			.pg a.nxt em{font-size:14px;}
+			.pg .prev .previcon{display:inline-block;width:10px;height:17px;background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png) no-repeat -124px -568px;margin:9px 0px 0px 0px;}
+			.pg .nxt .nxticon{display:inline-block;width:10px;height:17px;background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png) no-repeat -152px -568px;margin:9px 0px 0px 0px;}
+			.pg .disprev .previcon{background-position:-182px -568px;}
+			.pg .disnxt .nxticon{background-position:-210px -568px;}
+		.pgb a { }
+		.pgb .graybtn{margin:0px;}
+		.pg label { cursor: text; }
+			.ie6 .pg label { padding-top: 3px; height: 23px; }
+			.pg label .px { padding: 0; width: 25px; height: 16px; line-height: 16px; }
+	.pagebar .pgb{float:left;}
+	.pagebar .pgt{float:left;}
+	.pagebar .bluebtn{margin-left:20px;margin-right:0px;}
+/* 用于行动的按钮 button action */
+.bac {margin: 0; padding: 0; width: 70px; height: 30px;line-height: 30px; color: #333; overflow: hidden; text-decoration: none; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pg_arw.png) no-repeat 0 0; text-align: center; text-indent: -7px; display: block;}
+
+#psd .bn .mbn input{ margin-right: 20px; }
+#postbox .mbn, #psd .mbn { height:34px; line-height:34px; }
+
+/* 用于积分奖励提示等弹出层提示 */
+.popupcredit {}
+	.pc_l, .pc_c, .pc_inner, .pc_r { width: 29px; height: 56px; line-height: 56px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/popupcredit_bg.gif) no-repeat 0 0; }
+	.pc_c { width: 200px; background-position: 0 -56px; background-repeat: repeat-x; }
+		.pc_inner { white-space: nowrap; text-align: center; width: auto; background-position: 50% -112px; }
+			.pc_inner i { margin-right: 10px; font-size: 12px; font-style: normal; color: #FFF; font-weight: 400; }
+			.pc_inner span { margin-right: 15px; color: #FFEA97; font-size: 14px; font-weight: 700; }
+			* html .pc_inner span { display: inline-block; }
+				.pc_inner span a { color: #FFEA97; text-decoration: underline; }
+				.pc_inner span em { color: #FFF; font-size: 18px; font-weight: 400; }
+				.pc_inner span u { font-size: 10px; text-decoration: none; }
+				.pc_inner span em.desc { color: #930; }
+			.pc_btn img { opacity: 0.5; }
+				.pc_btn:hover img { opacity: 1; }
+	.pc_r { background-position: -30px 0; }
+
+/* 快速跳转菜单 */
+#fjump_menu { padding: 7px 0 10px 10px; background: #F2F2F2; }
+	.ie6 #fjump_menu { width: expression(this.getElementsByTagName('li')[2] ? '600px' : (this.getElementsByTagName('li')[1] ? '400px' : '200px')); }
+	#fjump_menu .sch { position: absolute; top: 6px; right: 10px; }
+.jump_bdl { overflow: hidden; }
+	.jump_bdl li { float: left; overflow-x: hidden; overflow-y: auto; margin-right: 10px; padding: 5px; width: 178px; height: 300px; border: 1px solid #CCC; background: #FFF; }
+	.bdl_title li { float: left; margin-right: 9px; padding: 0 1px; width: 189px; height: 33px; line-height: 23px; font-weight: 700; }
+		.bdl_title .px { width: 80px; }
+	.jump_bdl p { overflow: hidden; height: 25px; line-height: 25px; }
+		.jump_bdl .sub { text-indent: 1em; }
+		.jump_bdl .child { text-indent: 2em; }
+	.jump_bdl a { display: block; position: static !important; padding: 0 4px; text-decoration: none; color: #444; }
+	.jump_bdl .a a, .jump_bdl .a a:hover { background-color: #E5EDF2; }
+
+/* 可用道具列表 by lushnis */
+	.mgcmn { width: 100px; }
+		.mgcmn a { padding-left: 25px; line-height: 16px !important; }
+			.mgcmn img { position: absolute; margin-left: -20px; }
+
+/* 高亮道具用到的 */
+.cmen { overflow: hidden; width: 63px; }
+	.cmen a { overflow: hidden; float:left; width: 20px; height: 20px; }
+
+
+/* 热点：站长推荐内容，在页面右下角弹出 */
+.focus { position: fixed; right: 10px; bottom: 0; z-index: 300; overflow: hidden; width: 270px; background: #FFF; }
+	* html .focus { position: absolute; top: expression(offsetParent.scrollTop+document.documentElement.clientHeight-this.offsetHeight); }
+	.fctrl { margin-left: 10px; font-weight: 400; }
+		.fctrl img { margin-bottom: -4px; }
+		.fctrl em { display: inline-block; }
+	.focus .m img { width: 60px; height: 60px; }
+	.focus dt { padding-top: 0; }
+
+/* 分享的验证码（全局） by Pony */
+.m_c .sec .secq { display: block; margin: 5px 0 10px; }
+
+/*
+	Name:			mod_reason_select
+	Level:			Global
+	Explain:		类似评分窗口中的评分原因选择的样式
+	Last Modify:	Pony
+*/
+.reason_slct {}
+	.reason_slct .reasonselect { height: 6em; overflow: scroll !important; overflow-x: auto !important; }
+		.reason_slct .reasonselect li { white-space: nowrap; }
+	.reason_slct .pt, .reason_slct .px { width: 25.2em !important; }
+	.reasonarea { height: 5.8em; }
+
+/*
+	Name:			mod_filebtn
+	Level:			Global
+	Sample:			<div class="filebtn">
+						<input type="file" class="pf cur1" size="1" />
+						<button type="button" class="pn pnc"><strong>{lang}</strong></button>
+					</div>
+	Explain:		模拟 <input type="file" />，注意不要让 button 太宽
+	Last Modify:	Pony
+*/
+.filebtn { position: relative; margin: 0 auto; width: 96px; overflow: hidden; }
+	.filebtn .pf { position: absolute; right: 0; height: 23px; opacity: 0; filter:alpha(opacity=0); }
+
+/* 上传弹出层 */
+.upfile { width: 220px; }
+#fwin_content_upload .upfile{ width:auto;}
+	.uploadform { padding: 0 10px; border: 1px dashed #CDCDCD; background: #F2F2F2; }
+
+/*
+	Name:			mod_flashupload
+	Level:			Global
+	Explain:		Flash 上传时的处理界面，结构参见 /static/js/fileprogress.js
+	Last Modify:	Pony 2012022813
+*/
+.progressWrapper { overflow: hidden; width: 100%; }
+.progressContainer { overflow: hidden; margin: 5px; padding: 4px; border: solid 1px #E8E8E8; background-color: #F7F7F7; }
+.message { overflow: hidden; margin: 1em 0; padding: 10px 20px; border: solid 1px #FD9; background-color: #FFC; } /* Message */
+.red { border: solid 1px #B50000; background-color: #FFEBEB; } /* Error */
+.green { border: solid 1px #DDF0DD; background-color: #EBFFEB; } /* Current */
+.blue { border: solid 1px #CEE2F2; background-color: #F0F5FF; } /* Complete */
+.progressName { overflow: hidden; white-space: nowrap; width: 323px; height: 18px; text-align: left; font-weight: 700; color: #555; }
+.progressBarInProgress, .progressBarComplete, .progressBarError { clear: both; margin-top: 2px; width: 0; height: 2px; background-color: blue; font-size: 0; }
+.progressBarComplete { visibility: hidden; width: 100%; background-color: green; }
+.progressBarError { visibility: hidden; width: 100%; background-color: red; }
+.progressBarStatus { white-space: nowrap; margin-top: 2px; width: 337px; text-align: left; }
+a.progressCancel { display: block; float: right; width: 14px; height: 14px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/cancelbutton.gif) no-repeat -14px 0; font-size: 0; }
+	a.progressCancel:hover { background-position: 0 0; }
+.swfupload { vertical-align: top;}
+#SWFUpload_0,#SWFUpload_1{ width:110px !important; height:38px !important;}
+#e_imgattachlist .bbda,#e_attachlist .bbda{border:none;}
+
+
+/* ------------------------------------------------------------------------ 拖拽及页面 DIY */
+.frame, .frame-tab { margin-bottom: 10px; border: 1px solid #CCC; background: #FFF; }
+	.title { padding: 0 10px; height: 32px; font-size: 14px; font-weight: 700; line-height: 32px; overflow: hidden; }
+		.frame-title, .frametitle, .tab-title { background: #F2F2F2 url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/title.png) repeat-x 0 100%; }
+
+	/* 新的框架结构 */
+	.frame-1-1-l, .frame-1-1-1-l, .frame-1-1-1-c, .frame-2-1-l, .frame-1-2-l, .frame-3-1-l, .frame-1-3-l { float: left; }
+	.frame-1-1-r, .frame-1-1-1-r, .frame-2-1-r, .frame-1-2-r, .frame-3-1-r, .frame-1-3-r { float: right; }
+	.frame-1-1-l, .frame-1-1-r { width: 49.9% }
+	.frame-1-1-1-l, .frame-1-1-1-c, .frame-1-1-1-r, .frame-2-1-r, .frame-1-2-l { width: 33.3%; }
+	.frame-2-1-l, .frame-1-2-r { width: 66.6%; }
+	.frame-3-1-l, .frame-1-3-r { width: 74.9%; }
+	.frame-3-1-r, .frame-1-3-l { width: 24.9%; }
+	/* End */
+
+	/* X1 之前的框架结构 */
+	.frame .mn { margin-bottom: 0; }
+	.frame .sd { min-height: 0; _height: auto; }
+
+	.frame-1-1 .col-r { float: right; width: 49.9%; }
+	.frame-1-1 .col-l { float: left; width: 49.9%; }
+
+	.frame-1-2 .mn, .frame-1-2 .col-r, .frame .frame-1-2 .mn, .frame .frame-1-2 .col-r { float: right; width: 66.6%; }
+	.frame-1-2 .sd, .frame-1-2 .col-l, .frame .frame-1-2 .sd, .frame .frame-1-2 .col-l { float: left; width: 33.3%; }
+
+	.frame-2-1 .mn, .frame-2-1 .col-l, .frame .frame-2-1 .mn, .frame .frame-2-1 .col-l { float: left; width: 66.6%; }
+	.frame-2-1 .sd, .frame-2-1 .col-r, .frame .frame-2-1 .sd, .frame .frame-2-1 .col-r { float: right; width: 33.3%; }
+
+	.frame-1-3 .mn, .frame-1-3 .col-r, .frame .frame-1-3 .mn, .frame .frame-1-3 .col-r { float: right; width: 74.9%;}
+	.frame-1-3 .sd, .frame-1-3 .col-l, .frame .frame-1-3 .sd, .frame .frame-1-3 .col-l { float: left; width: 24.9%;}
+
+	.frame-3-1 .mn, .frame-3-1 .col-l, .frame .frame-3-1 .mn, .frame .frame-3-1 .col-l { float: left; width: 74.9%;}
+	.frame-3-1 .sd, .frame-3-1 .col-r, .frame .frame-3-1 .sd, .frame .frame-3-1 .col-r { float: right; width: 24.9%}
+
+	.frame-1-1-1 .col-l { float: left; width: 33.3%; }
+	.frame-1-1-1 .col-c { float: left; width: 33.3%; }
+	.frame-1-1-1 .col-r { float: right; width: 33.3%; }
+
+	.frame .frame-1-1-1 .col-l, .frame .frame-1-1-1 .col-c, .frame .frame-1-1-1 .col-r { padding: 0; width: 33%; }
+	.frame .frame-1-1 .col-l, .frame .frame-1-1 .col-r { width: 49.9%; }
+	/* End */
+
+	.frame .title .titletext, .block .title .titletext{ float: left; }
+	.frame-tab .tab-title .titletext { float: left; margin: 0 10px; }
+		.tab-title { padding: 0; width: 100% !important; border: none; }
+		.frame-tab .tb { margin-top: 0; padding-left: 15px; line-height: 32px; border: none; }
+			.frame-tab .tb li { margin: 0; margin-left: -1px; font-weight: 400; }
+			.frame-tab .tb li, .frame-tab .tb li a { -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; border-top: none; background: transparent none; }
+				* html .frame-tab .tb li a { float: left; }
+				.frame-tab .tb .a a { background: #FFF; font-weight: 700; }
+		.frame-tab .tb-c { padding: 10px 16px; }
+
+.block { margin: 10px 10px 0; }
+	.frame-1-2 .sd .block, .col-l .block, .frame-2-1 .mn .block, .frame-1-1-1 .col-c .block, .frame-1-3 .sd .block, .frame-3-1 .mn .block { margin-right: 10px; }
+	.frame-1-2 .mn .block, .col-r .block, .frame-2-1 .sd .block, .frame-1-1-1 .col-c .block, .frame-1-3 .mn .block, .frame-3-1 .sd .block { margin-left: 10px; }
+	body#space .block { margin: 0 5px 10px; }
+.temp {margin:1px;}
+/* 重定义 frame */
+	#ct .frame { margin: 0; border: none; }
+	.bx { border: none; }
+		.bx .frame-1-1-1 { background: transparent url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/vline2.png) repeat-y 320px 0; }
+		.bx .frame-2-1 { background: transparent url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/vline.png) repeat-y 645px 0; }
+
+/* 拖动生成的页面元素 by lushnis */
+.drag .block .title { margin-bottom: 0; padding-left: 0; font-size: 14px; font-weight: 700; }
+
+/* 重定义 block */
+#ct .sd .block { margin: 0; }
+
+.block .xl1 ul li { padding-left: 10px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/dot.gif) no-repeat 0 50%; }
+	.ie_all .block .xl1 ul li { background-position: 0 6px; }
+
+/* Frame stylies by lushnis */
+.xfs { border-top: none; }
+	.xfs .frame-title, .xfs .frametitle, .xfs .tab-title { border: none; background: transparent url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/mu.png) repeat-x 0 0; }
+	.xfs .frame-title, .xfs .frametitle, .xfs .tab-title, .xfs .frame-title a, .xfs .frametitle a, .xfs .tab-title a { color: #FFF !important; }
+	.xfs .tb li a { height: 32px; border: none !important; }
+	.xfs .tb .a a { background: transparent url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/mu.png) no-repeat 50% -165px; }
+.xfs_1 { border-color: #2267B5; }
+	.xfs_1 .frame-title, .xfs_1 .frametitle, .xfs_1 .tab-title  { background-color: #2267B5; background-position: 0 0; }
+		.xfs_1 .tb .a a { background-position: 50% -66px; }
+.xfs_2 { border-color: #A90000; }
+	.xfs_2 .frame-title, .xfs_2 .frametitle, .xfs_2 .tab-title  { background-color: #A90000; background-position: 0 -99px; }
+		.xfs_2 .tb .a a { background-position: 50% -165px; }
+.xfs_3 { border-color: #006C6C; }
+	.xfs_3 .frame-title, .xfs_3 .frametitle, .xfs_3 .tab-title  { background-color: #006C6C; background-position: 0 -198px; }
+		.xfs_3 .tb .a a { background-position: 50% -264px; }
+.xfs_4 { border-color: #EC5A00; }
+	.xfs_4 .frame-title, .xfs_4 .frametitle, .xfs_4 .tab-title  { background-color: #EC5A00; background-position: 0 -297px; }
+		.xfs_4 .tb .a a { background-position: 50% -363px; }
+.xfs_5 { border-color: #6F099E; }
+	.xfs_5 .frame-title, .xfs_5 .frametitle, .xfs_5 .tab-title  { background-color: #6F099E; background-position: 0 -396px; }
+		.xfs_5 .tb .a a { background-position: 50% -462px; }
+.xfs_nbd { border: none; }
+	.xfs_nbd .block { margin-top: 0; margin-bottom: 10px; }
+	.xfs_nbd .col-l .block, .xfs_nbd .frame-1-1-l .block, .xfs_nbd .frame-2-1-l .block, .xfs_nbd .frame-1-2-l .block, .xfs_nbd .frame-3-1-l .block, .xfs_nbd .frame-1-3-l .block, .xfs_nbd .frame-1-1-1-l .block { margin-left: 0; }
+	.xfs_nbd .sd .block, .xfs_nbd .col-r .block, .xfs_nbd .frame-1-1-r .block, .xfs_nbd .frame-2-1-r .block, .xfs_nbd .frame-1-2-r .block, .xfs_nbd .frame-3-1-r .block, .xfs_nbd .frame-1-3-r .block, .xfs_nbd .frame-1-1-1-r .block { margin-right: 0; }
+
+
+/* Block stylies by lushnis */
+.xbs { background: no-repeat 0 100%; }
+	.xbs .title { padding-left: 0; padding-right: 10px; background: no-repeat 100% 0; }
+		.xbs .titletext { float: left; padding-left: 10px; background: no-repeat 0 0; }
+	.xbs .dxb_bc { padding-bottom: 6px; background: transparent no-repeat 100% 100%; }
+	.xbs .module, .xbs .portal_block_summary { padding: 10px 10px 4px; border-style: solid; border-width: 0 1px; }
+.xbs_1 { border: 1px solid #CCC; }
+	.xbs_1 .title { padding: 0 10px; height: 31px; border-bottom: 1px solid #CCC; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/thead.png) repeat-x 0 0; line-height: 31px; }
+		.xbs_1 .title, .xbs_1 .title a { color: #666 !important; }
+	.xbs_1 .dxb_bc { padding: 9px 10px; }
+.xbs_2 { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_2_ft.png); }
+	.xbs_2 .title, .xbs_2 .titletext { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_2_hd.png); }
+		.xbs_2 .title, .xbs_2 .title a { color: #F60 !important; }
+	.xbs_2 .dxb_bc { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_2_ft_r.png); }
+	.xbs_2 .module, .xbs_2 .portal_block_summary { border-color: #E0E0E0; }
+.xbs_3 { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_3_ft.png); }
+	.xbs_3 .title, .xbs_3 .titletext { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_3_hd.png); }
+		.xbs_3 .title, .xbs_3 .title a { color: #FFF !important; }
+	.xbs_3 .dxb_bc { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_3_ft_r.png); }
+	.xbs_3 .module, .xbs_3 .portal_block_summary { border-color: #B2B2B2; background-color: #F1F1F1; }
+.xbs_4 { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_4_ft.png); }
+	.xbs_4 .title, .xbs_4 .titletext { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_4_hd.png); }
+		.xbs_4 .title, .xbs_4 .title a { color: #FFF !important; }
+	.xbs_4 .dxb_bc { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_4_ft_r.png); }
+	.xbs_4 .module, .xbs_4 .portal_block_summary { border-color: #B2B2B2; }
+.xbs_5 { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_5_ft.png); }
+	.xbs_5 .title { padding: 0 10px; height: 30px; border: 1px solid; border-color: #F08C3B #F08C3B #DDD; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_5_hd.png) repeat-x 0 0; line-height: 30px; }
+		.xbs_5 .title, .xbs_5 .title a { color: #BC4A2D !important; }
+	.xbs_5 .dxb_bc { padding-bottom: 10px; background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_5_ft_r.png); }
+	.xbs_5 .module, .xbs_5 .portal_block_summary { padding: 10px 10px 0; border-color: #F08C3B; }
+.xbs_6 { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_6_ft.png); }
+	.xbs_6 .title, .xbs_6 .titletext { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_6_hd.png); line-height: 24px; }
+		.xbs_6 .titletext { height: 32px; }
+		.xbs_6 .title, .xbs_6 .title a { color: #FFF !important; }
+	.xbs_6 .dxb_bc { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_6_ft_r.png); }
+	.xbs_6 .module, .xbs_6 .portal_block_summary { border-color: #4B85A0; }
+.xbs_7 { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_7_ft.png); }
+	.xbs_7 .title, .xbs_7 .titletext { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_7_hd.png); }
+		.xbs_7 .title, .xbs_7 .title a { color: #444 !important; }
+	.xbs_7 .dxb_bc { background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/diy/bs_7_ft_r.png); }
+	.xbs_7 .module, .xbs_7 .portal_block_summary { border-color: #E5E5E5; }
+
+.fcs { font-size: 12px; }
+	.fcs dt, .fcs dd { margin: 0; padding: 0; }
+	.fcs dt { font-size: 18px; font-weight: 100; }
+	.fcs dd, .fcs dd a { color: #666; }
+
+/* 幻灯片 */
+.slideblock { position: relative; }
+	.slideshow { clear: both; }
+		.slideshow li { position: relative; overflow: hidden; }
+			.slideshow span.title { position: absolute; bottom: 0; left: 0; margin-bottom: 0; width: 100%; height: 32px; line-height: 32px; font-size: 14px; text-indent: 10px; }
+			.slideshow span.title, .slidebar li { background: rgba(0, 0, 0, 0.3); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr = #30000000, endColorstr = #30000000); color: #FFF; overflow: hidden; }
+			.slidebar li { float: left; margin-right: 1px; width: 20px; height: 20px; line-height: 20px; text-align: center; font-size: 10px; cursor: pointer; }
+				.slidebar li.on { background: rgba(255, 255, 255, 0.5); filter:progid:DXImageTransform.Microsoft.gradient(startColorstr = #50FFFFFF, endColorstr = #50FFFFFF); color: #000; font-weight: 700; }
+
+/* 清除DIY产生的多余样式使用的公共样式 */
+.cl_frame_bm { margin: 0 !important; border: 0 !important;}
+.cl_block_bm { margin: 0 !important; border: 0 !important;}
+.cl_block_bm .dxb_bc { margin: 0 !important;}
+
+/* 侧边调用 */
+	/* 投票 */
+	.b_poll dt { padding-left: 20px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pollsmall.gif) no-repeat 0 9px; }
+	.b_poll dd li { padding: 0 0 4px 20px; }
+		.b_poll dd li .pc { float: left; margin: 4px 0 0 -20px; }
+	.b_debate {}
+		.b_debate dt { padding-left: 20px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/debatesmall.gif) no-repeat 0 10px; }
+		.b_debate .chart { position: relative; margin: 8px auto; padding: 0; width: 279px; height: 78px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/p_debate_chart.png) no-repeat 0 0; }
+		.b_debate .chart strong { position: absolute; top: 25px; width: 80px; font-size: 14px; text-align: center; }
+			.b_debate .chart .debater2 { right: 0; }
+		.b_debate .chart1, .b_debate .chart2 { position: absolute; left: 80px; bottom: 0; width: 40px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/p_debate_chart.png) no-repeat 0 -78px; }
+			.b_debate .chart2 { left: 159px; background-position: 100% -78px; }
+		.b_debate p { height: 1.5em; overflow: hidden; }
+	.b_hstab td { padding: 5px 0; border-bottom: 1px solid #CDCDCD; }
+
+
+
+.p_pop .m{width:100px;}
+.p_pop .sign_name{color:#32a5e7;padding-bottom:25px;margin-top:-3px;}
+.p_pop .sign_user_info a{ color:#32a5e7 !important;text-decoration: none;}
+.p_pop .sign_name a{text-decoration:none;height:auto;line-height:20px;} 
+.p_pop .sign_name a:hover, .p_pop .sign_user_info a:hover{text-decoration: none;}
+.p_pop .sign_name a,.p_pop .sign_name img{float:left;}
+.p_pop .sign_name a.xi2{font-weight:bold;color:#32A5E7 !important;}
+.p_pop .sign_name .mzvip{margin:3px 0px 0px 6px;}
+.p_pop .sign_name .mzpower{margin:0px 0px 0px 6px;color:#515151;}
+.p_pop .sign_weight{ width:115px;}
+.p_pop .sign_weight .mzvip{margin-bottom:0px; float:left}
+.p_pop .sign_weight .mzpower{float:left;line-height:25px;color:#515151;}
+.p_pop .sign_weight .mzpower:hover{text-decoration: none;}
+.p_pop .sign_weight a.mzpower:hover{color:#222222;}
+
+.p_pop .sign_info dt{ width:75px !important; height:25px; line-height:25px; float:left;}
+.p_pop .sign_info dd{ width:175px !important; height:25px; line-height:25px; overflow:hidden;  float:left;}
+.p_pop .mzpro_user_info{margin:23px 0px -12px;}
+.p_pop .mzpro_user_info img{margin:0px 23px 19px 0px;}
+.p_pop .sign_user_info{ margin:8px 0px 3px 0px;overflow:hidden;}
+.sign_user_info em{float:left;}
+.sign_user_info .arrow_2{background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll 0 -88px rgba(0, 0, 0, 0);_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");display: inline-block;height: 9px;margin: 17px 0 0 5px;width: 6px;}
+
+
+/*
+	Name:			mod_tip
+	Level:			Global
+	Explain:		弹出的气泡信息，1、2、3、4 分别指气泡尖角从左上到左小顺时针方向的位置
+	Last Modify:	lushnis
+*/
+.tip { position: absolute; padding: 10px; max-width: 260px;*width:260px; border: 1px solid #B1B1B1; background: #FEFEE9; }
+	.tip_1, .tip_2 { margin-top: 8px; }
+	.tip_3, .tip_4 { margin-top: -8px; }
+	.tip_horn { position: absolute; width: 11px; height: 6px; overflow: hidden; }
+		.tip_1 .tip_horn { left: 5px; top: -6px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/tip_top.png); }
+		.tip_2 .tip_horn { right: 5px; top: -6px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/tip_top.png); }
+		.tip_3 .tip_horn { right: 5px; bottom: -6px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/tip_bottom.png); }
+		.tip_4 .tip_horn { left: 5px; bottom: -6px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/tip_bottom.png); }
+		.tip_js .tip_horn { right: 61px; bottom: -6px; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/tip_bottom.png); }
+	.aimg_tip { margin-top: 0; }
+
+/* 推荐商品 by dfox */
+em.hot { position: absolute; left: -2px; top: -2px; text-indent: -9999px; overflow: hidden; background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/hot.png) no-repeat 0 0; }
+
+/* 板块、群组、空间主区域/侧边搜索 by dfox */
+.gsh { text-align: center; }
+	.gsh h1 { margin: 1em 0 0.5em -60px; font-size: 16px; font-weight: 100; }
+	.gsh .px { width: 272px; }
+	.gsh .pns .px { margin-right: 3px; width: 190px; }
+
+/* 名片 */
+.card { padding: 0; width: 295px !important; border-color: #C2D5E3; background: #FDFEFF; }
+	.card .p_opt { padding: 0; }
+	.card .avt { position: absolute; display: inline; margin-left: -70px; width: 70px; }
+	.card_mn, .card_info { padding: 10px 10px 10px 80px; }
+		.card_mn { min-height: 56px; }
+			.ie6 .card_mn { height: 56px; }
+		.card_info { border: dashed #CDCDCD; border-width: 1px 0; }
+		.card_msg { width: 95%; height: 4em; }
+	.card a { padding: 0; display: inline !important; white-space: normal; border-bottom: none; }
+		.card a:hover { background-color: transparent !important; color: #444; text-shadow: none; }
+	.card .o { clear: both; padding: 5px 10px; }
+		.card .o a { float: left; margin: 3px 5px 3px 0; padding: 2px 0; width: 5em; border: 1px solid #C2D5E3; background: #E5EDF2 url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/card_btn.png) repeat-x 0 100%; line-height: 14px; text-align: center; }
+		.ie_all .card .o a { padding: 3px 0 0; }
+	.card .mgc, .card .f { padding: 0 10px 5px; }
+		.card .f li { display: block; }
+
+/*
+	Name:			mod_BIUC
+	Level:			Global
+	Explain:		模块中编辑单条数据BIU、颜色选择器其中 colorwd 要配合 pn 使用（不要合并 colorwd 的 background，因为其他配色会受影响）
+	Last Modify:	Pony
+*/
+.ss em { display: block; float: left; margin-right: 2px; padding-left: 7px; width: 16px; line-height: 23px; background: #EEE; cursor: pointer; }
+	.ss em.a { background: #09F; color: #FFF; }
+.dopt a { float: left; margin-right: 3px; width: 21px !important; height: 21px; line-height: 21px; text-align: center; }
+	.dopt_b, .dopt_i, .dopt_l { border: 1px solid #F1F5FA; outline: none; }
+	.dopt .cnt { border: 1px solid #999; background-color: #FFF; }
+.colorwd { margin-left: 3px; width: 23px !important; background-color: #666; background-image: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pn_color.png) !important; background-repeat: no-repeat; background-position: 0 0; }
+	.colorwd:active { background-position: 0 0; }
+	.ie6 .colorwd, .ie7 .colorwd { background-position: -1px -1px; }
+	.ie6 a.colorwd, .ie7 a.colorwd { background-position: 0 0; }
+.colorpx { margin: 0 -3px 0 3px; border-right: none; }
+
+/*
+DIY图片幻灯片未加载时隐藏,模块标识隐藏
+*/
+.slidebox, .block-name {display: none; }
+
+.imgzoom_title { padding: 10px 0 0; color: #666; }
+.imgzoom_exif { position: absolute; left: 10px; bottom: 24px; padding: 0 6px; height: 18px; background: rgba(0,0,0,.6); text-align: left; line-height: 1.5; color: white;  overflow: hidden;}
+.imgzoom_exif_hover { height: auto; }
+.ie_all .imgzoom_exif, .imgzoom_exif_hover { background: #000; }
+.ie6 .imgzoom_exif { bottom: 39px; }
+
+.patch { width: 300px; }
+	.patch .bm { border-color: #F26C4F; background: #FFF; }
+	.patch .allfixed { border-color: #6C3; }
+	.patch .bm_h { border: solid #FFF; border-width: 1px 1px 0; background: #F26C4F; }
+		.patch .allfixed .bm_h { background: #6C3; }
+		.patch h2, .patch .bm_h .y { color: #FFF; }
+	.patch table { table-layout: fixed; }
+		.patch th, .patch td { padding: 2px; border-bottom: 1px dotted #CDCDCD; }
+		.patchdate { width: 70px; }
+		.patchstat { width: 55px; }
+	.unfixed { color: #F26C4F; }
+.plugin { width: 300px; }
+	.plugin .bm_h { border-color: #CDCDCD; color: #444; background: #F2F2F2; }
+	
+	
+	
+	
+	
+.attachment_img{ max-width:750px;  padding-top:2px; margin-bottom:2px;}
+#attachment_img_show{}
+.pattl_box{ margin-right:46px;}
+.pattl_box .pattl{ background: none repeat scroll 0 0 #F8F8F8; border:1px solid #F0F0F0; padding:20px !important;}
+.pattl_box .pattl .attachment_img{max-width:548px;_width: expression(this.width > 548 ? 548 : true);}
+.firstitem_postlist .pattl_box .pattl .attachment_img{max-width:610px;_width: expression(this.width > 610 ? 610 : true);}
+
+
+/*new stylesheet*/
+body{background-color:#F2F2F2 !important;font-size:14px;}
+.clear{display:block;height:0px;line-height:0px;overflow:hidden;clear:both;}
+.focusBox{border:1px solid #12b1e5 !important;}
+.back_left{ width:218px; float:right !important; background-color:#FFFFFF; border:1px solid #E6E6E6; overflow:hidden; margin-left:20px;_margin:0px;}
+.main_wp{margin-right:240px;}
+/* font size */
+.fontsize_1{font-size:10px;line-height:20px;}
+.fontsize_2{font-size:12px;line-height:24px;}
+.fontsize_3{font-size:14px;line-height:28px;}
+.fontsize_4{font-size:16px;line-height:32px;}
+.fontsize_5{font-size:20px;line-height:40px;}
+.fontsize_6{font-size:24px;line-height:48px;}
+.fontsize_7{font-size:36px;line-height:72px;}
+/**page header**/
+#w_header {background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/headbg.jpg") 0 0 repeat-x;height: 80px;width: 100%;min-width:1080px;}
+.custHead,#globalName,#logo,.c_menu a,.sina,.tencent{background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/head20130902.png") no-repeat;}
+#logo {background-position:0px -60px;float: left;height: 25px;width: 115px;}
+#logo a{width:122px;height:20px;display:block;overflow: hidden;}
+.m_top{width:1040px;margin:0 auto;padding: 30px 20px 0px;position:relative;z-index:10;}
+.c_menu{float:left;padding-top: 4px;padding-left:30px;}
+.c_menu li{float:left;}
+.c_menu a{display:block;width:100px;height:18px;position:relative;}
+.c_menu .hideLeft{background-color:#d8d8d8;display:block;height:12px;width:1px;overflow:hidden; position:absolute;right:0px;}
+a.r_bbs .hideLeft{width:0px;}
+.c_menu a.r_store{background-position:-100px 0;}.c_menu a.r_store:hover{background-position:-100px -18px;}.c_menu a.r_store_selected{background-position:-100px -36px;}
+
+
+.c_menu a.r_prd{ background-position: 0px 0px;}.c_menu a.r_prd:hover{background-position:0px -18px;}.c_menu a.r_prd_selected{background-position:0px -36px;}
+
+
+
+.c_menu a.r_buy{background-position:-200px 0;}.c_menu a.r_buy:hover{background-position:-200px -18px;}.c_menu a.r_buy_selected{background-position:-200px -36px;}
+.c_menu a.r_tech{background-position:-300px 0;}.c_menu a.r_tech:hover{background-position:-300px -18px;}.c_menu a.r_tech_selected{background-position:-300px -36px;}
+.c_menu a.r_flyme{background-position:-400px 0;}.c_menu a.r_flyme:hover{background-position:-400px -18px;}.c_menu a.r_flyme_selected{background-position:-400px -36px;}
+.c_menu a.r_bbs{background-position:-500px 0;}.c_menu a.r_bbs:hover{background-position:-500px -18px;}.c_menu a.r_bbs_selected{background-position:-500px -36px;}
+
+div#globalContainer,div#mzCustOp{-moz-box-shadow: 0px 0px 10px #E1E4E8;-webkit-box-shadow: 0px 0px 10px #E1E4E8;box-shadow: 0px 0px 10px #E1E4E8;-moz-border-radius: 2px;-webkit-border-radius: 2px;-webkit-border-radius: 2px;border-radius: 2px;background-color: #FEFEFE;position: absolute;border:solid 1px #E1E4E8;display:none;overflow:hidden;}
+
+/**login**/
+#mzCust{float:right;height:28px;line-height:28px;margin-top:-9px;padding-top: 4px;}
+/*#mzCust div{float:right;width:25px;color:#a2a2a2;font-size:12px;}*/
+#mzCust .custHead{width: 18px;height: 17px;background-position: -124px -58px;float:right;margin-top:6px;}
+#mzCust .atag{cursor: pointer;margin:2px 5px 0px 3px;_margin:2px 3px 0px 3px;float:right;}
+#mzCust a:link,#mzCust a:visited{color: #a2a2a2;}
+#mzCust a:hover{color:#000;}
+#mzCustName{display:inline-block;float:right;max-width:90px;position:relative;padding:0px 10px; word-wrap:normal;word-break:normal;_width:expression(this.offsetWidth > 90 ? '90px': true);}
+#mzCustName .arrow_dark{bottom:5px;}
+#newsNum{margin:4px 0px 0px 10px;float: right;height:20px;line-height:20px;padding:0px 5px;text-align:center;background-color:#c8212b;color:#FFFFFF;border-radius:2px;}
+#mzCust .empty_newsnum{background-color:#C2C2C2;}
+a#newsNum:hover{color:#FFFFFF;}
+.hsplit{width:115px;height:1px;background-color:#e4e7e9;margin:0px auto;overflow:hidden;}
+#mzUserHead,#mzUserHead img,#mzUserHead .shadowbox_avatar{width:28px;height:28px;border-radius:14px;}
+#mzLoginArea3{float:right;}
+#mzUserHead{float:right;}
+/**user center pop**/
+#mzCustName_menu{overflow:hidden;}
+#mzCustName_menu a{border:none;color:#000000 !important;line-height:34px;height:34px;}
+#mzCustName_menu a:hover{color:#515151 !important;}
+#mzCustName_menu a.actmanage_mzcust{border-bottom:1px solid #E5E5E5;color:#32a5e7 !important;}
+#mzCustName_menu a.actmanage_mzcust:hover{color:#32a5e7 !important;}
+#mzCustName_menu .logout_mzcust{margin:0px -16px;border-top:1px solid #E5E5E5;background-color:#FAFAFA;padding-left:26px;}
+#newsNum_menu .title_newsmenu{height:40px;border-bottom:2px solid #e0e0e0;text-align:center;line-height:40px;color:#000000;position:relative;}
+#newsNum_menu .back_newsmenu{position:absolute;left:0px;top:10px;padding-left:12px;line-height:normal;background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -214px -451px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");cursor:pointer;}
+#newsNum_menu .item_newsmenu{height:61px;border-bottom:1px solid #E6E6E6;padding:12px 10px;margin-bottom: -1px;cursor:pointer;position:relative;overflow:hidden;}
+#newsNum_menu .itemcover_itemnmenu{height:85px;width:100%;position:absolute;top:0px;left:0px;z-index:11; background-color:#FFFFFF\9;filter:alpha(Opacity=0)\9;opacity:0;}
+#newsNum_menu .cont_itemnmenu{float:left;width:300px;height:60px;overflow:hidden;}
+#newsNum_menu .cont_itemnmenu h3{font-size:18px;color:#000000;}
+#newsNum_menu .cont_itemnmenu p{color:#515151;height:28px;line-height:28px;width:300px;white-space:nowrap;overflow:hidden;-o-text-overflow: ellipsis;text-overflow:ellipsis;}
+#newsNum_menu .num_itemnmenu{float:right;margin-top:20px;padding:0px 5px;height:20px;line-height:20px;color:#FFFFFF;background-color:#dd5b41;border-radius:2px;}
+#newsNum_menu .cont_itemnmenu a{color:#32a5e7;display:inline;border:none;height:28px;line-height:28px;padding:0px;margin:0px;}
+#newsNum_menu .cont_itemnmenu a:link,#newsNum_menu .cont_itemnmenu a:visited,#newsNum_menu .cont_itemnmenu a:hover{color:#32a5e7;}
+.item_seclevel{border-bottom:1px solid #E6E6E6;padding:12px 0px 12px 10px;overflow:hidden;cursor:pointer;}
+.item_seclevel .head_seclevel{width:56px;}
+.item_seclevel .cont_seclevel{width:350px;}
+.item_seclevel .contwrap_seclevel{position:relative;padding-right:15px;}
+.item_seclevel .btnbar_seclevel{display:none;position:absolute;right:0px;top:-8px;}
+.msgitem_seclevel .continner_seclevel{max-height:60px;overflow:hidden;}
+.hover_newsmenu .btnbar_seclevel{display:block;}
+#newsNum_menu .cont_seclevel a.readed_seclevel{display:inline-block !important; background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -160px -409px !important;}
+.item_seclevel a.readed_seclevel{width:12px;height:12px;background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -160px -409px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");cursor:pointer;}
+.item_seclevel a.readed_seclevel:hover{background-position:-192px -409px;}
+
+.head_seclevel a.avatar{border:none;line-height:normal;padding:0px;margin:0px;width:36px;height:36px;}
+.head_seclevel a.avatar img,.head_seclevel .shadowbox_avatar{width:36px;height:36px;}
+#newsNum_menu .cont_seclevel a{color:#32a5e7;display:inline;border:none;height:28px;line-height:28px;padding:0px;margin:0px;white-space:normal;}
+#newsNum_menu .cont_seclevel a:link,.cont_seclevel a:visited,.cont_seclevel a:hover{color:#32a5e7;}
+#newsNum_menu .friend_approved{background:none;float:none;}
+.more_seclevel{border:none;padding:0px;}
+.more_seclevel a{display:block;height:54px;line-height:54px;color:#222222;text-align:center;cursor:pointer;}
+.hover_newsmenu{background-color:#FAFAFA;}
+
+.closenotice { 
+	border: none !important;
+	background:none !important;
+	position:static !important;
+	display:inline !important;
+	line-height: 100% !important;
+}
+/**navigate**/
+
+#globalContainer{right: 252px;bottom: 25px;*bottom:20px;width: 140px;height: 123px;z-index:2000;}
+#globalContainer a{display:block;height:40px;line-height:40px;width:118px;margin:0px auto;text-decoration:none;border-bottom: solid 1px #E4E7E9;font-size:14px;color:#000000;text-align: left;padding-left: 10px;}
+#globalContainer a.ClobalItem:link    {color:#000000;}
+#globalContainer a.ClobalItem:visited {color:#000000;}
+#globalContainer a.ClobalItem:hover   {color:#515151;}
+#globalContainer a.checked,#globalContainer a.checked:hover{color:#1daeed;text-decoration:none;}
+#globalName{background-position:-197px -56px;display:inline-block;cursor:default;}
+.globalName{padding-top:10px;*padding-top:0px;}
+/**page footer**/
+	
+#Footer{padding-top: 37px !important;width: 1080px;margin: 0 auto;text-align: center;position: relative;height:95px;}
+#footer1{height:20px;line-height:20px;position: relative;width:540px;margin: 0px auto;font-size:14px;}
+#footer1 a.bottoma,#footer1 a.bottoma:link,#footer1 a.bottoma:visited{color:#515151;}
+#footer1 a.bottoma:hover{color:#000;}
+.language img {margin: -4px 7px 0 0;vertical-align: middle;width: 17px;}
+#footer2{height:20px;line-height:20px;position: relative;width:928px;margin:0px auto;margin-top:10px;}
+#footer2 a,#footer2 a:link,#footer2 a:visited{color:#515151;}
+#footer2 a:hover{color:#000;}
+.copyright,.copyright span{font-size:12px;color:#515151;}
+
+.footline{background-color: #888;margin: 0px 5px;width: 1px;height: 10px;}
+.tborder_foot{width:100%;border-top:1px solid #d9d9d9;margin-top:50px;}
+#footWeibo{position:absolute;top:0px;right:0px;}
+a.sina{width:20px;height:20px;background-position: 0px -88px;display:inline-block;text-decoration:none;vertical-align: middle;margin-left:28px;}
+a.tencent{width:20px;height:20px;background-position: -20px -88px;display:inline-block;text-decoration:none;vertical-align: middle;margin-left:10px;}
+a.sina:hover{background-position: 0px -108px;text-decoration:none;}
+a.tencent:hover{background-position: -20px -108px;text-decoration:none;}
+#footcap{padding-left:20px;}
+#footcap img{background:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/head20121226.png) repeat-x;width:20px;height:20px;display:inline-block;}
+#footcap img.cap1{background-position:-61px -88px}#footcap img.cap2{background-position:-95px -88px}
+.longdot{white-space:nowrap;overflow:hidden;-o-text-overflow: ellipsis;text-overflow:ellipsis;}
+
+/*dialog*/
+.mzBlockLayer{background-color: #FFFFFF; height: 100%;left: 0;filter:alpha(Opacity=70);-moz-opacity:0.7;opacity: 0.7;overflow: hidden;position: absolute;top: 0;width: 100%;}
+.mzdialog {background-color: #FFFFFF;border:1px solid #E6E6E6;box-shadow:0 0 10px #E6E6E6;}
+.mzdialogBtn { background-color: #F0F0F0;color: #4C4C4C;cursor: pointer;font-size: 14px;height: 45px;line-height: 45px;text-align: center;}
+.wrap_mzdialog{padding:0px 10px;}
+.head_mzdialog{padding:40px 30px;border-bottom:1px solid #e4e8eb;font-size:18px;color:#000000;}
+.head2_mzdialog{padding:40px 30px;font-size:18px;color:#000000;}
+.cont_mzdialog,.cont2_mzdialog{padding:0px 30px;}
+.btnbar_mzdialog{padding:40px 30px;}
+.btnbar_mzdialog .normalbtn{margin-right:20px;float:left;}
+.mzClose{background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat 7px -401px; _background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif"); cursor: pointer;height: 28px;position: absolute;right: 4px;top: 4px;width: 28px;}
+.mzCloseh{background-position:-26px -401px;}
+#fwin_dialog_cover{background-color: #FFFFFF !important;filter:alpha(Opacity=70);-moz-opacity:0.7;opacity: 0.7 !important;}
+#fwin_dialog .normalbtn{float:right;margin-left:20px;}
+/*广播*/
+.feed_li_box{border-bottom:#e6e6e6 1px solid;padding:20px 0px;}
+.float_number{position:absolute; top:0px; right:0px;}
+.user_imgls{ padding:8px 0 5px 0 !important;}
+.follow_feed_cover{background-color: #FFFFFF; height:5px; overflow:hidden; top:50px; position:absolute; width:104px;}
+.select_box{position:relative;z-index:9;}
+.select_box .box_menu{ cursor: pointer; padding-right:10px;white-space: nowrap;color:#000000;position:relative;}
+.select_box .son_menu{ background-color:#FFFFFF; border:#e6e6e6 1px solid;border-radius: 1px 1px 1px 1px;box-shadow: 0 0 5px #DDDDDD;padding: 0 16px; width:100%; z-index:99; left:-27px;}
+.select_box .son_menu ul li{ height:40px; line-height:40px; color:#222222; cursor:pointer; border-top: 1px solid #E5EDF2;margin-bottom: -1px; padding: 3px 10px;}
+.select_box .son_menu ul li.one{border-top: 1px solid #FFFFFF;}
+.select_box .son_menu ul li.activity{ color:#32a5e7;}
+.thmenu{padding:30px 0px 0px; overflow:hidden;}
+.guide_indicate .cname{ float:left;}
+.guide_indicate th, .guide_indicate td{ height:65px;}
+.guide_indicate .num a{ color:#2b7dac !important;}
+.guide_indicate .by a{color:#515151;}
+.guide_indicate .by a:hover{color:#222222;}
+.by .br, .num .br{ padding-top:5px;}
+.atcont_flwlist a:hover{color:#32a5e7;}
+/*广播 -- 动态*/
+.checkbox_flwbar{float:right;margin:8px 18px 0px 0px;}
+.checkbox_flwbar span{float:left;}
+.checkbox_flwbar .box_simcheck{ margin: 4px 7px 0 0;}
+.bar2 .simselect{background:none;border:none;padding-top:1px;}
+.bar2 .simselect strong{display:inline-block;margin-right:15px;}
+.flw_replybox .box_simcheck{margin: 4px 7px 0 0;}
+.list_replybox{margin:0px -20px;}
+.list_replybox li{color:#6e7580;line-height:28px;}
+.list_replybox li a{color:#32a5e7;}
+.closebar_replybox{margin: 0 -20px -16px;border-top: 1px solid #DBE2E6;height: 50px;padding:0px 20px;}
+.closebar_replybox .xg1{float:right;display:inline-block;margin-top:15px;width:20px;height:20px;background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -40px -188px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+.closebar_replybox .xi2{float:left;margin-top:12px;color:#32a5e7;}
+.arrow_2{background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll 0 -88px transparent;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);display: inline-block;height: 9px;margin: 8px 0 0 5px;width: 6px;}
+.flw_replybox .flb{padding:0px 0px 10px 55px;}
+.flw_replybox .flbc{display:none;}
+.flw_replybox .altw{padding-left:55px;}
+.flw_replybox #closebtn{margin-left:55px;}
+
+/**个人中心公共**/
+.follow_avatar_absolute{position:absolute; bottom:0px; text-align:center; width:160px;left:0px; overflow:hidden;text-overflow:ellipsis;filter:alpha(Opacity=70);-moz-opacity:0.7;opacity: 0.7;z-index:100; background-color:#FFF; padding:5px 10px; color:#000000;color:pointer; font-size:16px; height:25px;}
+.follow_avatar_absolute a{ color:#222222; display:block;}
+
+.page_frame_navigation{position:relative;}
+.page_frame_navigation .tb a{ width:105px !important; height:50px !important; padding:0px !important; text-align:center !important; display:block; font-size:14px; line-height:50px; color:#515151; border-width:0px !important; background:#FFFFFF;}
+.page_frame_navigation .tb li{ margin:0 1px 0 0 !important;}
+.page_frame_navigation .tb .a a{color:#32a5e7; border-left:1px solid #e6e6e6  !important; border-top:1px solid #e6e6e6  !important; border-right:1px solid #e6e6e6  !important; border-bottom:1px solid #FFFFFF !important;}
+.follow_feed_boxval{background-color:#FFFFFF; margin:11px 0 0 0; border:#e6e6e6 1px solid; padding:30px 20px 0px;width:760px;_width:758px;overflow:hidden;}
+.page_frame_navigation .page_frame_ul{margin:0px !important; padding-left:20px!important;}
+.but1{ border: 1px solid #e6e6e6; background-color:#f3f3f3; padding:5px 8px;*padding:3px 8px; cursor:pointer;}
+
+.avatar_content{ margin-bottom:20px;}
+.avatar_content .current_l{ float:left; width:240px;}
+.avatar_content .marking{ margin-bottom:30px;}
+.avatar_content .new_r{ float:left; margin-left:20px;} 
+.avatar_content .avatar,.avatar_content .avatar a,.avatar_content .avatar img,.avatar_content .shadowbox_avatar{width:120px;height:120px;border-radius:60px;}
+
+/* 输入框样式 */
+.input_style1{background: none repeat scroll 0 0 #F9F9F9;border: 1px solid #E6E6E6;height: 34px;outline: medium none;width: 430px;padding:0px 10px; line-height:34px\9;font-size:14px;}
+.input_style2{ background-color:#F9F9F9;border: 1px solid #E6E6E6;font-size: 14px;height: 34px; line-height: 34px;outline: medium none;}
+.input_style2 input{float:left; border:0px none;background-color:#F9F9F9; height:30px; line-height:30px; padding-left:3px;_margin-left:-20px !important;}
+.input_style2 span{float:left;line-height:32px;}
+.input_style3{width:338px;height:38px;line-height:38px\9;padding:0px 10px;background-color:#FFFFFF;border:1px solid #e6e6e6;}
+
+.p_opt input.px{padding:2px 4px;height:34px;line-height:34px\9;width:240px;margin-top:5px;}
+.p_opt input.px2{width:60px;height:18px;line-height:18px\9;}
+.p_opt input.px3{width:40px;height:18px;line-height:18px\9;}
+
+
+/* 马甲 */
+.vest_account{ margin:40px 0; padding:0; width:100%; _width:99%;}
+.vest_account .alt td, .vest_account .alt th{ height:50px; background-color:#e9e9e9 !important;}
+
+.vest_account .row td, .vest_account .row th{ height:50px;}
+.vest_account .padding_l5{ padding-left:15px;}
+.add_memcp .simselect strong{display: inline-block;padding: 5px 15px;}
+
+
+.space_tbmu a { color: #666666; }
+.space_tbmu .a { color: #515151; font-weight: 700; }
+.space_th td, .space_th th{ height:60px !important;}
+.space_thread_table .by,.space_thread_table .num,.space_thread_table .scontent{ padding:18px 0px;}
+.space_thread_table .icn{ width:0px !important; padding-left:0 !important;}
+.space_thread_table .by{ padding-right:0px !important;}
+.space_thread_table .forum{ color:#515151;}
+.space_thread_table .scontent{ font-size:16px;}
+.space_thread_table .sreply, .space_thread_table .sname{ margin-bottom:12px;}
+.space_thread_table .sreply a{ color:#2b7dac;}
+.space_thread_table .sname a{ color:#515151;}
+.space_thread_table .sview, .space_thread_table .sview a{ color:#999999; font-size:12px;}
+.space_thread_table .space_th th,.space_thread_table .space_th td{border-bottom:1px solid #E6E6E6 !important;padding:0px;}
+.newpm, .newpm .ptm, .newpm .ptm a, .newpm .ptm p{color:#222222  !important;}
+
+
+
+/**		搜索		**/
+#scbar{ overflow:visible !important;}
+.scbar_wrap{ position:relative;}
+.scbar_wrap #searchTip{ position:absolute; background-color:#ffffff; border:1px solid #E8E8E8;z-index:500;left:0px;top:32px; overflow:hidden;}
+.scbar_wrap #searchTip li{ padding:0 8px; cursor:pointer; height:30px; line-height:30px; overflow:hidden;}
+.scbar_wrap #searchTip li:hover, .scbar_wrap #searchTip li.select{ background-color:#eeeeee;}
+
+
+/**page menu**/
+.separator{background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -67px -220px; width:1px;height:10px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+#nv .separator{height:10px;margin-top:13px;}
+.cr{display:block;float:none;font-size:0;height:0;line-height:0;overflow:hidden;clear:both;visibility: hidden;}
+/**img roll**/
+/*.dxb_bc{width:3120px; position:absolute;}*/
+
+/*button*/
+a:hover{ text-decoration:none;}
+.bluebtn{background-color:#32a5e7;border:1px solid #32a5e7;border-radius:2px 2px 2px 2px;color:#FFF ;cursor:pointer;}
+.bluebtn span{color:#FFF}
+a.bluebtn{color:#FFFFFF !important;display:inline-block;}
+a.bluebtn:hover{background-color:#2799db;border:1px solid #309ddb;color:#FFF; text-decoration:none;}
+a.bluebtn button,a.bluebtn input{background:none;border:none;color:#FFFFFF;cursor:pointer;height:36px;}
+a.disablebtn{background-color:#f6f6f6;border:1px solid  #e4e6e5;border-radius:2px 2px 2px 2px;color:#DDD; cursor:auto;}
+.graybtn{background-color:#f5f5f5;border: 1px solid #e6e6e6;border-radius: 2px 2px 2px 2px;cursor: pointer;font-size: 14px;color:#000000;}
+a.graybtn{color:#000000;display:inline-block;}
+a.graybtn:hover{background-color:#ebebeb;color:#000000;}
+a.graybtn button,a.graybtn input{background:none;border:none;color:#000000;cursor:pointer;height:36px;}
+.normalbtn,a.normalbtn{display:inline-block;_display:block;width:96px; height:36px;text-align:center;line-height:36px;*line-height:34px;font-size:14px;margin:0px;padding:0px !important;}
+.normalbtn button,.normalbtn input{background:none;border:none;padding:0px;margin:0px;width:96px;height:36px;line-height:36px;*line-height:34px;cursor:pointer;}
+.normalbtn5,a.normalbtn5{display:inline-block;width:70px; height:30px;text-align:center;line-height:30px;font-size:14px;margin:0px;padding:0px !important;}
+.normalbtn7,a.normalbtn7{display:inline-block;height:30px;text-align:center;line-height:30px;font-size:14px;margin:0px;padding:0px !important;}
+.normalbtn strong{display:inline-block;line-height:36px;*line-height:34px;padding:0px !important;width:96px;}
+.normalbtn5 strong{display:inline-block;line-height:30px;}
+
+.disabledgraybtn{background-color:#f5f5f5;border: 1px solid #e6e6e6;border-radius: 2px 2px 2px 2px;cursor:text;font-size: 14px;color:#acacac;}
+.disabledgraybtn span,.disabledgraybtn a,.disabledgraybtn button,.disabledgraybtn input{color:#ACACAC !important;cursor:text;}
+
+/*列表页  板块介绍块*/
+.plateintro{padding:12px 20px 20px;border: 1px solid #E6E6E6;}
+.title_pintro{font-size:18px;float:left;}
+.head_pintro{padding:0px;line-height:31px;}
+.head_pintro .xs1,.head_pintro .xi1{float:left;font-size:14px !important;color:#999999;overflow:hidden;}
+.head_pintro .xs1{padding-left:20px;}
+.head_pintro .pipe{display:inline-block;width:2px; height:12px;background-color:#d7d7d7;margin:11px 14px 0px;}
+.head_pintro .xs1 em,.head_pintro .xs1 strong,.head_pintro .xs1 span{float:left;}
+.head_pintro .y{overflow:hidden;color:#515151;font-size:14px;}
+.head_pintro .y a,.head_pintro .y span,.head_pintro .y strong{float:left;color:#515151;}
+.head_pintro .o{width:20px;margin-left:20px;}
+.cont_pintro{font-size:14px;color:#515151;line-height:28px;}
+.plate_mn .plateintro .cont_pintro{padding:0px;}
+.boxspacing_10{height:10px;background-color:#F2F2F2;}
+.bm_pintro a{margin-right:14px;color:#515151;}
+.plate_mn{box-shadow: 0 0 4px #ECECEC; width:700px;float:left;_overflow:hidden;}
+.plate_mn .bm_c{padding:0px 20px;}
+.plate_mn .tl th,.plate_mn .tl td{padding:12px 0px !important;}
+.plate_mn .cont_wp{padding:0px;width:auto !important;}
+.rules_expand .actionbar_pintro a,.rules_expand .actionbar_pintro a:hover{color:#56AF45;}
+.rules_expand img{max-width:276px !important;height:auto !important;_width:expression(this.offsetWidth > 276 ? '276px': true);}
+/*列表页 板块*/
+.platebar{padding:30px 0px;margin:0px 20px;overflow:hidden;border-bottom:1px solid #E6E6E6;}
+.curbox_platebar{display:inline-block;border:1px solid #E3E5E6;height:36px;margin-right:24px;background-color:#F5F6F6;cursor:pointer;}
+.plateicon_platebar{display:inline-block;border-right:1px solid #E3E5E6;height:36px;width:36px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -62px -475px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+.current_platebar{display:inline-block;line-height:36px;padding:0px 13px;color:#32a5e7;}
+.recommend_platebar{height:38px;line-height:38px;}
+.recommend_platebar a{color:#32a5e7;margin-right:20px;float:left;}
+.recommend_platebar .label_recom{display:inline-block;width:16px;height:16px;margin:11px 14px 0px 0px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -108px -485px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+.recommend_platebar a:link,.recommend_platebar a:visited,.recommend_platebar a:hover,.recommend_platebar a:active{color:#32a5e7;}
+.moreplatebox{}
+#morePlate_menu li{float:left;height:auto;}
+#morePlate_menu li a{display:inline-block;width:100px;padding:10px 0px;margin:15px 10px;font-size:14px;text-align:center;cursor:pointer;}
+#morePlate_menu li a:hover{color:#32A5E7;}
+#morePlate_menu li a:active{color:#32A5E7;}
+#morePlate_menu a.current_platebox{color:#32A5E7;}
+.wrap_menubtn{padding-bottom:10px;margin-bottom:-10px;}
+
+
+/*列表页 分页*/
+.pagebar{padding:31px 20px;margin:0px;overflow:hidden;border:none;}
+.cont_wp .pagebar{padding:30px 0px;}
+.pg_viewthread #wp .headdiv_post #mdly{box-shadow:0 0 5px #DDDDDD;width:190px;z-index:99;}
+.modact a:hover{ color:#222222 !important;}
+.buttonbar{padding:16px 20px 30px;}
+.buttonbar .bluebtn{float:right;margin-left:20px;}
+/*列表*/
+.listhead{padding:0px 20px;}
+.pipe2{display:inline-block;margin:0px 10px 2px;width:1px;height:14px;background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -24px -215px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+.userhead{width:64px;text-align:left;}
+.userhead img{width:44px;height:44px;border-radius:22px;}
+#separatorline th{background:#FFFFFF;border:none;padding:20px 0px 0px !important; height:45px;}
+.plate_mn .tl th.itemcont_threadlist{padding:10px 0px;}
+.maincont_list{overflow:hidden;padding-right:13px;padding-left:7px;width:468px;}
+.maincont_list .tips_list{float:left;width:400px;height:30px;}
+.maincont_list .xst{font-size:16px;width:480px;height:30px;}
+.maininfo_list{color:#999999 !important;font-size:14px;overflow:hidden;}
+.maininfo_list a{color:#999999 !important;font-size:14px;}
+.maininfo_list a:hover{color:#222222 !important;}
+.maincont_list a,.maincont_list img,.maincont_list em{overflow:hidden;line-height:30px;vertical-align:middle;}
+.maincont_list em a{float:none;}
+.maincont_list img{margin:0px 0px 0px 6px; }
+.maincont_list img.pin_icon{margin:0px 5px 0px 0px;}
+.maincont_list .digest_1_icon,.maincont_list .digest_2_icon,.maincont_list .digest_3_icon{margin-left:4px;}
+.maincont_list .pagebar_postlist{margin:0px 0px 0px 5px;}
+.author_list,.date_list{margin:0px;}
+.latestreply_list{width:260px;text-align:right;}/*96*/
+.latestreply_list .date_list{display:inline-block;margin-top:3px;}
+.latestreply_list a,.latestreply_list span{color:#999999;font-size:12px;}
+.latestreply_list .author_list{display:inline-block;max-width:96px;overflow:hidden;text-overflow:ellipsis;word-break:normal;word-wrap:normal;white-space:nowrap;_width:expression(this.offsetWidth > 96 ? '96px': true); visibility:visible;}
+.bm_c .itemcont_threadlist .maincont_list .pagebar_postlist{margin:0;}
+#threadlist{_width:700px;_overflow:hidden;}
+.listhover_forum,#threadlist .listhover_forum{ background-color:#f7fafc; }
+.plate_mn .tl th.filbarwrap_thread{padding:0px !important;}
+.filterbar_thread{padding:24px 0px;margin:0px !important;border-bottom:1px solid #E6E6E6;}
+.filterbar_thread a,.filterbar_thread span,.filterbar_thread em{float:left;line-height:38px;}
+.filbarwrap_thread .filterbar_thread a.xi2{color:#000000;}
+.filterbar_thread .box_simcheck{margin-top:4px;}
+.filterbar_thread .pipe2{margin-top:13px;}
+.filterbar_thread .arrow_dark{bottom:8px;}
+.filterbar_thread .showmenu{position:relative;background:none;color:#000000 !important;}
+.filterbar_thread .normalbtn{float:right;line-height:36px;}
+
+.platehead_list{padding:20px;overflow:hidden;border: 1px solid #E6E6E6;border-bottom:none;height:36px;}
+.platehead_list .info_platehead{float:left;height:36px;line-height:36px;}
+.platehead_list .info_platehead span{margin-right:20px;}
+.platehead_list .normalbtn{float:right;}
+.maincont_list .pagebar_postlist a{color:#ff9c00 !important;padding:0px 4px;display:inline-block;font-size:16px;}
+.maincont_list .pagebar_postlist em{color:#ff9c00;margin:0px 0px 0px 0px;display:inline-block;font-size:16px;}
+.maincont_list .pagebar_postlist a:hover{color:#ff9c00 !important;}
+.maincont_list .pagebarshort_postlist a{color:#999999 !important;;}
+.maincont_list .pagebarshort_postlist a:hover{color:#515151 !important;}
+/*列表页 - 拓展阅读块*/
+.expandbox_mn{width:276px;box-shadow:0px 0px 4px #ECECEC;border:1px solid #E6E6E6;background-color:#FFFFFF;float:right;padding:23px 20px 15px;}
+.expandbox_mn{width:276px;overflow:hidden;}
+.readblock_expand .block{margin:0px;}
+.signinwrap_expand{position:relative;}
+.signin_expand{width:274px;height:52px;line-height:52px;font-size:16px;color:#FFFFFF;border:1px solid #56af45;border-radius:2px 2px 2px 2px;background-color:#43b56b;/*#56af45*/color:#FFFFFF;overflow:hidden;cursor:pointer;}
+.signin_expand span{float:left;}
+.signin_expand a,.signin_expand a:link,.signin_expand a:hover,.signin_expand a:active,.signin_expand a:visited{color:#FFFFFF;}
+.tips_signin{position:absolute;top:65px;left:0px;width:254px;padding:0px 10px;line-height:34px;background-color:#fe9233;border:1px solid #fe9233;color:#FFFFFF;border-radius:1px 1px 1px 1px;text-align:center;}
+.point_signtip{position:absolute;top:-7px;left:132px;display:inline-block;width:13px;height:7px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -174px -611px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+.hassignin_expand{background-color:#43b56b;color:#43b56b;border:1px solid #e3e5e6;color:#43b56b;}//background-color:#43b56b;
+.icon_signin{display:inline-block;width:22px;height:22px;margin:15px 20px 0px 85px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -72px -479px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+.hassignin_expand .icon_signin{background-position:-109px -479px;margin-right:29px;}
+.hassignin_expand a,.hassignin_expand a:link,.hassignin_expand a:hover,.hassignin_expand a:active,.hassignin_expand a:visited{color:#56af45;}
+.titlebar_expand{border-bottom:1px solid #E6E6E6;height:58px;line-height:58px;color:#222222;margin-top:20px;}
+.titlebar_expand h3{float:left;color:#32a5e7;font-size:18px;}
+.titlebar_expand span{float:right;}
+.readblock_expand{padding:20px 0px 0px 0px;line-height:28px;color:#222222;}
+.readblock_expand .xg2,.readblock_expand a{color:#222222;}
+.readblock_expand a:hover{color:#515151;}
+.rules_expand{padding-top:12px;}
+.rules_expand .bm_pintro{margin-bottom:16px;width:276px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rules_expand .bm_pintro .xi2 { white-space: normal; }
+.titlebar_expand .turnbtn_rules{display:inline-block;width:18px;height:10px;margin-top:24px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -146px -196px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");cursor:pointer;}
+.titlebar_expand .openbtn_rules{background-position:-146px -196px;}
+.titlebar_expand .closebtn_rules{background-position:-182px -196px;}
+.toprec_recread{margin:0px -32px 18px 0px;*width:305px;}
+.toprec_recread li{float:left;width:124px;overflow:hidden;margin-right:28px;*margin-right:25px;}
+.toprec_recread li img{width:124px;height:100px;margin-bottom:10px;display:block;}
+.recitems_recread li{height:44px;line-height:44px;overflow:hidden;}
+.recread_expand{padding-top:20px !important;}
+.turnbtn_maylike{cursor:pointer;}
+.maylike_expand{padding:0px;overflow:hidden;}
+.maylike_expand table{margin-bottom:-1px;}
+.maylike_expand th,.maylike_expand td{padding:16px 0px;border-bottom:1px solid #f0f0f0;}
+.lastitem_maylike th,.lastitem_maylike td{border:none;}
+.maylike_expand .userinfo_expand a{font-size:16px;}
+.maylike_expand .userinfo_expand p{line-height:24px;}
+.maylike_expand .attention_expand a,.maylike_expand .attention_expand a:hover{color:#32a5e7;}
+.userinfo_expand{color:#999999;width:160px;overflow:hidden;}
+.attention_expand{vertical-align:top;text-align:right;}
+.plateintro_expand{padding:4px 0px 0px;}
+.plateintro_expand p{line-height:44px;height:44px;overflow:hidden;}
+.advert_expand img{width:276px !important;height:auto !important;margin:10px 0px;}
+/*帖子内容页 - 拓展阅读块*/
+.authorpost_expandtitle{margin-top:-20px;}
+.authorpost_expandtitle a:link,.authorpost_expandtitle a:hover,.authorpost_expandtitle a:active,.authorpost_expandtitle a:visited{color:#32A5E7;}
+.authorpost_expandtitle h3 em{color:#333333;float:left;line-height:28px;margin-top:15px;}
+.authorpost_expandtitle h3 a.uname_expandtitle{display:inline-block;float:left;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-break:normal;word-wrap:normal;line-height:28px;margin-top:15px;}
+.authorpost_expand{padding:10px 0px 0px;}
+.authorpost_expand p{line-height:44px;height:44px;overflow:hidden;}
+.authorpost_expand p a,.recitems_recread li a,.guesslike_expand p a{display:inline-block;width:276px;line-height:44px;height:44px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.guesslike_expand{padding:5px 0px 0px;}
+.guesslike_expand p{line-height:44px;height:44px;overflow:hidden;}
+
+/*帖子内容页*/
+.postcontbox_mn{box-shadow:none;}
+.headdiv_post{padding:14px 0px 0px;}
+.headdiv_post .modmenu{margin:22px 0px 0px;padding:0px;border-top:1px solid #E6E6E6;}
+.footdiv_post{overflow:hidden;background-color:#FFFFFF;padding:20px 0px 0px;position:relative; top:-10px;}
+.footdiv_post .pagebar{padding:31px 0px;}
+.footdiv_post .dividingline{margin:0px;y}
+.modmenu{line-height:34px;margin:0px 20px;padding:10px 0px;color:#515151;font-size:14px;}
+.modmenu a{color:#515151;float:left;}
+.modmenu a:hover{color:#222222;}
+.modmenu .modmenu_h{color:#999999;float:left;margin-right:5px;}
+.modmenu a.modmenu_h:hover{color:#999999;}
+.modmenu .modmenu_l{color:#999999;float:left;margin-right:14px;}
+.modmenu .modmenu_r{float:right;margin-left:14px;}
+#moreMod{color:#999999;position:relative;cursor:pointer;}
+#moreMod .arrow_dark{bottom:7px;right:-10px;}
+#moreMod_menu a{float:none;}
+.wp_postlist{padding:0px 20px;margin-bottom:20px;background-color:#FFFFFF;border:1px solid #e6e6e6;box-shadow:0 0 4px #ECECEC;}
+.replypost_postlist{padding:0px 20px;background-color:#FFFFFF;border:1px solid #e6e6e6;box-shadow: 0 0 4px #ECECEC;}
+.item_postlist{padding:18px 0px;border-bottom:1px solid #e6e6e6;}
+.item_postlist .t_table{background:none !important;}
+.firstitem_postlist{border:none;padding:10px 0px;}
+.firstitem_postlist .cbar_postlist{padding:26px 0px;}
+.firstitem_postlist .cbarbox_postlist .fastre,.firstitem_postlist .cbarbox_postlist .support_oppose,.firstitem_postlist .cbarbox_postlist .action_postlist{display:inline-block;_display:block;width:96px; height:36px;text-align:center;line-height:36px;*line-height:34px;font-size:14px;margin:0px 0px 0px 10px;padding:0px !important;}
+.firstitem_postlist .cbarbox_postlist .fastre{background-color:#32a5e7;border:1px solid #32a5e7;border-radius:2px 2px 2px 2px;color:#FFF !important;cursor:pointer;}
+.firstitem_postlist .cbarbox_postlist a.fastre:hover{background-color:#2799db;border:1px solid #309ddb;color:#FFF !important; text-decoration:none;}
+.firstitem_postlist .cbarbox_postlist .support_oppose,.firstitem_postlist .cbarbox_postlist .action_postlist{background-color:#f5f5f5;border: 1px solid #e6e6e6;border-radius: 2px 2px 2px 2px;cursor: pointer;font-size: 14px;color:#000000;}
+.firstitem_postlist .cbarbox_postlist a.support_oppose:hover,.firstitem_postlist .cbarbox_postlist a.action_postlist:hover{background-color:#ebebeb;color:#000000;}
+.firstitem_postlist .cbarbox_postlist .action_postlist{background-image:none;position:relative;}
+.firstitem_postlist .cbarbox_postlist .action_postlist .arrow_gray{top:auto;bottom:5px;right:5px;}
+#tipBox{display:none;position:absolute;line-height:24px;padding:6px 10px;color:#FFFFFF;background-color:#fe9233;max-width:300px;_width:expression(this.offsetWidth > 300 ? '300px': true);}
+.cbar_postlist a.hassupport_postlist,.cbar_postlist a.hassupport_postlist:hover{color:#ff9c00 !important;}
+.cbar_postlist a.hasoppose_postlist,.cbar_postlist a.hasoppose_postlist:hover{color:#56af45 !important;}
+
+
+
+
+.firstitem_postlist .avatar a{width:70px;height:70px;}
+.comminner_post .psth{font-size:14px;font-weight:bold;margin-bottom:0px;}
+.firstitem_postlist .comminner_post .psth{font-size:18px;font-weight:normal;margin-bottom:10px;}
+.posttitlewrap{position:relative;}
+.posttitle a{font-size:24px;}
+#postlist .posttitle{overflow:hidden;padding:6px 0px;width:570px;}
+#postlist .posttitle a{ display:block;line-height:38px;color:#222222; float:left;}
+#postlist .posttitle a:hover{color:#222222;}
+#postlistreply{padding:0px;margin:0px;}
+
+.infobar_post{font-size:14px;color:#999999;overflow:hidden;padding-bottom:5px;padding-top:2px;}
+.infobar_post a{color:#999999;}
+.infobar_post a:hover{color:#222222;}
+.infobar_post a.name_uinfo,.infobar_post a.uname_psth{color:#32A5E7;font-weight:bold;}
+.infobar_post a.name_uinfo:hover,.infobar_post a.uname_psth:hover{color:#32A5E7;}
+.infobar_post a.name_uinfo{display:inline-block;float:left;margin-right:6px;max-width:150px;overflow:hidden;text-overflow:ellipsis;word-break:normal;word-wrap:normal;white-space:nowrap;_padding-top:1px;_width:expression(this.offsetWidth > 150 ? '150px': true);}
+.authi em{margin-right:16px;}
+.infobar_post .authi em{color:#999999;float:left;}
+.infobar_post .authi em a{color:#999999;}
+.infobar_post .authi em a:hover{color:#222222;}
+.infobar_post .warn_postlist{margin:0px 0px 0px 20px;}
+.postcont_postlist{width:594px;overflow:hidden;}
+.firstitem_postlist .postcont_postlist{width:658px;}
+.firstitem_postlist .infobar_post .authi em,.firstitem_postlist .infobar_post .authi em a{color:#999999;}
+.authi span.xg1{margin-right:10px;}
+.authi span.xi1{margin-right:20px;}
+.barl_post{float:left;height:20px;width:280px;}
+.infobar_post .barl_post{width:auto;}
+.barr_post{float:right;height:20px;width:285px;padding:0 5px 0 0;}
+.infobar_post .barr_post{width:auto;}
+.barr_post strong,.barr_post label,.barr_post input{float:left;}
+.barr_post input{width:38px;height:22px;background-color:#f9f9f9;border:1px solid #e6e7e9;}
+.prize_barpost{margin-top:-1px;}
+.prizecont_barpost{min-width:14px;height:22px;line-height:22px;padding:0px 10px 0px 9px;text-align:center;color:#bd6e08;background-color:#ffe05d;}
+.prizeicon_barpost{display:inline-block;width:9px;height:22px;background:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png) no-repeat 0px -638px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+
+.view_mzvip{float:left; background:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/mzvip.jpg) no-repeat 0 0; width:28px; height:16px; margin:2px 10px 0 0 ;}
+.products_omit img,.products_omit span{ float:left;}
+.click_product_omit_show{float:left; cursor:pointer; margin-left:4px;}
+
+.thread_postlist .posttitle,.thread_postlist .infobar_post{margin-left:90px;}
+.thread_postlist .head_uinfo{position:absolute;left:0px;top:0px;width:70px;height:70px;_left:-80px;margin-top:8px;}
+.thread_postlist .head_uinfo a{display:inline-block;position:relative;}
+.thread_postlist .head_uinfo img{width:70px;height:70px;border-radius:35px;}
+.thread_postlist .infobar_post{padding-bottom:31px;width:570px;}
+.thread_postlist .t_f, .thread_postlist .t_f td{font-size:16px;line-height:32px;}
+.thread_postlist .fontsizelimit .t_f font,.thread_postlist .fontsizelimit .t_f td font{font-size:16px;line-height:32px;}
+
+.head_postlist{padding:25px 0px 5px;font-size:18px;color:#222222;}
+.head_postlist2{padding:0px 0px 18px;border-bottom:1px solid #E6E6E6;}
+#postlist .head_postlist2 .posttitle{padding:5px 0;}
+#postlist .head_postlist2 a{font-size:22px;}
+.head_postlist em{font-size:24px;margin-right:5px;}
+.avatar a,.avatar{display:inline-block;width:44px;height:44px;position:relative;overflow:hidden;}
+.avatar img{width:44px;height:44px;border:none;border-radius:22px;}
+.shadowbox_avatar{position:absolute;top:0px;left:0px;display:inline-block;box-shadow:inset 0px 0px 1px #DDDDDD;width:44px;height:44px;border-radius:22px;}
+.thread_postlist .head_uinfo .shadowbox_avatar{width:70px;height:70px;border-radius:35px;}
+.dividingline{height:1px;overflow:hidden;display:block;padding:0px;border:none;background-color:#E6E6E6;margin:0px 20px;}
+.headdiv_post .dividingline{margin:0px 0px 10px;_margin-bottom:0px;}
+.userlevel_uinfo img,.userlevel_uinfo a{float:left;}
+.userlevel_uinfo .mzpower img{margin:4px 0px 0px 0px;}
+.userlevel_uinfo .mzvip{margin:4px 6px 0px 0px;}
+.readicon_uinfo{display:inline-block;margin:2px 6px 0px 20px;width:24px;height:14px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll 0px -604px transparent;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+.replyicon_uinfo{display:inline-block;margin:2px 6px 0px 20px;width:19px;height:16px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -91px -602px transparent;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+.floor_infobar{margin-left:30px;}
+.tofloor_postlist{font-size:14px;color:#999999;margin-top:6px;}
+.tofloor_postlist input{width:46px;height:22px;background-color:#f9f9f9;border:1px solid #e6e7e9;margin-left:10px;margin-top:-2px; _margin-top:0px;text-align:center;}
+
+.tipbox_oldthread #fastpostiframe{display:none;}
+#oldThreadTip{height:150px;line-height:150px;}
+/* 子版块UI */
+.child_forum{ border: 1px solid #e6e6e6;padding:0px 20px;}
+.child_forum .cf_title{ height:65px; line-height:65px; background-image:none; background-color:#FFFFFF; border-style:none; margin: 0px; padding:0px; font-size:18px; color:#222222; border-bottom:1px dashed #e6e6e6;}
+.child_forum .cf_title .o{margin-top:20px; }
+.child_forum .cf_content{ padding:0px;}
+.child_forum .cf_content .sub_fl{float:left; width:365px;}
+.child_forum .cf_content .sub_fr{float:right; text-align:right;width: 230px;}
+.child_forum .cf_content .sub_fr a{ color:#515151;}
+.child_forum .cf_content .subforum_content{ margin:10px 0px;}
+.child_forum .cf_content .color9{ color:#999999; }
+.border_not_bottom{ border: 1px solid #e6e6e6; border-bottom-style:none;}
+
+
+/*  发帖  帖子发表页  */
+.newthread_post{ background-color:#FFFFFF; border:1px solid #e6e6e6;}
+.newthread_post #pt{ height:74px; line-height:74px; padding-left:20px; border-bottom:1px solid #e6e6e6;}
+.newthread_post #pt .z em{overflow:visible !important;}
+.newthread_post .editorbox_post{padding:30px 69px 62px;}
+.newthread_post #postbox #subjectchk{ color:#999999;line-height:34px;height:34px;}
+.newthread_post #postbox #e_body{border: 1px solid #e6e6e6; background-color:#FFFFFF;position:relative;}
+.newthread_post #postbox .edt{ border-width:0px; border-style:none;}
+.newthread_post #postbox .edt .area{ padding:5px 10px;}
+.newthread_post #postbox .edt .area .pt{ background-color:#FFFFFF;margin:0px !important;}
+.newthread_post #postbox .edt .bbar{ height:32px; line-height:32px; border-top-style:none; border-top-width:0px; background-color:#f9f9f9; border-left: 1px solid #e6e6e6; border-bottom: 1px solid #e6e6e6; border-right: 1px solid #e6e6e6; color:#999999;}
+.newthread_post #postbox .edt .bbar em{ padding-left:10px;height:32px; line-height:32px;}
+.newthread_post #postbox .exfm{background-color:#FFFFFF;margin:0px;padding:10px 0px 12px;border:none;position:relative;}
+.newthread_post #postbox .exfm  .sinf{border-right:0px none; border-right-style:none; }
+.newthread_post #postbox .exfm .poll_in{ color:#999999; padding-bottom:10px;}
+.newthread_post #postbox .exfm .mbm p{height:auto; padding:2px 0 18px; }
+.newthread_post #postbox .exfm .mbm a.d{ background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/close1.jpg") no-repeat scroll 0 0 transparent; height:25px; width:25px; margin:6px 0px 0px 0px;}
+.newthread_post #postbox .poll_set{ border-top:1px dashed #e6e6e6; border-bottom:1px dashed #e6e6e6; height:36px; padding:10px 0px; line-height:36px; color:#000000; margin-top:12px;}
+.newthread_post #postbox .poll_set .boxstyle{ margin-left:20px; padding-right:5px; color:#9fa2a4;}
+#postbox .pbt{margin-bottom:20px;}
+#postbox .pbt .z span{line-height:34px;float:left;}
+#postbox .pbt .input_style1,#pollm_c_1 .input_style1,#postbox .pbt .input_style3{margin-right:20px;}
+#postbox .form_postbox .bbda{border:none;}
+#postbox .form_postbox textarea{border: 1px solid #e6e6e6;background: none repeat scroll 0 0 #F9F9F9;width:352px;}
+#postbox .form_postbox .normalbtn button{height:36px;line-height:36px;font-size:14px;}
+#pollm_c_1{_width:700px;overflow:hidden;}
+#pollm_c_1 a.d{float:left;display:inline-block;text-indent:999px;}
+#pollm_c_1 .input_style1{float:left;}
+#e_attach_menu .p_opt td.attpr input.px{width:32px; height:23px;}
+#e_attach_menu .p_opt td.atds input.px{width:60px; height:23px;}
+#e_attach_menu #attachlist table tr td{ height:48px;}
+.newthread_post #postbox #e_body .bbar{height:22px;line-height: 100%;border-top-style:none; border-top-width:0px; background: #FFFFFF;border:none;padding-right:3px;}
+.newthread_post #postbox #e_body .bbar #e_resize img{margin:0;}
+
+.newthread_post .appl{ padding-right:0px; width:190px;}
+.newthread_post .appl h3.bbs{line-height:48px;padding-top:21px; border-bottom:1px solid #e6e6e6;}
+.newthread_post .wrap_simcheck_pub input{ display:none;}
+
+.newthread_post .fwin #e_image_ctrl,.newthread_post .fwin #e_attach_ctrl{ position:relative;padding-top:40px;}
+.newthread_post .fwin #e_image_ctrl .flbc, .newthread_post .fwin #e_attach_ctrl .flbc{ position:absolute; top:0px; right:-40px;}
+.newthread_post .p_opt tr.xg1 th{ padding:8px 0;}
+.newthread_post .p_pof .p_opt p.pbn{ margin:10px 0;}
+.newthread_post .p_pof .p_opt .tcontent{padding:0px;}
+
+
+.newthread_post #postbox .edt .bar{ background-color:#FAFAFA; border-bottom: 1px dashed #E0E0E0; height:auto;padding:0px;}
+.newthread_post #postbox .edt .bar .selectbox{background-color: #F9F9F9;background-image: none;border: 1px solid #E6E6E6; padding: 0px 6px; margin:0;}
+.newthread_post #postbox .edt .bar .sbox2{ border-left:0px none #ffffff;;border-left-style:none;}
+.newthread_post #postbox .edt .bar .arrow_dark{bottom:3px; right:3px;}
+
+.newthread_post #postbox .edt .b1r, .newthread_post #postbox .edt .b2r{ height:auto;}
+.newthread_post #postbox .edt .teditor_new{ position:relative;height:39px;padding:15px 20px 0px;}
+.newthread_post #postbox .edt .teditor_new a{text-indent:-9999px; padding-top:0; float:left;}
+.newthread_post #postbox .edt .teditor_new span{ float:left;}
+.newthread_post #postbox .edt .teditor_new a.selectbox{ text-indent:0;width:25px;padding-top:0; height:26px;line-height:26px;}
+.newthread_post #postbox .edt .teditor_new2{position:absolute;background:#FFFFFF;border:1px solid #e6e9eb;box-shadow:0px 0px 5px #DDDDDD;height: 28px;padding:8px 10px 2px;top:-61px;left:371px;}
+.newthread_post #postbox .edt .teditor_new2 .selectbox{border:none;background-color:inherit;color:#4C4C4C;height:24px !important;line-height:21px !important;}
+.newthread_post #postbox .edt .teditor_new2 .arrow_dark{bottom:0px;right:0px;}
+.newthread_post #postbox .edt .teditor_new2 a.sbox2{width:28px;height:34px !important;margin-top:-6px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new3.png") no-repeat scroll 0px -42px transparent; _background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new3.gif") no-repeat scroll 0px -42px transparent;}
+
+.newthread_post #postbox .edt .bar a{border: 0px none #ffffff; border-style:none; margin-right:20px; width:25px; height:24px}
+.newthread_post #postbox .edt .b1r a{text-indent:-9999px; width:24px;padding-top:0; height:22px;}
+
+
+.newthread_post #postbox #e_bold, .newthread_post #postbox #e_url, .newthread_post #postbox #e_sml, .newthread_post #postbox #e_image, .newthread_post #postbox #e_attach, .newthread_post #postbox #e_at, .newthread_post #postbox #e_code, .newthread_post #postbox #e_quote, .newthread_post #postbox #e_underline,.newthread_post #postbox #e_wordprocess,.newthread_post #postbox #e_more,.newthread_post #postbox .arrow_wordprocess{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new3.png") no-repeat scroll 0 0 transparent; _background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new3.gif") no-repeat scroll 0 0 transparent;width:25px;}
+.newthread_post #postbox #e_bold{width:15px;background-position:-59px -47px;margin-right:28px;}
+.newthread_post #postbox #e_url{width:23px;background-position:-220px 0;}
+.newthread_post #postbox #e_sml{ background-position:0 0;}
+.newthread_post #postbox #e_image{width:26px; background-position:-43px 0;position:relative;overflow:visible;margin-right:24px;}
+.newthread_post #postbox #e_attach{width:23px; background-position:-132px 0;position:relative;overflow:visible;}
+.newthread_post #postbox #e_at{width:24px; background-position:-176px 0;}
+.newthread_post #postbox #e_code{width:23px; background-position:-191px 0;}
+.newthread_post #postbox #e_quote{width:18px;background-position:-311px 0;margin-right:18px;}
+.newthread_post #postbox #e_underline{width:16px;background-position:-102px -47px;margin-right:28px;}
+.newthread_post #postbox #e_wordprocess{width:56px;height:34px;background-position:-347px 0;margin:-5px 15px 0px 0px;}
+.newthread_post #postbox #e_more{width:24px;background-position:-418px 0;}
+.newthread_post #postbox #e_simplemode,.newthread_post #postbox #e_advancemode{background:none;text-indent:0;width:auto;float:right;}
+#e_wordprocess_menu{position:absolute;}
+.newthread_post #postbox .arrow_wordprocess{width:20px;height:16px;background-position:-447px -57px;position:absolute;left:15px;bottom:-14px;}
+
+
+
+.newthread_post #postbox #e_inserthorizontalrule, .newthread_post #postbox #e_forecolor, .newthread_post #postbox #e_tbl, .newthread_post #postbox #e_removeformat, .newthread_post #postbox #e_justifyleft, .newthread_post #postbox #e_justifyright ,.newthread_post #postbox #e_justifycenter, .newthread_post #postbox #e_insertorderedlist, .newthread_post #postbox #e_insertunorderedlist, .newthread_post #postbox #e_vid, .newthread_post #postbox #e_pasteword, .newthread_post #postbox #e_downremoteimg, .newthread_post #postbox #e_hide, .newthread_post #postbox #e_undo, .newthread_post #postbox #e_redo,.newthread_post #postbox #e_indent{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new3.png") no-repeat scroll 0 0 transparent; _background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/editor/editor_new3.gif") no-repeat scroll 0 0 transparent;width:25px;}
+.newthread_post #postbox #e_inserthorizontalrule{width:26px; background-position:-465px 0;}
+.newthread_post #postbox #e_forecolor{width:17px;background-position:-146px -47px;margin-right:23px;}
+.newthread_post #postbox #e_tbl{width:24px;background-position:-510px 0;margin-right:23px;}
+.newthread_post #postbox #e_removeformat{width:23px;background-position:-362px -47px;}
+.newthread_post #postbox #e_justifyleft{width:24px;background-position:-274px -47px;}
+.newthread_post #postbox #e_justifyright{width:24px;background-position:-318px -47px;}
+.newthread_post #postbox #e_justifycenter{width:24px;background-position:-487px -47px;}
+.newthread_post #postbox #e_insertorderedlist{width:24px;background-position:-230px -47px;}
+.newthread_post #postbox #e_insertunorderedlist{width:24px;background-position:-186px -47px;}
+.newthread_post #postbox #e_vid{width:20px; background-position:-92px 0px;}
+.newthread_post #postbox #e_pasteword{width:19px; background-position:-150px 0;}
+.newthread_post #postbox #e_downremoteimg{width:28px; background-position:-262px 0;}
+.newthread_post #postbox #e_hide{width:20px;background-position:-556px 0;}
+.newthread_post #postbox #e_undo{ background-position:-60px 0;}
+.newthread_post #postbox #e_redo{ background-position:-30px 0;}
+.newthread_post #postbox #e_indent{ background-position:-481px 0;}
+.newthread_post #postsubmit{float:right;margin-left:20px;}
+.newthread_post #adddynamicspan{float:right;width:120px;}
+.newthread_post #postbox #e_fullswitcher{ background-image:none; border: 1px solid #E6E6E6;text-indent:1px; background-color: #F5F5F5; height: auto; padding: 2px 10px;text-indent: 1px;width: auto; border-radius:2px; margin-right:0; }
+.newthread_post #postbox #e_fullswitcher:hover{background-color: #EFEFEF; }
+.newthread_post #postbox .pnpost{margin-top:0px;}
+
+.arrow_post_extra{background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -184px -345px #FFFFFF;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");height:7px;width:16px;position:absolute;left:22px;top:-7px;}
+#extra_replycredit_c .arrow_post_extra{left:20px;}
+#extra_readperm_c .arrow_post_extra{left:95px;}
+#extra_price_c .arrow_post_extra{left:152px;}
+#extra_rushreplyset_c .arrow_post_extra{left:197px;}
+#extra_tag_c .arrow_post_extra{left:270px;}
+#extra_pubdate_c .arrow_post_extra{left:310px;}
+.siminput_postbox{display:inline-block;width:68px;height:34px;line-height:34px;padding:0px 10px;background-color:#F9F9F9;border:1px solid #E6E6E6;}
+.siminput_postbox input{background:#F9F9F9;border:none;margin:0px 5px 0px 0px !important;padding:0px;}
+.siminput_postbox em{color:#999999;}
+#post_extra_c .siminput_postbox{margin:0px 38px 0px 0px;position:relative;text-align:right;}
+#post_extra_c .siminput_postbox input{position:absolute;left:10px;top:9px;}
+#post_extra_c .simselect{margin:0px 38px 0px 0px;}
+#post_extra_c .simselect strong{display:inline-block;height:34px;line-height:34px;padding:0px 10px;width:68px;}
+.simtitle_postbox{padding-right:18px;}
+#extra_replycredit_c .selectbox_simu{width:72px !important;}
+#extra_readperm_c .selectbox_simu{width:130px !important;}
+#extra_readperm_c .simselect strong{width:auto;min-width:68px;*width:110px;}
+#extra_replycredit_c .xg1,#extra_price_c p.xg1{margin-top:28px;}
+#postbox #post_extra_c .exfm{border-top:1px solid #d9d9d9 !important;border-bottom:1px solid #E6E6E6 !important;margin-bottom:30px;}
+#extra_rushreplyset_c table{margin-top:10px;}
+#extra_rushreplyset_c th{width:77px;padding:10px 0px;}
+#extra_rushreplyset_c td{padding:10px 0px;}
+#extra_rushreplyset_c .input_w_141 td em{padding:0px 10px;display:inline-block;height:34px;line-height:34px;}
+#wrap_rushreply{display:block;height:20px;}
+#wrap_rushreply .box_simcheck{margin-top:3px;}
+#extra_tag_c table td{padding-bottom:20px;}
+#extra_tag_c .xg1{padding-bottom:25px;}
+#extra_tag_c .input_w_316 input,#extra_tag_c .input_w_316 a,#extra_tag_c .input_w_316 span{float:left;}
+#extra_tag_c .pipe{margin-top:9px;}
+.robtime_rushreply input,.robtime_rushreply em{float:left;}
+
+
+.ftid{ position:relative;}
+.ftid .arrow_dark{bottom:3px; right:3px;}
+.ftid a{ padding:7px 11px 7px 10px; border:1px solid #E6E6E6; background-color:#F9F9F9; background-image:none;}
+.ftid a:hover{ background-position:-149px -347px;}
+.option_appl{padding-top:10px;}
+.option_appl .blank{background:none;height:10px;margin:0px;padding:0px;}
+
+.closebtn_at{position:absolute;right:0px;top:0px;}
+.closebtn_at .flbc{margin:0px;}
+
+/* 用户卡片 */
+.space_card_user_box{ background-color:#FFFFFF; z-index:301; border:1px solid #e6e6e6; padding:20px; box-shadow:0px 0px 5px #E6E6E6; width:340px;}
+.space_card_user_box img{ cursor:pointer;}
+.card_new .head_avatar{ float:left;}
+.card_new .user_info{ float:left; margin-left:20px;}
+.card_new .user_info .user_name{ color:#32a5e7; padding-bottom:12px; width:270px;}
+.card_new .user_info .user_name a:link,.card_new .user_info .user_name a:visited,.card_new .user_info .user_name a:hover{color:#32a5e7;}
+.card_new .user_info .sightml{ color:#32a5e7; overflow:hidden;text-overflow:ellipsis;white-space:nowrap; height:20px; color:#999999; width:270px;margin-bottom:5px;}
+.card_new .user_info .user_info_r{color:#999999;}
+.card_new .user_info .user_info_r .r{ float:left;}
+.card_new .user_info .user_info_r .rmargin{ margin-left:20px;}
+.card_new .user_info .user_info_r .in{ font-weight:bold;}
+.card_new .user_info .follow_la{ border:1px solid #bae3f0; background-color:#dbf3fb; display:block; height:27px; line-height:27px; text-align:center; width:70px; float:right; margin-top:30px;}
+.card_new .user_info .follow_lb{ border:1px solid #e6e6e6; background-color:#f5f5f5; display:block; height:27px; line-height:27px; text-align:center; width:70px; float:right; margin-top:30px;}
+.card_new .avatar,.card_new .avatar a,.card_new .avatar img,.card_new .shadowbox_avatar{width:48px;height:48px;border-radius:24px;}
+
+/* 错误信息页 */
+.message_enf{border-bottom:1px solid #d9d9d9;  border-top:1px solid #d9d9d9; min-height: 450px; }
+.message_error{ border-style:none; background-color:transparent !important; margin:160px auto !important; }
+.message_error .alert_right, .message_error .alert_error, .message_error .alert_info{font-size:18px !important; color:#000000;}
+.message_error .alert_btnleft{ margin-top:16px; _width:110px;}
+.message_error .alert_btnleft a{ color:#ffffff; font-weight:normal; display:inline-block; padding:0 20px !important;}
+.message_error .alert_btnleft a:link,.message_error .alert_btnleft a:visited,.message_error .alert_btnleft a:hover{color:#FFFFFF;}
+
+/* 售前售后弹出框 */
+.customer_service{ width:460px;}
+.customer_service .custmoner1{ width:200px; height:140px; background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/customer_service.jpg") no-repeat 0 0; float:left; margin:10px 15px; cursor:pointer; }
+.customer_service .custmoner2{ width:200px; height:140px; background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/customer_service.jpg") no-repeat -200px 0; float:left; margin:10px 15px; cursor:pointer;}
+.customer_service .custmoner3{ width:200px; height:140px; background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/customer_service.jpg") no-repeat -400px 0; float:left; margin:10px 15px; cursor:pointer;}
+.customer_service .custmoner4{ width:200px; height:140px; background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/customer_service.jpg") no-repeat -600px 0; float:left; margin:10px 15px; cursor:pointer;}
+.customer_service a:hover .custmoner1{ background-position:0 -140px;}
+.customer_service a:hover .custmoner2{ background-position:-200px -140px;}
+.customer_service a:hover .custmoner3{ background-position:-400px -140px;}
+.customer_service a:hover .custmoner4{ background-position:-600px -140px;}
+
+
+
+
+.ct1_feed{ width:800px !important; margin:0px !important; padding: 0px !important;}
+
+.follow_avatar{float:left; width:180px; height:180px; overflow:hidden;}
+.follow_avatar .avatar{width:180px;height:180px;}
+.follow_avatar .shadowbox_avatar{width:180px;height:180px;border-radius:0px;}
+.follow_avatar img{ width:180px; height:180px;border-radius:0px;}
+.broadcast{float: left; padding:15px 19px 20px 19px;}
+.broadcast_top{ margin-bottom:15px;}
+.broadcast_top .c{ font-size:14px; display:block; float:left; width:33px; margin-top:3px;}
+.broadcast_top .f{ font-size:18px; display:block; float:left; margin-right:15px;}
+.broadcast_top .mzvip{float:left;margin:11px 0px 0px 8px;}
+.uname_broadcast{float:left;font-size:22px;color:#000000;width:200px;overflow:hidden;}
+.uname_broadcast .inner_uname{float:left;max-width:170px;_width:expression(this.offsetWidth > 170 ? '170px': true);overflow:hidden;text-overflow:ellipsis;white-space: nowrap;word-break:normal;word-wrap:normal;}
+.uname_broadcast .mzvip{float:left;margin:11px 0px 0px 8px;}
+.barr_post input{width:38px;height:22px;background-color:#f9f9f9;border:1px solid #e6e7e9;}
+.barr_post label{margin-left:20px; cursor:text;}
+.infobar_post .barr_post span,.infobar_post .barr_post em,.infobar_post .barr_post a{float:right;}
+.head_uinfo{width:44px;height:44px;text-align:center;margin-top:6px;}
+.head_uinfo img{width:44px;height:44px;}
+.name_uinfo{color:#222222;font-size:14px;margin-right:16px;}
+.ver_uinfo,.info_uinfo{font-size:14px;margin-top:10px;color:#515151;}
+.ver_uinfo a{color:#515151;}
+.comment_post{background-color:#f5f6f7;font-size:14px;}
+.comminner_post{margin-top:22px; margin-bottom:1px;padding:0px 20px;overflow:hidden;}
+.comminner_post .head_comminner{margin-bottom:-5px;overflow:hidden;}
+.comminner_post .psti{line-height:54px;height:54px;border-bottom:1px solid #e6e6e6;margin-bottom:-1px;overflow:hidden;}
+.comminner_post .pre,.comminner_post .nxt,.comminner_post .predis,.comminner_post .nxtdis{display:inline-block;width:24px;height:24px;background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -70px -441px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");padding:0px !important;margin:0 0 0 10px !important;border:none;}
+.comminner_post .pre{background-position:-68px -441px;}
+.comminner_post .nxt{background-position:-102px -441px;}
+.comminner_post a.pre:hover{background-position:-136px -441px;}
+.comminner_post a.nxt:hover{background-position:-170px -441px;}
+.comminner_post .predis{background-position:0px -441px;}
+.comminner_post .nxtdis{background-position:-34px -441px;}
+.morebtn_compost{color:#999999;height:54px;line-height:54px;text-align:center;cursor:pointer;}
+.morebtn_compost a,.morebtn_compost a:link{display:block;color:#999999;}
+.morebtn_compost a:hover{color:#222222;}
+.score_post{float:left;padding:35px 30px 0px 0px;}
+.score_post .xi2{color:#32a5e7;}
+.score_post .psth{margin:0px 20px 0px 0px;font-size:14px;}
+.firstitem_postlist .score_post{line-height:38px;}
+.firstitem_postlist .score_post .psth{font-size:18px;}
+.score_post .ratc{padding:0px;}
+.wonderreply_postlist{background-color:#f7fcff;border:1px solid #d7e2eb;box-shadow:0px 0px 4px #d7e2eb;}
+.wonderreply_post{font-size:14px;padding:30px 0px 0px;color:#333333;}
+.wonderreply_post .psta{padding-top:6px;}
+.wonderreply_post .pstl { clear: left;padding:20px 0px;}
+.wonderreply_post .psti{margin-left:60px;line-height:18px;}
+.wonderreply_post .solidline{border-bottom:1px solid #d7e2eb;}
+.wonderreply_post .infobar_post{padding-bottom:7px;}
+.uname_psth{margin-right:10px;color:#222222;font-weight:bold;}
+.comminner_post .uname_pasth{color:#32a5e7;font-weight:bold;float:left;display:inline-block;max-width:100px;overflow:hidden;text-overflow:ellipsis;word-break:normal;word-wrap:normal;white-space: nowrap;_width:expression(this.offsetWidth > 100 ? '100px': true);}
+.comcont_pasth{float:left;display:inline-block;max-width:332px;overflow:hidden;text-overflow:ellipsis;word-break:normal;word-wrap:normal;padding-right:10px;white-space: nowrap;_width:expression(this.offsetWidth > 332 ? '332px': true);}
+.firstitem_postlist .comcont_pasth{max-width:378px;_width:expression(this.offsetWidth > 378 ? '378px': true);}
+.comm_pasth{float:left;}
+.comm_psth{overflow:hidden;}
+.comm_psth a.xi2{color:#32a5e7;}
+.comm_psth .commcont_psth{line-height:28px;}
+.comm_psth .commcont_psth h3{display:inline;}
+.comm_psth .splendid_support{padding-top:14px;}
+.comm_psth .splendid_support .score_post{padding:0px;}
+.comm_psth .splendid_support a.xi2{margin:0px;}
+.splendid_support{text-align:right;}
+.splendid_support a{color:#999999;margin-left:25px;}
+.dashedline{height:0px;overflow:hidden;border-bottom:1px dashed #D9D9D9;}
+.solidline{height:0px;overflow:hidden;border-bottom:1px solid #E6E6E6;}
+.cbarbox_postlist{width:450px;float:right;padding:30px 0px 4px 0px;}
+.cbar_postlist a,.cbar_postlist label{color:#999999 !important;}
+.cbar_postlist a:hover{color:#222222 !important;}
+.cbarhover_postlist a,.cbarhover_postlist label{color:#515151 !important;}
+.cbarhover_postlist a:hover{color:#222222 !important;}
+.cbar_postlist .showmenu{padding:0px 12px 0px 0px;}
+.action_postlist{display:inline-block;_width:28px;float:left;}
+.action_postlist .arrow_gray{top:15px;}
+.cbar_postlist .p_pop a:hover{color:#32a5e7 !important;}
+.cbar_postlist .p_pop a{height:40px;}
+
+
+/* 管理员对数据的管理页 */
+.forum_manager{ width:205px !important; background-color:#FFFFFF !important; padding:10px 0px;}
+.forum_manager .tbn{margin:0 !important; padding:0 !important;}
+.forum_manager .tbn ul li{ padding:5px 20px !important; margin:0 !important;}
+.forum_manager .tbn li.a{ border-bottom-style:dashed; border-top-style:none; background-color:#eeeeee;}
+
+.forum_manager_mn{}
+.forum_manager_mn .bw0{padding:0 20px 20px 20px;}
+.forum_manager_mn .dt th{ background-color:#FFFFFF !important; }
+.forum_manager_mn .mdcp{ padding:0 20px 20px 20px;}
+.forum_manager_mn .mdcp h2.mtm{ padding:10px 0 10px 12px;}
+.forum_manager_mn .ftid select{ height:25px;}
+.forum_manager_mn #list_modcp_logs{ font-size:12px;}
+.forum_manager_mn input.px{ width:100px;}
+.forum_manager_mn #newexpiration{ width:60px;}
+.forum_manager_mn .home_msg{ margin:5px 25px;}
+.forum_manager_mn .mdcp .um p{ margin:5px 0;}
+.forum_manager_mn .mdcp .pgs{ margin-top:20px;}
+.forum_manager_mn table{border-left:1px solid #CDCDCD;}
+.forum_manager_mn table.dt td, .forum_manager_mn table.dt th{ padding:12px 0 12px 5px;}
+.forum_manager_mn .mdcp table{border-left:0px none #CDCDCD;}
+
+
+/*快速回复框*/
+.replybox_post{background-color:#FFFFFF;border:1px solid #E6E6E6;box-shadow: 0 0 4px #ECECEC;padding:20px;margin-top:20px;}
+.replybox_post .identifying_code{padding-top:10px;}
+.replybox_post .pnpost{margin:30px 0px 10px 0px;}
+.head_pform .avatar{width:44px;height:44px;text-align:center;}
+.head_pform .avatar img{width:44px;height:44px;}
+.pnpost{clear:both;margin-top:30px;overflow:hidden;height:38px;line-height:38px;}
+.pnpost label,.pnpost a{float:right;margin-left:20px;}
+.pnpost button{display:block;width:96px;}
+
+/*.oneself_fav{background:url("../../../static/image/common/elect_star.jpg") no-repeat scroll 0 5px transparent !important;}*/
+.oneself_fav{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/elect_star.jpg") no-repeat scroll 0 5px transparent !important;}
+#fastposteditor .area .hm a.xi2,#fastposteditor .area .hm a.xi2:hover{ margin:0 10px 0 10px; color:#32a5e7;}
+#fastposteditor .separator{display:inline-block;}
+#floatlayout_topicadmin .o{ background-color:#FFFFFF;}
+.btnbar_fwin label{float:right;margin:10px 10px 0px 0px;}
+.btnbar_fwin .normalbtn{float:right;}
+.btnbar_fwin_l label{float:left;margin:10px 0px 0px 10px;}
+.btnbar_fwin_l .normalbtn{float:left;}
+.btnbar_opt{overflow:hidden;}
+.btnbar_opt .normalbtn{float:left;}
+#fastposthiddenview{position:relative;}
+/*#quoteDelBtn{position:absolute;right:10px;top:20px;width:24px;height:24px;background:url("../../../static/image/common/main_icon.png") no-repeat scroll -146px -520px; _background-image: url("../../static/image/common/main_icon.gif");cursor:pointer;}*/
+#quoteDelBtn{position:absolute;right:10px;top:20px;width:24px;height:24px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -146px -520px; _background-image: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");cursor:pointer;}
+/*模拟复选框*/
+.wrap_simcheck{cursor:pointer;}
+.box_simcheck{display:inline-block;margin:12px 7px 0px 0px;width:17px;height:14px;background: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -34px -315px; _background-image: url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif");}
+.wrap_simcheck span,.wrap_simcheck em{float:left;}
+.wrap_simcheck input{display:none;}
+.graybar_postlist .box_simcheck{background-position:0px -315px;}
+.graybar_postlist .cbar_postlist em{display:none;}
+@media handheld{
+.graybar_postlist .cbar_postlist em{display:block;}
+}
+.checked_simcheck .box_simcheck{background-position:-68px -315px;}
+/*模拟select*/
+.simselect {background-color: #F9F9F9;border: 1px solid #E6E6E6;cursor: pointer;display: inline-block;position: relative;}
+.simselect select{display:none;}
+.simselect .arrow_dark{bottom:3px;right:3px;}
+.selectbox_simu{background-color: #FFFFFF;border: 1px solid #E0E3E8;border-radius: 1px 1px 1px 1px;box-shadow: 0 0 5px #DDDDDD;color: #515151;padding:0px 16px;left:-1px;position: absolute;top: 35px;z-index:99; cursor:default;display:none;}
+.selectbox_simu li{border-bottom: 1px solid #E0E3E8;display: block;line-height: 40px;margin-bottom: -1px;padding: 3px 5px;white-space: nowrap;}
+.selectbox_simu li a{display:block;cursor:pointer;}
+.selectbox_simu li a:hover{color:#32a5e7;}
+/*个人中心 -- 关系*/
+.item_ulist{height:80px;}
+.check_ulist{width:17px;margin:25px 20px 0px 0px;float:left;}
+.cont_ulist{float:left;}
+.cont_ulist .showmenu{display:inline-block;width:28px;}
+.cont_ulist .arrow_gray{_top:15px;}
+.name_ulist a{display:inline-block;color:#32a5e7;font-size:16px;line-height:28px;padding-top:3px;}
+.name_ulist a:hover{color:#32a5e7;}
+/*.relat_ulist .flw_avt {display:inline-block;margin:5px 20px 5px 0px; width: 80px;height:80px;background: url(../../../static/image/common/wavebg.png) repeat 0px 0px;text-align:center;}*/
+.relat_ulist .flw_avt {display:inline-block;margin:5px 20px 5px 0px; width: 80px;height:80px;background: url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/wavebg.png) repeat 0px 0px;text-align:center;}
+.relat_ulist .flw_avt .avatar{margin-top:16px;height:50px; width:50px;}
+.relat_ulist .flw_avt .avatar img {height:50px; width:50px;margin-left:0px;border-radius:25px;}
+.relat_ulist .shadowbox_avatar{height:50px; width:50px;border-radius:25px;}
+.relat_ulist li p{line-height:28px;}
+.relat_ulist li .bar_ulist{height:28px;margin-left:100px;}
+.relat_ulist .cont_ulist{width:500px;_width:490px;overflow:hidden;}
+.flw_btn_eachother{width:135px !important;}
+/*.icon_eachother{display:inline-block;margin:0px 20px 0px 0px;width:36px;height:38px;background:#eeeff1 url(../../../static/image/common/main_icon.png) repeat -64px -360px;_background-image:url(../../static/image/common/main_icon.gif);}*/
+.icon_eachother{display:inline-block;margin:0px 20px 0px 0px;width:36px;height:38px;background:#eeeff1 url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png) repeat -64px -360px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+.flw_btn_eachother span{float:left;}
+.bar_flist{height:48px;padding:18px 0px 0px;border-bottom:1px solid #e6e6e6;}
+.scbox_flist{width:160px;height:30px;background-color:#f2f2f2;}
+.scbox_txt{border:none;float:left;font-size:14px;height:30px;line-height:30px\9;padding:0 0 0 8px;width:117px;background:none transparent; outline:none;color:#9fa2a4;}
+.scbox_btn{border:none;cursor:pointer;float:left;height:30px;margin:0;padding:0;width:35px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") transparent no-repeat -100px -365px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+.arrow_gray{display:inline-block;width:5px;height:5px;position:absolute;bottom:0px;right:0px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") transparent no-repeat -104px -347px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+.arrow_dark{display:inline-block;width:5px;height:5px;position:absolute;bottom:0px;right:0px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") transparent no-repeat -149px -347px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);overflow:hidden;}
+.buddy .showmenu{background:none;padding:0px 10px 0px 0px;margin:0px 20px 0px 0px;position:relative;}
+.relat_nav a{color:#515151;}
+/*个人中心 -- 关系 -- 搜索页*/
+.relat_search{padding:20px 0px;color:#000000;}
+.relat_search input{color:#000000;}
+.relat_search th{padding:10px 0px 10px 40px; vertical-align:middle;}
+.relat_search .sbox1_relats,.relat_search .sbox2_relats{height:34px;line-height:34px\9;width:308px;background:none;background-color:#f9f9f9;border:1px solid #e6e6e6;outline:none;}
+.relat_search .sbox1_relats{width:100px;}
+.relat_search .wrap_simcheck{line-height:36px;}
+.uname_relats .sbox2_relats{float:left;margin-right:20px;}
+.borderline_relats th,.borderline_relats td{height:1px;line-height:1px;overflow:hidden;border-bottom:1px solid #e6e6e6;}
+.sex_relats th, .sex_relats td{padding-top:30px;}
+.btnbar_relats td{padding:30px 0px 0px 40px;}
+.relat_search select{display:none;}
+.simselect strong{line-height:24px;}
+.birthd_relats .simselect{margin-right:6px;}
+.birthd_relats .simselect strong{display:inline-block;width:70px;height:24px;padding:5px 15px;}
+.sex_relats .simselect strong,.reside_relats .simselect strong{display:inline-block;width:286px;height:24px;padding:5px 15px;}
+#spacecp_friend_radio .radiowrapper{ width:150px; overflow:hidden; height:35px;}
+
+/*个人中心 -- 关系 -- 搜索结果页*/
+.sresult_ulist{width:758px;overflow-x:visible;_overflow-x:hidden;}
+.sresult_ulist .relat_ulist{padding-left:10px; margin:0px -20px 0px 0px !important;}
+.sresult_ulist li{float:left;position:relative;width:292px;height:80px;border:1px solid #e6e6e6;box-shadow:0px 0px 4px #fbfbfb,0px 0px 1px #fbfbfb inset;margin:0px 30px 30px 0px;padding:30px !important;}
+.sresult_ulist h4 a{font-size:16px;color:#32a5e7;}
+.sresult_ulist h4 a:hover{color:#32a5e7;}
+.sresult_ulist p{color:#999999;line-height:30px;}
+.sresult_ulist .showmenu{margin-right:15px;}
+.sresult_ulist .xg1{padding-top:4px;}
+.tips_sresult{padding:30px 10px;color:#000000;}
+.tips_sresult a,.tips_sresult a:link,.tips_sresult a:hover{color:#32a5e7 !important;}
+.sresult_ulist .ihover_sresult{background-color:#f7fafc;border-color:#e1eaf0;box-shadow:0px 0px 4px #fafbff,0px 0px 1px #fafbff inset;z-index:9;}
+.sresult_ulist .flw_avt{margin:0px 20px 0px 0px;}
+.sresult_ulist .cont_ulist{width:192px;height:80px;}
+.sresult_ulist .cont_ulist h4{padding:2px 0px;}
+.uname_sresult{height:23px;width:190px;height:22px;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;word-break:normal;word-wrap:normal;}
+.uname_sresult a{word-break:normal;word-wrap:normal;}
+/*个人中心 -- 帖子 -- 主题*/
+.conbar_guide th,.conbar_guide td{height:62px !important;}
+.guide_theme .title_guidelist{height:74px;line-height:74px;overflow:hidden;}
+.conbar_guide .common,.guide_theme .common,.guide_reply .common{}
+/*个人中心 -- 帖子 -- 回复*/
+.guide_reply th, .guide_reply td{ border-bottom:0px none #FFFFFF !important;}
+.guide_theme .xst,.guide_reply .xst{font-size:16px;color:#222222;}
+.guide_theme a.xst:hover, .guide_reply a.xst:hover{color:#515151;}
+.guide_reply th.common img{margin:27px 0 0 10px;}
+.guide_reply td.by cite a{color:#515151;}
+.guide_reply .br,.guide_theme .br{padding-top:12px;color:#999999;}
+.arrow_guidelist{width:16px;height:14px;position:absolute;top:-8px;left:50px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") transparent no-repeat -146px -373px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+.guide_reply .title_guidelist{height:66px;line-height:66px;overflow:hidden;}
+.title_guidelist{width:302px;}
+.title_guidelist a{float:left;max-width:302px;_width:302px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.title_guidelist img{float:left;margin-top:32px;}
+/*个人中心 -- 消息 -- 详情*/
+.space .pml dl.other_msgdetail,.space .pml dl.self_msgdetail{border:none;}
+.head_msgdetail{float:right;padding:0px 0px 0px 18px;}
+.other_msgdetail .head_msgdetail{float:left;padding:0px 18px 0px 0px;}
+.cont_msgdetail{float:right;position:relative;background-color:#f9f9f9;border:1px solid #e6e6e6;padding:13px 20px;width:604px;color:#515151;line-height:28px;}
+.other_msgdetail .cont_msgdetail{float:left;background-color:#f2f8fc;border:1px solid #dde5eb;}
+.arrow_msgdetail{position:absolute;left:644px;top:20px;width:11px;height:16px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") transparent no-repeat 0px -373px;_background-image:url(http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif);}
+.other_msgdetail .arrow_msgdetail{left:-10px;background-position:-32px -373px;}
+.uname_msgdetail{margin-right:12px;}
+.uname_msgdetail span{color:#999999;}
+.cont_msgdetail .uname_msgdetail a{color:#32a5e7;}
+.time_msgdetail{float:left;color:#999999;}
+.btn_msgdetail{float:right;}
+.cont_msgdetail .btn_msgdetail a{color:#dcdcdc;}
+.conth_msgdetail .btn_msgdetail a{color:#515151;}
+.breadnav_space{padding:0px 20px 25px;margin:0px 0px 15px 0px !important;border-bottom:1px solid #e6e6e6 !important;}
+.space_pm_post .area{margin:0px;}
+.space_pm_post .cont_msgdetail{padding:0px;width:644px;}
+.wp_space_pm .cont_msgdetail{margin-bottom:10px;}
+.wp_space_pm .pagebar_space{padding:18px 0px; border-bottom:1px solid #E6E6E6;}
+.wp_space_pm .pagebar_space .normalbtn{float:left;}
+.btnbar_space_pm{padding:5px 56px 15px;text-align:right;overflow:hidden;}
+.btnbar_space_pm span{float:right;margin-left:10px;line-height:36px;}
+.btnbar_space_pm .normalbtn{float:right;margin-left:10px;}
+.cont_msgdetail .tedt{border:none;}
+.cont_msgdetail .area{border:none;margin:0px;background:none;}
+.cont_msgdetail .area textarea{width:100%;height:130px;background:none;}
+.space .pml dl .ptm a.name_pmlist{color:#32a5e7;font-weight:bold;margin-right:15px;}
+.space .pml dl .ptm a.name_pmlist:hover{color:#32a5e7;}
+/*个人中心 -- 消息 -- 提醒*/
+.notice_msg .nts{padding:0px;}
+.notice_msg .nts dl{ padding:20px 0px; border-bottom:1px solid #e6e6e6;}
+.notice_msg dl .avt{margin:0 !important;height:100%; vertical-align:middle;}
+.notice_msg dl .avt img{width:44px;height:44px;}
+.notice_msg .ntc_body{float:left;padding-left:20px;width:485px;}
+.notice_msg .ntc_body a,.notice_msg .ntc_body a:hover{color:#32a5e7;}
+.notice_msg .readntc_body a{color:#999999;}
+.notice_msg .readntc_body a:hover{color:#515151;}
+.time_msgnotice{float:right;}
+.shield_msgnotice{margin-left:20px;color:#E6E6E6 !important;}
+.hover .shield_msgnotice{color:#515151 !important;}
+.hover a.shield_msgnotice:hover{color:#222222 !important;}
+.friend_approved{display:inline-block;height:26px;line-height:26px;background-color:#f5f5f5;border:1px solid #e6e6e6;border-radius:2px 2px 2px 2px;padding:0px 10px;}
+#radioshielding .radiowrapper{margin: 30px 30px 0 0;}
+#radioshielding .radio_pway{margin: 2px 10px 5px 0;}
+
+/*个人中心 -- 消息 -- 短消息设置*/
+.checkbox_msgset{display:inline-block;font-size:16px;color:#000000;overflow:hidden;line-height:30px;margin-top:30px;}
+.checkbox_msgset span{float:left;}
+.checkbox_msgset .box_simcheck{margin-top:9px;}
+.cont_msgset{padding-bottom:32px;}
+.cont_msgset h5{font-size:14px;color:#000000;line-height:54px;margin-top:8px;}
+.cont_msgset textarea{margin-bottom:14px;width:478px;height:105px;border:1px solid #E6E6E6;background:#F9F9F9;}
+.conttip_msgset{font-size:14px;color:#999999;line-height:28px;height:56px;overflow: hidden;}
+.cont_mzdialog .btnbar_mzdialog{margin:0px -30px;border-top: 1px solid #E4E8EB;}
+.unamecard_msg{margin:0px 5px 0px 0px;display:inline;word-break:normal;word-wrap:normal;}
+.unamecard_msg em,.unamecard_msg a{word-break:normal;word-wrap:normal;}
+.un_selector2 .unamecard_msg{margin:0px 5px 5px 0px;}
+#pmsettingform .cont_msgset{position:relative;}
+#ignoreNameWp,#usernameWp{float:left;border:none;padding:0px;margin:0px;background:none;width:95px;}
+.page_frame_navigation .tb a.msgsetbtn_nav{color: #999999;text-align: right !important;}
+.page_frame_navigation .tb a.msgsetbtn_nav:hover{color:#222222;}
+/*个人中心 -- 消息 -- 发消息*/
+.breadnav_msg{padding: 0 20px 30px;border-bottom: 1px solid #E6E6E6;}
+.form_postmsg{padding:0px 32px;}
+.form_postmsg th{padding:20px 0px 0px;width:56px;}
+.form_postmsg td{padding:10px 0px;}
+.textarea_w_640 textarea{width:635px;height:142px;background:#F9F9F9;border: 1px solid #E6E6E6;outline:none;padding:2px 5px;}
+.form_postmsg .btnbar_postmsg{float:right;padding:20px 0px 40px;}
+.pm_isnew{background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/pm_unread.png") no-repeat 0px 0px; width:15px; height:15px; position:absolute; right:-6px; bottom:-6px;}
+
+/*个人中心 -- 动态 -- 关注*/
+.boxfocus{ border-color:#12b1e5 !important;}
+.boxfocus2{ border-top-color: #12b1e5 !important;border-right-color:#12b1e5 !important;border-left-color:#12b1e5 !important;}
+.identifying_code .seccode_image .vm,.sec .seccode_image .vm{width:100px;height:32px;margin-right:6px;}
+.identifying_code .px,.sec .px{background-color: #FFFFFF;border: 1px solid #E3E7EA;height: 30px;margin: 0 6px 0 16px;width: 98px;line-height:30px\9;}
+.sec .p_opt{width:0px;height:0px;border:none;}
+
+.back_left dl{margin:0px !important;}
+.user_imgls li{ padding:0 10px;}
+.user_imgls li p{ margin:8px 0;}
+.user_imgls li span{ overflow:auto; height:auto; display:block; width:66px;}
+.user_imgls li .listen_in{display:block;color:#FFFFFF; background-color: #32a5e7; line-height:28px;border-radius:2px;}
+.user_imgls li .listen_off{display:block;background-color:#f5f5f5;border: 1px solid #e6e6e6;border-radius: 2px 2px 2px 2px;line-height:26px;color:#000000;}
+.mzpro_pic{margin-right:-25px;*margin-right:-28px;}
+.mzpro_pic img{margin:0px 19px 19px 0px;}
+#forumlistdev .selectbox_simu{width:120px !important;left:-22px;}
+
+/*个人中心 -- 设置*/
+.settinglist{background-color:#FFFFFF;border: 1px solid #E6E6E6;padding:0px 20px;}
+.settinglist form{padding:20px 20px 0px;}
+.settinglist li.items_setlist{height:80px;line-height:80px;border-top:1px solid #E6E6E6;padding:0px;position:relative;}
+.settinglist li.items_setlist a{font-size:20px; display:block; padding:0 20px;}
+li.items_setlist .itemicon_setlist{position:absolute;right:18px;top:34px;display:inline-block;width:13px;height:13px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat -80px -192px; _background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif")}
+.settinglist li.a .itemicon_setlist{background-position:-113px -192px;}
+.settinglist .tb{margin:0px;}
+.listhover_forum a.stitle{color:#666666;}
+.hover_setlist{background-color:#f7fafc;}
+.hover_setlist a{color:#666666;}
+.profile_setlist,.profile_setlist input{color:#000000;font-size:14px;}
+.profile_setlist th{height:58px;width:75px;vertical-align:middle;}
+.profile_setlist td{vertical-align:middle;padding:10px 0px;}
+.input_w_316 input,input.input_w_316{background:#F9F9F9;border: 1px solid #E6E6E6;height: 34px;line-height:34px\9;outline:none;width: 286px;padding:0px 15px;}
+.input_w_141 input,input.input_w_141{background:#F9F9F9;border: 1px solid #E6E6E6;height: 34px;line-height:34px\9;outline:none;width: 111px;padding:0px 15px;}
+.select_w_316 .simselect strong{display: inline-block;height: 24px;padding: 5px 15px;width:286px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.select_w_102 .simselect{margin-right: 6px;}
+.select_w_102 .simselect strong{display: inline-block;height: 24px;padding: 5px 15px;width: 70px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.btnbar_setlist{padding:22px 0px 40px !important;}
+.profile_setlist textarea{background:#F9F9F9;border: 1px solid #E6E6E6;height:80px;width:500px;}
+.tr_sightml .tedt textarea{background:#F9F9F9;border: 1px solid #E6E6E6;height:80px;width:100%;}
+
+/*个人中心 -- 设置 -- 积分*/
+.head_record{padding: 35px 10px 5px 20px;}
+.form_record th{height:58px;width:75px;vertical-align:middle;}
+.form_record td{vertical-align:middle;padding:10px 0px;}
+.form_record .btnbar_setlist{padding:30px 0px 0px;}
+.wrap_timecon {display: inline-block;position: relative;margin-right:6px;}
+.wrap_timecon input{background: #F9F9F9;border: 1px solid #E6E6E6;cursor: pointer;width:124px;height: 30px;outline:none;padding:2px 15px;color:#999999;font-size:14px;}
+.wrap_timecon .arrow_dark{bottom:3px;right:3px;}
+.integrallist{padding:40px 0px;}
+.integrallist table{border:1px solid #e5e9ec;border-bottom:none;}
+.integrallist th,.integrallist td{border-bottom:1px solid #e5e9ec;padding:0px 0px 0px 20px;}
+.integrallist th{height:38px;background-color:#f8f9fd;color:#000000;}
+.integrallist td{height:49px;vertical-align:middle;}
+.integrallist td,.integrallist .xg1,.integrallist a{color:#515151 !important;}
+.integrallist a:hover{color:#222222 !important;}
+.integrallist strong{color:#000000;display:inline-block;max-width:200px;_width:200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;padding: 0 5px;}
+.integrallist a:hover strong{color:#515151;}
+.detail_intelist span,.detail_intelist strong{float:left;}
+.rule_intelist{padding:40px 20px;}
+.rule_intelist table{border:1px solid #e5e9ec;}
+.rule_intelist td{border:none;}
+/*个人中心 -- 设置 -- 用户组*/
+.filterbar_usergroup{height:47px;padding:30px 20px 0px;}
+.filterbar_usergroup li{margin-right:40px;}
+.detail_usergroup{margin:0px;padding:0px 20px;}
+.detail_usergroup .attachtype_usergroup{height:60px;}
+.attachtype_usergroup .nwp{white-space: normal;min-height:40px;_height:expression(this.height > 40 ? true : 40);}
+.tipbar_dug{height:59px;padding:16px 20px 0px;}
+.upower_usergroup{padding:40px 20px 0px;}
+/*个人中心 -- 设置 -- 隐私设置*/
+.privacy_setlist th{width:75px;}
+.filterrule_setlist{padding:0px 0px 30px;border:none;}
+.filterrule_setlist h2{font-weight:bold;padding:0px 0px 20px;}
+.filterrule_setlist label{display:inline-block;width:180px;margin:10px 40px 10px 0px;}
+/*个人主页*/
+
+#meizu_space{ width:218px;  border: 1px solid #e6e6e6 !important; float:right; background-color:#FFFFFF;}
+#meizu_space .space_box{ padding:20px 19px;}
+#meizu_space .cut_line{border-top:1px dashed #E6E6E6;}
+#meizu_space .avatar_img{ margin:24px 0px;}
+#meizu_space .avatar_img img{width:180px; height:180px;border-radius:90px;}
+#meizu_space .avatar{width:180px; height:180px;}
+#meizu_space .shadowbox_avatar{width:180px; height:180px;border-radius:90px;}
+#meizu_space .grid{ width:60px; float:left; text-align:center;}
+#meizu_space .grid .number{ margin-bottom:5px; color: #515151; font-weight:bold; font-size:16px;}
+#meizu_space .social_contact{margin-top:14px;}
+#meizu_space{ overflow:hidden;}
+#meizu_space .social_listen{width:178px; margin-top:14px; height:40px; line-height:40px;}
+.admin_twig{ background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/head20121226.png") no-repeat scroll -210px -55px transparent;background-position:-210px -55px;}
+#usermanageli_menu li, #umanageli_menu li,  #usermanageli_menu a, #umanageli_menu a{ width:80px !important; height:40px !important; line-height:40px !important;}
+
+.meizu_name{font-size:16px;color:#000000;}
+.meizu_name .inner_uname{display:inline-block;float:left;max-width:150px;height:22px;_width:expression(this.offsetWidth > 150 ? '150px': true);overflow:hidden;text-overflow:ellipsis;white-space: nowrap;word-break:normal;word-wrap:normal;}
+.meizu_name .mzvip{float:left;margin:3px 0px 0px 8px;}
+.personal_onfo{ width:758px !important;overflow:hidden; border: 1px solid #e6e6e6 !important; float:left !important; margin-right:20px;padding:30px 20px 0px !important;background:#FFFFFF;}
+
+.space_profile_box{ padding:30px 40px; border-bottom:1px solid #e6e6e6;}
+.space_profile_box .mbn{ color:#808080; font-size:14px; margin-bottom:5px;}
+.space_profile_box .column2{ margin-top:15px;color:#000000;}
+.space_profile_box .column2 .l{ width:100px;  float:left;}
+.space_profile_box .column2 .o{ width:558px; float:left; margin-left:10px;}
+.space_profile_box .dt{ border-top:1px solid #E6E6E6; border-left:1px solid #E6E6E6; border-right:1px solid #E6E6E6;}
+.space_profile_box .dt td, .space_profile_box .dt th { border-bottom: 1px solid #E6E6E6; }
+.space_profile_box .tb_profile td{padding:8px 30px 8px 0px;}
+
+/* 单选按钮 */
+#reportreason .radiowrapper{ width:110px;}
+.radiowrapper{display:inline-block;vertical-align:bottom;cursor:pointer;height:40px;}
+.radiowrapper span,.radiowrapper img{float:left;}
+.radio_pway{ display:inline-block;width:15px;height:15px;background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/icons.gif") no-repeat 0px -503px;vertical-align:bottom;margin:5px 15px 5px 0px;}
+.radiochecked .radio_pway{background-position:-45px -503px;}
+
+/*帖子列表 -- 选择板块发帖*/
+.selbox_selplate{overflow:hidden;margin-right:-20px;}
+.selbox_selplate li{float:left;width:118px;height:48px;line-height:48px;border:1px solid #e6e6e6;background-color:#f5f5f5;margin:0px 14px 14px 0px;font-size:16px;text-align:center;cursor:pointer;}
+.selbox_selplate li.curitem_selplate{border:1px solid #c1e4f8;background-color:#eaf6fd;color:#32a5e7;}
+.cont2_mzdialog .btnbar_mzdialog{margin:0px -30px;}
+
+
+/*后台管理 -- 热门讨论管理*/
+.schresult .dblist{overflow:hidden;padding-top:10px;}
+.schresult .dblist li{float:left;width:100px;padding-bottom:10px;}
+.schresult .checkall_dblist{padding-bottom:10px;}
+.schresult .tfm th,.schresult .tfm td{padding:15px 0px;}
+.managebar{padding:0px 0px 20px 0px;}
+.title_mbar{font-size:16px;color:#222222;margin-right:20px;}
+.managebar .showmenu{margin-right:20px;}
+.backlog_mn h3.logtitle{padding:10px;background-color:#F7F7F7;margin-bottom:20px;}
+.backlog_mn table{table-layout:fixed;}
+.backlog_mn .emp{padding:20px 0px;}
+#list_modcp_logs th{font-weight:bold;}
+/*魅友家 - 首页*/
+.wp_myj .index_content{margin:0px;}
+.myjcont_mn{width:700px !important;}
+.myjcont_mn .iimage img{width:698px !important;}
+.myjcont_mn .index_list .itail{padding-right:20px;}
+.wp_myj .frame,.wp_myj .frame-tab{border:none;margin:0px;}
+.camp_expand{padding-bottom:8px;}
+.camp_expand a{display:block;width:276px;height:54px;line-height:54px;font-size:24px;font-weight:bold;color:#FFFFFF;text-align:center;background-color:#ff8542;}
+.camp_expand a:link,.camp_expand a:hover,.camp_expand a:active,.camp_expand a:visited{color:#FFFFFF;}
+.countryfun_expand ul{margin-right:-12px;overflow:hidden;_width:290px;}
+.countryfun_expand li{float:left;height:auto;background:none !important;padding:0px !important;margin:0px 10px 10px 0px !important;}
+.countryfun_expand li a{background-color:#F5F5F5;display:block;width:86px;height:36px;line-height:36px;text-align:center;}
+.advertmyj_expand{padding:0px;}
+/*魅友家 - 列表页*/
+.wp_myj .plate_mn{box-shadow:none;}
+.adverimg_myjcont{background:#DDDDDD;}
+.adverimg_myjcont,.adverimg_myjcont img{width:698px;min-height:100px;max-height:200px;+height:200px;_height:200px;overflow:hidden;_height: expression(this.height > 200 && this.width<=this.height ? 200 : true);}
+.adverimg_myjcont img {width: 700px;}
+.desc_myjcont{margin-top:-48px;*float:left;}
+.head_myjcont{background-color:#FFFFFF;border: 1px solid #E6E6E6;margin-bottom:20px;box-shadow: 0 0 4px #ECECEC;}
+.head_myjdesc{width:93px;padding:11px 0px 11px 19px;vertical-align:top;}
+.head_myjdesc .avatar{width:74px;height:74px;}
+.head_myjdesc .avatar img,.head_myjdesc .shadowbox_avatar{width:74px;height:74px;border-radius:37px;}
+.head_myjdesc .shadowbox_avatar{width:70px;height:70px;border:2px solid #FFFFFF;box-shadow:none;}
+.cont_myjdesc{width:585px;vertical-align:top;}
+.title_myjdesc h5{font-size:22px;line-height:48px;color:#FFFFFF;height:45px;overflow:hidden;width:585px;}
+.title_myjdesc h5 a,.title_myjdesc h5 a:link,.title_myjdesc h5 a:hover,.title_myjdesc h5 a:active,.title_myjdesc h5 a:visited{color:#FFFFFF;}
+.title_myjdesc h5 .xs2{margin-left:20px;}
+.desc_myjdesc{line-height:28px;padding:12px 5px 17px 0;width:585px;word-break:break-all;}
+.content_myjcont{background-color:#FFFFFF;border: 1px solid #E6E6E6;box-shadow: 0 0 4px #ECECEC;}
+.content_myjcont .bmw{border:none;}
+.content_myjcont .groupnav_myjcont{border-bottom:1px solid #E6E6E6;padding:9px 0px 6px;_height:50px;}
+.content_myjcont .tb{padding:0px 20px;border:none;margin:0px;height:auto;}
+.content_myjcont .tb li{width:99px;margin:0px;}
+.content_myjcont .tb a{font-size:16px;}
+.content_myjcont .tb .pipe2{width:1px;height: 14px;margin: 19px 10px 2px;}
+.content_myjcont .tb a.bluebtn{font-size:14px;background-color:#32A5E7;border:1px solid #32A5E7;}
+.content_myjcont .a a, .content_myjcont .current a{border:none;}
+.content_myjcont .filterbar_thread{margin:0px 20px !important;padding:10px 26px;}
+.content_myjcont .mls li{width:80px;overflow: hidden;white-space: nowrap;-o-text-overflow: ellipsis;text-overflow: ellipsis;}
+.content_myjcont .name_memberlist{width:68px;}
+.groupnav_myjcont{overflow:hidden;}
+.groupnav_myjcont .normalbtn{margin-top:6px;}
+.groupnav_myjcont .cr{height:0px !important;line-height:0px !important;}
+.content_myjcont .bm_c .itemcont_threadlist .maincont_list{display:block;}
+.content_myjcont .itemcont_threadlist{ width:468px;}
+.tl .bm_c table{table-layout:auto;border-collapse:collapse;}
+/*魅友家 - 成员列表*/
+.memberlist_myj{margin-right:-30px;overflow:hidden;padding:0px 0px 20px 0px;}
+.memberlist_myj li{width:86px;float:left;margin:0px 28px 4px 0px;padding-top:20px;}
+.head_memberlist{display:block;margin:0px 0px 6px 17px;overflow:visible;}
+.name_memberlist{display:block;width:78px;height:20px;line-height:20px;overflow: hidden;white-space: nowrap;-o-text-overflow: ellipsis;text-overflow: ellipsis; text-align:center;word-break:normal;word-wrap:normal;}
+.title_memberlist{padding:30px 0px 9px 36px;}
+.memberlist_myj .gm,.memberlist_myj  .gs,.memberlist_myj  .gol{width:18px;right:-4px;bottom:-2px;}
+/*魅友家 - 管理*/
+.tbmu_myjmanage{padding:10px 46px;overflow:hidden;}
+.tbmu_myjmanage .a{color:#32A5E7;line-height:38px;}
+.tbmu_myjmanage  a{float:left;line-height:38px;}
+.tbmu_myjmanage .pipe2{float:left;margin-top:13px;}
+.form_myjmanage{padding:0px 46px 30px;}
+.form_myjmanage .pagebar{padding:30px 0px 0px !important;}
+.form_myjmanage .tips_myjmanage{padding-bottom:20px;}
+.form_myjmanage .tips_myjmanage h2{padding: 30px 0px 10px;}
+.form_myjmanage .tips_myjmanage p{line-height:28px;}
+.form_myjmanage dl.bbda{border-bottom: 1px dashed #E6E6E6;padding-left: 75px;}
+.form_myjmanage dl.bbda dt{padding: 10px 0;}
+.form_myjmanage .m{margin:22px 0 22px -75px;}
+/*魅友家 - 列表页 - 右侧拓展块*/
+.readblock_expand .tb_h{background:none;}
+.readblock_expand .tb_h li{width:123px;}
+.readblock_expand .tb_h a{font-size:18px;}
+.readblock_expand .tb_h a:hover{color:#32A5E7;}
+.ulist_expand li{width:78px;}
+.btnbar_expand{margin:20px -22px 30px 0px;}
+.btnbar_expand .normalbtn{float:left;display:block;width:126px;height:40px;line-height:40px;margin-right:20px;font-size:16px;}
+.infodata_expand{margin-bottom:20px;padding:7px 0px 10px;}
+.infodata_expand  th{border-right: 1px solid #ECECEC;color:#000000;}
+.infodata_expand  th,.infodata_expand  td{width:92px;height:40px;font-size:14px;padding:0px;}
+.infodata_expand  th p,.infodata_expand  td p{font-size:18px;padding-bottom:1px;margin-top:-6px;*margin-top:-3px;}
+.recmyj_expand{padding:6px 0 0;}
+.recmyj_expand .toprec_recread{margin:margin: 0 -32px 0px 0;}
+.recmyj_expand .toprec_recread img{margin:14px 0px 4px 0px;}
+.readblock_expand .memberlist_myj{margin-right:-25px;padding:0px;}
+.readblock_expand .memberlist_myj li{margin:0px 22px 3px 0px;_margin:0 12px 3px 0;}
+/*魅友家 - 邀请好友*/
+.invite_myj .usl{height:210px;}
+.sbar_myjinvite{padding:0px 0px 20px 0px;background:none;border:none;border-bottom:1px solid #E6E6E6;}
+.sbar_myjinvite li{float:left;margin-right:50px;}
+.sbar_myjinvite li p{padding-bottom:10px;}
+.sbar_myjinvite  .tbx{line-height:38px;}
+
+
+
+/*  首页 */
+.signin_expand_2{width:268px;height:62px;line-height:52px;font-size:16px;color:#FFFFFF;border:1px solid #53D769;border-radius:2px 2px 2px 2px;background-color:#43b56b;color:#FFFFFF;overflow:hidden;cursor:pointer;}
+.week_ban{display:inline-block;width:92px;height:50px; margin:5px 5px 0 22px; background:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.png") no-repeat scroll -107px -221px;_background-image:url("http://bbs.res.meizu.com/resources/php/bbs/static/image/common/main_icon.gif"); color:#000000; font-size:18px; padding:0 0 0 26px; _margin:5px 5px 0 10px; float:left; }
+.btncont_signin_2{ float:left; font-size:24px;margin:5px 0 0 15px; width:92px; text-align:center; color:#ffffff; }
+.hassignin_expand{color:#56af45;background-color:#43b56b;border:1px solid #e3e5e6;color:#56af45;}
+.hassignin_expand .btncont_signin_2{ color:#FFFFFF; }
+
+

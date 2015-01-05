@@ -1,0 +1,124 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta content="width=1080" name="viewport">
+    <title>注册Youths账户</title>
+    <link href="~/Content/css/base.css" type="text/css" rel="Stylesheet">
+    <link href="~/Content/css/nameregister.css" type="text/css" rel="Stylesheet">
+</head>
+<body style="min-height: 900px;">
+    <div id="content" class="content">
+
+        <div class="ucSimpleHeader" id="header">
+            <a href="#" class="meizuLogo"><i class="i_icon"></i></a>
+            <div id="trigger">
+                <a href="login" id="toLogin" class="linkAGray">登录</a>
+                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                <a href="register" id="toRegister" class="linkAGray">注册</a>
+            </div>
+        </div>
+        <div class="middle">
+            <form id="mainForm" action="register" method="post">
+                <div class="number">
+                    <a class="linkABlue" id="toNameRegister" href="/nameRegister">账户名注册</a>
+                </div>
+                <div class="normalInput" style="margin-bottom: 20px;">
+                    <input type="text" name="UserName" id="account" class="username" maxlength="32" autocomplete="off" placeholder="帐户名">
+                </div>
+                <div class="lineWrap normalInput" style="margin-bottom: 20px;">
+                    <input type="password" name="UserPassword" id="password" maxlength="16" autocomplete="off" placeholder="密码">
+                </div>
+                <div class="lineWrap normalInput" style="margin-bottom: 10px;">
+                    <input type="text" name="UserEmail" id="email" maxlength="32" autocomplete="off" class="error" placeholder="邮箱">
+                </div>
+                <div class="clear"></div>
+                <div id="rememberField" class="rememberField">
+                    <span class="mzchkbox"><span class="checkboxPic check_chk"><i class="i_icon"></i></span><input name="acceptFlyme" id="acceptFlyme" type="checkbox" value="1" checked="checked" style="display: none;"></span>
+                    <label class="pointer" for="acceptFlyme" tabindex="0">我已阅读并接受</label>
+                    <a href="#" target="_blank" class="linkABlue">《Youths服务协议条款》</a>
+                </div>
+                <input type="hidden" name="vCodeTypeValue" value="16">
+                <span id="acceptError" class="otherError" style="display:none;">请确认已阅读并同意Youths服务协议条款</span>
+                <button id="register" class="fullBtnBlue">注册</button>
+            </form>
+        </div>
+    </div>
+    <div id="flymeFooter" class="footerWrap" style="top: 769px;">
+        <div class="footerInner">
+            <div class="footer-layer1">
+            </div>
+            <div class="clear"></div>
+            <div id="flymeCopyright" class="copyrightWrap">
+                <div class="copyrightInner">
+                    <span>©2014 Youths. All rights reserved.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="wechatPic"></div>
+    <script charset="utf-8" type="text/javascript" src="~/Content/js/jquery-1.7.1.min.js"></script>
+    <script charset="utf-8" type="text/javascript" src="~/Content/js/extend.js"></script>
+    <script type="text/javascript">
+        +(function ($) {
+            $("#mainForm").submit(function () {
+                $("#mainForm span.error").remove();
+                $("#mainForm .normalInput").removeClass("error");
+                var error = true;
+                var posturl = $(this).attr("action");
+                if ($("#account").val() == "") {
+                    formError($("#account"), "用户名不能为空!")
+                    error = false;
+                }
+                if ($("#password").val() == "") {
+                    formError($("#password"), "密码不能为空!")
+                    error = false;
+                }
+                if ($("#email").val() == "") {
+                    formError($("#email"), "邮箱不能为空!")
+                    error = false;
+                }
+                if (!emailExp.test($("#email").val())) {
+                    formError($("#email"), "邮箱格式不正确!")
+                    error = false;
+                }
+                if (!error) {
+                    return false;
+                }
+                else {
+                    str = $(this).serialize()
+                }
+                $.ajax({
+                    type: "POST",
+                    url: posturl,
+                    data: str,
+                    success: function (msg) {
+                        if (posturl == "register") {
+                            if (msg == "0") {
+                                $("#rememberField").before("<span class='error'>该用户名已被注册</span>");
+                            }
+                            else if(msg=="1") {
+                                $("#rememberField").before("<span class='linkABlue'>已成功注册</span>");
+                                jump(1500, "login");
+                            }
+                        }
+                    }
+                });
+                return false;
+            });
+        })(jQuery);
+    </script>
+    <script type="text/javascript" src="~/Content/js/jquery.form.js" charset="utf-8"></script>
+    @*<script type="text/javascript" src="~/Content/js/jquery.validate.js" charset="utf-8"></script>*@
+    <script type="text/javascript" src="~/Content/js/utils.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/Content/js/flyme.elements.js" charset="utf-8"></script>
+    @*<script type="text/javascript" src="~/Content/js/base.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/Content/js/jquery.autoEmail.js" charset="utf-8"></script>
+    <script type="text/javascript" src="~/Content/js/nameRegister.js" charset="utf-8"></script>*@
+</body>
+</html>
