@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AppStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AppTypeId" Type="Int32" />
+    <Property Name="AppClassId" Type="Int32" />
+    <Property Name="AppIsFree" Type="Boolean" />
+    <Property Name="AppIsNew" Type="Boolean" />
+    <Property Name="AppIsRecommended" Type="Boolean" />
+    <Property Name="AppDeveloper" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AppVersion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AppDownload" Type="Int32" />
+    <Property Name="AppSize" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AppIntroduce" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AppDescribe" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="AppClass">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppClassName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="AppComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppId" Type="Int32" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="AppCommentDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="AppScreenShot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppId" Type="Int32" />
+    <Property Name="AppScreenShotUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="AppTheme">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppThemeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AppThemeDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AppThemeThumb" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="AppThemeDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="AppId" Type="Int32" />
+    <Property Name="AppThemeId" Type="Int32" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="AppType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AppTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="BbsComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="BbsPostId" Type="Int32" />
+    <Property Name="BbsCommentDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="BbsPlate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BbsPlateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BbsPlateDesribe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="BbsPost">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="BbsPostTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="BbsPostDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="BbsRepley">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="BbsCommentId" Type="Int32" />
+    <Property Name="BbsRepleyDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="ManagerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ManagerPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ManagerSex" Type="Boolean" />
+    <Property Name="ManagerCall" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserAuthorUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="UserCall" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AddTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="YouthsContext" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Apps" EntityType="Self.App" />
+    <EntitySet Name="AppClasses" EntityType="Self.AppClass" />
+    <EntitySet Name="AppComments" EntityType="Self.AppComment" />
+    <EntitySet Name="AppScreenShots" EntityType="Self.AppScreenShot" />
+    <EntitySet Name="AppThemes" EntityType="Self.AppTheme" />
+    <EntitySet Name="AppThemeDetails" EntityType="Self.AppThemeDetail" />
+    <EntitySet Name="AppTypes" EntityType="Self.AppType" />
+    <EntitySet Name="BbsComments" EntityType="Self.BbsComment" />
+    <EntitySet Name="BbsPlates" EntityType="Self.BbsPlate" />
+    <EntitySet Name="BbsPosts" EntityType="Self.BbsPost" />
+    <EntitySet Name="BbsRepleys" EntityType="Self.BbsRepley" />
+    <EntitySet Name="Managers" EntityType="Self.Manager" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+  </EntityContainer>
+</Schema>

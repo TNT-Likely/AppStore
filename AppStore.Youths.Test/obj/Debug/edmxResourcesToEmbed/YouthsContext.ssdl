@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AppStoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="App">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="AppTypeId" Type="int" />
+    <Property Name="AppClassId" Type="int" />
+    <Property Name="AppIsFree" Type="bit" />
+    <Property Name="AppIsNew" Type="bit" />
+    <Property Name="AppIsRecommended" Type="bit" />
+    <Property Name="AppDeveloper" Type="varchar" MaxLength="50" />
+    <Property Name="AppVersion" Type="varchar" MaxLength="50" />
+    <Property Name="AppDownload" Type="int" />
+    <Property Name="AppSize" Type="varchar" MaxLength="50" />
+    <Property Name="AppIntroduce" Type="text" />
+    <Property Name="AppDescribe" Type="nchar" MaxLength="10" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppClass">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppClassName" Type="varchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppId" Type="int" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="AppCommentDetail" Type="text" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppScreenShot">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppId" Type="int" />
+    <Property Name="AppScreenShotUrl" Type="text" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppTheme">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppThemeName" Type="varchar" MaxLength="50" />
+    <Property Name="AppThemeDetail" Type="text" />
+    <Property Name="AppThemeThumb" Type="text" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppThemeDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="AppId" Type="int" />
+    <Property Name="AppThemeId" Type="int" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AppType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AppTypeName" Type="varchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BbsComment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="BbsPostId" Type="int" />
+    <Property Name="BbsCommentDetail" Type="text" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BbsPlate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BbsPlateName" Type="varchar" MaxLength="50" />
+    <Property Name="BbsPlateDesribe" Type="varchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BbsPost">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="BbsPostTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BbsPostDetail" Type="text" Nullable="false" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BbsRepley">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="BbsCommentId" Type="int" />
+    <Property Name="BbsRepleyDetail" Type="text" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="ManagerName" Type="varchar" MaxLength="50" />
+    <Property Name="ManagerPassword" Type="varchar" MaxLength="50" />
+    <Property Name="ManagerSex" Type="bit" />
+    <Property Name="ManagerCall" Type="varchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" />
+    <Property Name="UserPassword" Type="varchar" MaxLength="50" />
+    <Property Name="UserAuthorUrl" Type="text" />
+    <Property Name="UserCall" Type="varchar" MaxLength="50" />
+    <Property Name="UserEmail" Type="varchar" MaxLength="50" />
+    <Property Name="AddTime" Type="datetime" Nullable="false" />
+    <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="AppStoreModelStoreContainer">
+    <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppClass" EntityType="Self.AppClass" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppComment" EntityType="Self.AppComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppScreenShot" EntityType="Self.AppScreenShot" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppTheme" EntityType="Self.AppTheme" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppThemeDetail" EntityType="Self.AppThemeDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AppType" EntityType="Self.AppType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BbsComment" EntityType="Self.BbsComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BbsPlate" EntityType="Self.BbsPlate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BbsPost" EntityType="Self.BbsPost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BbsRepley" EntityType="Self.BbsRepley" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

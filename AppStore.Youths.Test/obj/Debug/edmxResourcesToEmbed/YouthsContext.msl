@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AppStoreModelStoreContainer" CdmEntityContainer="YouthsContext">
+    <EntitySetMapping Name="Apps">
+      <EntityTypeMapping TypeName="AppStoreModel.App">
+        <MappingFragment StoreEntitySet="App">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppName" ColumnName="AppName" />
+          <ScalarProperty Name="AppTypeId" ColumnName="AppTypeId" />
+          <ScalarProperty Name="AppClassId" ColumnName="AppClassId" />
+          <ScalarProperty Name="AppIsFree" ColumnName="AppIsFree" />
+          <ScalarProperty Name="AppIsNew" ColumnName="AppIsNew" />
+          <ScalarProperty Name="AppIsRecommended" ColumnName="AppIsRecommended" />
+          <ScalarProperty Name="AppDeveloper" ColumnName="AppDeveloper" />
+          <ScalarProperty Name="AppVersion" ColumnName="AppVersion" />
+          <ScalarProperty Name="AppDownload" ColumnName="AppDownload" />
+          <ScalarProperty Name="AppSize" ColumnName="AppSize" />
+          <ScalarProperty Name="AppIntroduce" ColumnName="AppIntroduce" />
+          <ScalarProperty Name="AppDescribe" ColumnName="AppDescribe" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppClasses">
+      <EntityTypeMapping TypeName="AppStoreModel.AppClass">
+        <MappingFragment StoreEntitySet="AppClass">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppClassName" ColumnName="AppClassName" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppComments">
+      <EntityTypeMapping TypeName="AppStoreModel.AppComment">
+        <MappingFragment StoreEntitySet="AppComment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AppCommentDetail" ColumnName="AppCommentDetail" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppScreenShots">
+      <EntityTypeMapping TypeName="AppStoreModel.AppScreenShot">
+        <MappingFragment StoreEntitySet="AppScreenShot">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="AppScreenShotUrl" ColumnName="AppScreenShotUrl" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppThemes">
+      <EntityTypeMapping TypeName="AppStoreModel.AppTheme">
+        <MappingFragment StoreEntitySet="AppTheme">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppThemeName" ColumnName="AppThemeName" />
+          <ScalarProperty Name="AppThemeDetail" ColumnName="AppThemeDetail" />
+          <ScalarProperty Name="AppThemeThumb" ColumnName="AppThemeThumb" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppThemeDetails">
+      <EntityTypeMapping TypeName="AppStoreModel.AppThemeDetail">
+        <MappingFragment StoreEntitySet="AppThemeDetail">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppId" ColumnName="AppId" />
+          <ScalarProperty Name="AppThemeId" ColumnName="AppThemeId" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AppTypes">
+      <EntityTypeMapping TypeName="AppStoreModel.AppType">
+        <MappingFragment StoreEntitySet="AppType">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AppTypeName" ColumnName="AppTypeName" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BbsComments">
+      <EntityTypeMapping TypeName="AppStoreModel.BbsComment">
+        <MappingFragment StoreEntitySet="BbsComment">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="BbsPostId" ColumnName="BbsPostId" />
+          <ScalarProperty Name="BbsCommentDetail" ColumnName="BbsCommentDetail" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BbsPlates">
+      <EntityTypeMapping TypeName="AppStoreModel.BbsPlate">
+        <MappingFragment StoreEntitySet="BbsPlate">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="BbsPlateName" ColumnName="BbsPlateName" />
+          <ScalarProperty Name="BbsPlateDesribe" ColumnName="BbsPlateDesribe" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BbsPosts">
+      <EntityTypeMapping TypeName="AppStoreModel.BbsPost">
+        <MappingFragment StoreEntitySet="BbsPost">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="BbsPostTitle" ColumnName="BbsPostTitle" />
+          <ScalarProperty Name="BbsPostDetail" ColumnName="BbsPostDetail" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BbsRepleys">
+      <EntityTypeMapping TypeName="AppStoreModel.BbsRepley">
+        <MappingFragment StoreEntitySet="BbsRepley">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="BbsCommentId" ColumnName="BbsCommentId" />
+          <ScalarProperty Name="BbsRepleyDetail" ColumnName="BbsRepleyDetail" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Managers">
+      <EntityTypeMapping TypeName="AppStoreModel.Manager">
+        <MappingFragment StoreEntitySet="Manager">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+          <ScalarProperty Name="ManagerPassword" ColumnName="ManagerPassword" />
+          <ScalarProperty Name="ManagerSex" ColumnName="ManagerSex" />
+          <ScalarProperty Name="ManagerCall" ColumnName="ManagerCall" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="AppStoreModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+          <ScalarProperty Name="UserAuthorUrl" ColumnName="UserAuthorUrl" />
+          <ScalarProperty Name="UserCall" ColumnName="UserCall" />
+          <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+          <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+          <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

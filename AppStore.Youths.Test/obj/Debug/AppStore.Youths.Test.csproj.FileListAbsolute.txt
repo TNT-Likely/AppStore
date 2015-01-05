@@ -1,0 +1,11 @@
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\AppStore.Youths.Test.dll.config
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\AppStore.Youths.Test.dll
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\AppStore.Youths.Test.pdb
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\EntityFramework.dll
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\EntityFramework.SqlServer.dll
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\EntityFramework.xml
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\EntityFramework.SqlServer.xml
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\obj\Debug\AppStore.Youths.Test.dll
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\obj\Debug\AppStore.Youths.Test.pdb
+E:\百度云同步盘\文件\大学学习\大三课程\Asp.net\AppStore.Youths\AppStore.Youths.Test\obj\Debug\AppStore.Youths.Test.csprojResolveAssemblyReference.cache

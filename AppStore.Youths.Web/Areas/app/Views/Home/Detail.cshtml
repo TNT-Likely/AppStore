@@ -116,6 +116,12 @@
                                 <span class="app_title">更新时间：</span>
                                 <div class="app_content">@app.UpdateTime.ToShortDateString()</div>
                             </li>
+                            <li>
+                                <span class="app_title">下载地址：</span>
+                                <div class="app_content ellipsis">
+                                    <a class="current" href="@app.AppUrl">点击下载</a>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -128,13 +134,13 @@
                                 <span class="detail_title_style clearfix">应用简介：</span>
                                 <div class="description_detail" style="height: 110px; overflow-y: hidden;">
                                  @app.AppIntroduce
-                                </div><div class="moreDes">查看更多&gt;&gt;</div>
+                                </div>
                             </div>
                             <div class="detail_content clearfix">
                                 <span class="detail_title_style">版本描述：</span>
                                 <div class="description_detail" style="height: 110px; overflow-y: hidden;">
                                     @app.AppDescribe
-                                </div><div class="moreDes">查看更多&gt;&gt;</div>
+                                </div>
                             </div>
                         </div>
                         <div class="screenShots clearfix">
